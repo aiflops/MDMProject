@@ -52,7 +52,7 @@ namespace MDMProject.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> ManageIndex(ManageMessageId? message)
         {
 
             return View();
