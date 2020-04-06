@@ -3,6 +3,7 @@
     background-color: #fff;
     border-radius: 0px;
     border-bottom: 5px solid rgba(0, 103, 184, 0.5);
+    margin-bottom: 0px;
 }
 
 .navbar-header {
@@ -111,7 +112,7 @@ html, body {
 }
 
 .welcome {
-    background-image: url("../image/welcome.jpg");
+    background-image: url("./images/welcome.jpg");
     background-position: center;
     background-size: cover;
     min-height: 100vh;
