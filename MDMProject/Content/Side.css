@@ -1,4 +1,5 @@
-﻿.navbar {
+﻿
+.navbar {
     background-image: none;
     background-color: #fff;
     border-radius: 0px;
@@ -157,5 +158,6 @@ html, body {
         font-size: 1.4rem;
     }
 }
+
 
 /*# sourceMappingURL=style.css.map */
