@@ -98,14 +98,14 @@ html, body {
 }
 
 .login {
-    background-image: url("../image/login.jpg");
+    background-image: url("./images/login.jpg");
     background-position: right;
     background-size: cover;
     min-height: 100vh;
 }
 
 .register {
-    background-image: url("../image/register.jpg");
+    background-image: url("./images/register.jpg");
     background-position: right;
     background-size: cover;
     min-height: 100vh;
