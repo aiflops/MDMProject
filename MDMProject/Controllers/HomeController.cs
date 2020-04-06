@@ -13,9 +13,8 @@ namespace MDMProject.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Rodo()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
