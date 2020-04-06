@@ -16,13 +16,13 @@
 
                             @Html.LabelFor(m => m.Email)
                             <div class="input-group mt-1">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control mb-1" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger " })
                             </div>
 
-                            @Html.LabelFor(m => m.Password)
+                            @Html.LabelFor(m => m.Password, "Hasło")
                             <div class="input-group mt-1">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control mb-1" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                             <button type="submit" class="btn form-submit mt-3">Zaloguj</button>
