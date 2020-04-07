@@ -1,0 +1,1 @@
+﻿Don't remove this file - it's required for App_Data folder to exist
