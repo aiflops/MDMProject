@@ -3,40 +3,54 @@
 }
 
 
-    <div class="map">
+<main class="map">
 
-        <div class="container-fluid">
+    <div class="container-fluid">
 
-            <div class="row">
-                <div class="col-xs-12 col-md-6 col-lg-5">
-                    <div class="d-flex justify-between align-center wrap mt-2 mb-2">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-5">
+                <div class="d-flex justify-between align-center wrap mt-2 mb-2">
 
-                        <div class="pr-2">Lista dostępnych:</div>
-                        <div action="" class="form-group m-0">
-                            <div class="search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="search" placeholder="Kod pocztowy">
-                                </div>
-                                <button type="submit" onclick="onSPCButtonClick()" class="btn form-submit">Szukaj</button>
+                    <div class="pr-2">Lista dostępnych:</div>
+                    <div action="" class="form-group m-0">
+                        <div class="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="search" placeholder="Kod pocztowy">
                             </div>
-                            <span class="search__validation" id="search__validation">Popraw kod pocztowy</span>
+                            <button type="submit" onclick="onSPCButtonClick()" class="btn form-submit">Szukaj</button>
                         </div>
+                        <span class="search__validation" id="search__validation">Popraw kod pocztowy</span>
                     </div>
-                    <div class="entry-container mb-2">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="list p-1" id="showSuppliers">
-
-                                </ul>
-                            </div>
+                </div>
+                <div class="entry-container mb-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list p-1" id="showSuppliers">
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-7 p-0">
-                    <div id="mapID"></div>
-                </div>
+            </div>
+            <div class="col-md-6 col-lg-7 p-0">
+                <div id="mapID"></div>
             </div>
         </div>
     </div>
+</main>
 
-        @*@Scripts.Render("~/Scripts/leaflet-0.7.3.js")*@
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+
+    @Styles.Render("~/Content/Map.css")
+}
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+
+    @Scripts.Render("~/Scripts/custom/MapMDM.js")
+    @*@Scripts.Render("~/Scripts/leaflet-0.7.3.js")*@
+}

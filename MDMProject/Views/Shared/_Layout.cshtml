@@ -1,24 +1,13 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title MDM </title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>Maska dla medyka @(ViewBag.Title != null ? "- " + ViewBag.Title : "")</title>
 
-    @*MAPS*@
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-          crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-            crossorigin=""></script>
-    @*CSS*@
-    @Styles.Render("~/Content/Side.css")
-    @Styles.Render("~/Content/Map.css")
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    @Styles.Render("~/css/main")
+    @RenderSection("styles", required: false)
 </head>
 <body>
 
@@ -31,11 +20,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("MDM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Maska dla medyka", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Mapa", "MapIndex", "Map")</li>
                     <li>@Html.ActionLink("Rodo", "Rodo", "Home")</li>
                 </ul>
 
@@ -45,13 +35,10 @@
             </div>
         </div>
     </nav>
+
     @RenderBody()
 
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Content/scripts/MapMDM.js")
-
+    @Scripts.Render("~/scripts/main")
     @RenderSection("scripts", required: false)
 </body>
 </html>

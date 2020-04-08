@@ -1,26 +1,23 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-    <div class="welcome">
+﻿<main class="welcome">
 
-        <div class="container">
-            <div class="row d-none">
-                <div class="col-md-12">
-                    <h1 class="welcome__header mt-3">
-                        Jestem:
-                    </h1>
-                </div>
+    <div class="container">
+        <div class="row d-none">
+            <div class="col-md-12">
+                <h1 class="welcome__header mt-3">
+                    Jestem:
+                </h1>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    @Html.ActionLink("Jestem Medykiem", "MapIndex", new { controller = "Map"}, new { @class = "welcome__choose" })
-                </div>
-                <div class="col-xs-6">
-                    @Html.ActionLink("Jestem Dostawcą", "Login", new { controller = "Account" }, new { @class = "welcome__choose" })
-                </div>
+        <div class="row">
+            <div class="col-xs-6">
+                @Html.ActionLink("Jestem Medykiem", "MapIndex", new { controller = "Map" }, new { @class = "welcome__choose" })
             </div>
-
+            <div class="col-xs-6">
+                @Html.ActionLink("Jestem Dostawcą", "Login", new { controller = "Account" }, new { @class = "welcome__choose" })
+            </div>
         </div>
 
     </div>
+
+</main>

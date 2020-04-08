@@ -1,0 +1,237 @@
+﻿.navbar {
+    background-image: none;
+    background-color: #fff;
+    border-radius: 0px;
+    border: 0;
+    border-bottom: 5px solid rgba(0, 103, 184, 0.5);
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    height: 55px;
+    min-height: 55px;
+}
+
+.navbar-header {
+    color: #000;
+}
+
+.navbar-brand {
+    text-transform: uppercase;
+    color: #000;
+}
+
+.navbar-nav li a {
+    color: #000;
+}
+
+html, body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.form-container {
+    background-color: white;
+    padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 5px solid rgba(0, 103, 184, 0.5);
+    border-bottom: 5px solid rgba(0, 103, 184, 0.5);
+}
+
+.form-header {
+    font-weight: 300 !important;
+    text-transform: uppercase;
+    font-size: 2.3rem;
+}
+
+.form-control {
+    width: 100%;
+    border-radius: 0px !important;
+    border: 1px solid #404040;
+}
+
+.form-submit {
+    background-color: #0067b8;
+    color: #fff;
+    border-radius: 0px;
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: background-color .3s ease;
+    margin-left: auto;
+    display: block;
+}
+
+    .form-submit:hover, .form-submit:focus, .form-submit:active {
+        transition: background-color .3s ease;
+        background-color: #0067b8;
+        color: #fff;
+    }
+
+.input-group {
+    width: 100%;
+}
+
+    .input-group label {
+        font-weight: 500;
+    }
+
+.m-0 {
+    margin: 0;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.mb-3 {
+    margin-bottom: 3rem;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.p-2 {
+    padding: 2rem;
+}
+
+.p-3 {
+    padding: 3rem;
+}
+
+.pl-0 {
+    padding-left: 0;
+}
+
+.pl-1 {
+    padding-left: 1rem;
+}
+
+.pl-2 {
+    padding-left: 2rem;
+}
+
+.pl-3 {
+    padding-left: 3rem;
+}
+
+.pr-0 {
+    padding-right: 0;
+}
+
+.pr-1 {
+    padding-right: 1rem;
+}
+
+.pr-2 {
+    padding-right: 2rem;
+}
+
+.pr-3 {
+    padding-right: 3rem;
+}
+
+.m-descrees {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+main {
+    background-position: right;
+    background-size: cover;
+    min-height: calc(100vh - 55px); /* 100% - navbar height */
+}
+
+.login {
+    background-image: url("./images/login.jpg");
+}
+
+.register {
+    background-image: url("./images/register.jpg");
+}
+
+.welcome {
+    background-image: url("./images/welcome.jpg");
+}
+
+.welcome__header {
+    background-color: #fff;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    padding: 13px;
+    box-shadow: 3px 3px 3px;
+}
+
+.welcome__choose {
+    margin-top: 45vh;
+    background-color: #0067b8;
+    color: #fff;
+    padding: 30px;
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    transition: all .3s ease;
+}
+
+    .welcome__choose:hover, .welcome__choose:focus, .welcome__choose:active {
+        transition: all .3s ease;
+        text-decoration: none;
+        color: #fff;
+        filter: invert(1);
+    }
+
+@media (max-width: 500px) {
+    .welcome__choose {
+        padding: 15px;
+        font-size: 1.4rem;
+    }
+}

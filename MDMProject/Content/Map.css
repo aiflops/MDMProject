@@ -2,10 +2,23 @@
     background-color: #f2f2f2;
 }
 
-.map .form-group.search {
-    display: flex;
-    align-items: center;
+.map .form-group {
+    position: relative;
 }
+
+    .map .form-group .search {
+        display: flex;
+        align-items: center;
+    }
+
+    .map .form-group .search__validation {
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        font-size: 1rem;
+        color: red;
+        display: none;
+    }
 
 .map .list {
     list-style: none;
@@ -51,6 +64,18 @@
             border-left: 5px solid #168211;
         }
 
+        .map .list__item .entry.multiple {
+            border-left: 5px solid #ef1712;
+        }
+
+            .map .list__item .entry.multiple .entry__icon {
+                flex-direction: column;
+            }
+
+                .map .list__item .entry.multiple .entry__icon img {
+                    height: 20px;
+                }
+
     .map .list__item .entry__icon {
         width: 30px;
         height: 30px;
@@ -61,28 +86,22 @@
     }
 
     .map .list__item .entry__media {
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-@media (max-width: 600px) {
-    .map .list__item .entry__media {
+        text-align: right;
         font-size: 1.3rem;
     }
-}
 
-.map .list__item .entry__wrapper {
-    display: flex;
-}
+    .map .list__item .entry__wrapper {
+        display: flex;
+        flex-grow: 1;
+    }
 
-.map .list__item .entry__text {
-    font-weight: 400;
-    font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
+    .map .list__item .entry__text {
+        font-weight: 400;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
 
 @media (max-width: 600px) {
     .map .list__item .entry__text {
@@ -91,10 +110,13 @@
 }
 
 .map .list__item .entry__address {
-    text-align: left;
+    font-size: 1.3rem;
+    text-align: right;
     margin: 0;
     display: flex;
     align-items: center;
+    border-right: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
 }
 
 @media (max-width: 600px) {
