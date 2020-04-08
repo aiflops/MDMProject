@@ -2,8 +2,9 @@
 window.onload = loadMapSuppliers;
 
 var suppliersList = [];
-
+var suppliersListElHtml = document.getElementById('showSuppliers');
 var mymap = L.map('mapID').setView([51.643078, 19.609658], 7);
+var GEOCODE_API = "https:\//nominatim.openstreetmap.org/search?q=#postcode,Poland&accept-language=pl&format=json";
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -36,18 +37,34 @@ function SPCButtonValidation(code) {
     if (code.match(/\d{2}-\d{3}/)) {
         return true;
     }
-    document.getElementById("search_validation").style.display = "block";
+    document.getElementById("search__validation").style.display = "block";
     return false;
 }
 
 function onSPCButtonClick(e) {
     codeVal = document.getElementById("search").value;
-    document.getElementById("search_validation").style.display = "none";
+    document.getElementById("search__validation").style.display = "none";
     if (SPCButtonValidation(codeVal)) {
         // todo ask api geolocalization 
         // change zoom map
         // hide supliers
         // hide markes
+
+        var api_url = GEOCODE_API.replace('#postcode', codeVal);
+        $.ajax({
+            type: "GET",
+            url: api_url,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (value) {
+                console.log(value);
+                var firstResult = value[0];
+                mymap.setView([firstResult.lat, firstResult.lon], 12);
+            },
+            error: function () {
+                alert("Error while inserting data");
+            }
+        });
 
     }
 }
@@ -118,10 +135,9 @@ function loadMapSuppliers() {
         success: function (value) {
             suppliersList = value;
             console.log(value);
-            var el = document.getElementById('showSuppliers');
             for (var i = 0; i < suppliersList.length; i++) {
                 if (suppliersList[i].OfferedHelp !== null || suppliersList[i].OfferedEquipment !== null)
-                    el.appendChild(ListElement.createLi(suppliersList[i]));
+                    suppliersListElHtml.appendChild(ListElement.createLi(suppliersList[i]));
             }
 
         },
@@ -131,16 +147,6 @@ function loadMapSuppliers() {
     });
 
 }
-//#id X
-//#Src
-//#Alt
-
-//#Name X
-
-//#Adress X
-
-//#Phone
-//#Email
 
 ///api/suppliers - zwraca wszystkich dostawcow(masek lub druku)
 //api/suppliers/17 - zwraca tylko gościa o id 17

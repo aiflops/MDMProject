@@ -1,5 +1,4 @@
-﻿
-.navbar {
+﻿.navbar {
     background-image: none;
     background-color: #fff;
     border-radius: 0px;
@@ -176,21 +175,21 @@ html, body {
 }
 
 .login {
-    background-image: url("../image/login.jpg");
+    background-image: url("./images/login.jpg");
     background-position: right;
     background-size: cover;
     min-height: 100vh;
 }
 
 .register {
-    background-image: url("../image/register.jpg");
+    background-image: url("./images/register.jpg");
     background-position: right;
     background-size: cover;
     min-height: 100vh;
 }
 
 .welcome {
-    background-image: url("../image/welcome.jpg");
+    background-image: url("./images/welcome.jpg");
     background-position: center;
     background-size: cover;
     min-height: 100vh;
@@ -240,10 +239,23 @@ html, body {
     background-color: #f2f2f2;
 }
 
-.map .form-group.search {
-    display: flex;
-    align-items: center;
+.map .form-group {
+    position: relative;
 }
+
+    .map .form-group .search {
+        display: flex;
+        align-items: center;
+    }
+
+    .map .form-group .search__validation {
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        font-size: 1rem;
+        color: red;
+        display:none;
+    }
 
 .map .list {
     list-style: none;
@@ -336,10 +348,12 @@ html, body {
 
 .map .list__item .entry__address {
     font-size: 1.3rem;
-    text-align: left;
+    text-align: right;
     margin: 0;
     display: flex;
     align-items: center;
+    border-right: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
 }
 
 @media (max-width: 600px) {
@@ -385,9 +399,3 @@ html, body {
 }
 
 /*# sourceMappingURL=style.css.map */
-
-/*# sourceMappingURL=style.css.map */
-#search_validation{
-    display:none;
-    color:darkred;
-}
