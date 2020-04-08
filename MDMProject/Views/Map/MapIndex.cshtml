@@ -12,12 +12,13 @@
                     <div class="d-flex justify-between align-center wrap mt-2 mb-2">
 
                         <div class="pr-2">Lista dostępnych:</div>
-                        <form action="" class="form-group m-0 search">
+                        <div class="form-group m-0 search">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="search" placeholder="Szukaj">
+                                <input type="text" class="form-control" id="search" placeholder="Kod pocztowy">
                             </div>
-                            <button type="submit" class="btn form-submit">Szukaj</button>
-                        </form>
+                            <button type="submit" onclick="onSPCButtonClick()" class="btn form-submit">Szukaj</button>
+                        </div>
+                                <span id="search_validation">Popraw kod pocztowy</span>
                     </div>
                     <div class="entry-container mb-2">
                         <div class="row">

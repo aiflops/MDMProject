@@ -377,3 +377,7 @@ html, body {
 }
 
 /*# sourceMappingURL=style.css.map */
+#search_validation{
+    display:none;
+    color:darkred;
+}
