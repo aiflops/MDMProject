@@ -1,6 +1,81 @@
 ﻿@{
     ViewBag.Title = "Map";
 }
-<div id="mapid"></div>
-@*@Scripts.Render("~/Scripts/leaflet-0.7.3.js")*@
-@Scripts.Render("~/Content/scripts/MapMDM.js")
+
+
+    <div class="map">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-lg-5">
+                    <div class="d-flex justify-between align-center wrap mt-2 mb-2">
+
+                        <div class="pr-2">Lista dostępnych:</div>
+                        <form action="" class="form-group m-0 search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="search" placeholder="Szukaj">
+                            </div>
+                            <button type="submit" class="btn form-submit">Szukaj</button>
+                        </form>
+                    </div>
+                    <div class="entry-container mb-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list p-1">
+
+
+                                    <li class="list__item">
+                                        <div role="button" class="entry print">
+                                            <div class="entry__wrapper p-1">
+                                                <div class="entry__icon">
+                                                    <img src="~/Content/images/3d.png" alt="Ikona Maski">
+                                                </div>
+                                                <h3 class="entry__text pl-1">
+                                                    Kasper <br> Kalfas
+                                                </h3>
+                                            </div>
+                                            <address class="entry__address p-1">Opole 46-675, <br> ul Partyzancka 10</address>
+                                            <div class="entry__media p-1">
+                                                tel: <a href="tel:456789123" title="Zadzwoń: 456789123">456789123</a>
+                                                <br> e-mail:
+                                                <a href="mailto:test@test.pl"
+                                                   title="Wyślij e-mail: test@test.pl">test@test.pl</a>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="list__item">
+                                        <div role="button" class="entry mask">
+                                            <div class="entry__wrapper p-1">
+                                                <div class="entry__icon">
+                                                    <img src="~/Content/images/mask.png" alt="Ikona Maski">
+                                                </div>
+                                                <h3 class="entry__text pl-1">
+                                                    Kasper <br> Kalfas
+                                                </h3>
+                                            </div>
+                                            <address class="entry__address p-1">Opole 46-675, <br> ul Partyzancka 10</address>
+                                            <div class="entry__media p-1">
+                                                tel: <a href="tel:456789123" title="Zadzwoń: 456789123">456789123</a>
+                                                <br> e-mail:
+                                                <a href="mailto:test@test.pl"
+                                                   title="Wyślij e-mail: test@test.pl">test@test.pl</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-7 p-0">
+                    <div id="mapID"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        @*@Scripts.Render("~/Scripts/leaflet-0.7.3.js")*@
+        @Scripts.Render("~/Content/scripts/MapMDM.js")

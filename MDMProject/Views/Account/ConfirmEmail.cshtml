@@ -1,13 +1,17 @@
 ﻿@{
     ViewBag.Title = "Dzięki za rejestrację!";
 }
-<div class="login otherView">
+<div class="login">
     <div class="container">
-        <h2>@ViewBag.Title.</h2>
-        <div>
-            <p>
-                Proszę, @Html.ActionLink("zaloguj się !", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-            </p>
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-xs-12 form-container">
+                <h2>@ViewBag.Title.</h2>
+                <div>
+                    <p>
+                        Proszę, @Html.ActionLink("zaloguj się !", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
