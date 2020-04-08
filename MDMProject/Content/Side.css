@@ -1,4 +1,5 @@
-﻿.navbar {
+﻿
+.navbar {
     background-image: none;
     background-color: #fff;
     border-radius: 0px;
@@ -175,21 +176,21 @@ html, body {
 }
 
 .login {
-    background-image: url("./images/login.jpg");
+    background-image: url("../image/login.jpg");
     background-position: right;
     background-size: cover;
     min-height: 100vh;
 }
 
 .register {
-    background-image: url("./images/register.jpg");
+    background-image: url("../image/register.jpg");
     background-position: right;
     background-size: cover;
     min-height: 100vh;
 }
 
 .welcome {
-    background-image: url("./images/welcome.jpg");
+    background-image: url("../image/welcome.jpg");
     background-position: center;
     background-size: cover;
     min-height: 100vh;
@@ -288,6 +289,18 @@ html, body {
             border-left: 5px solid #168211;
         }
 
+        .map .list__item .entry.multiple {
+            border-left: 5px solid #ef1712;
+        }
+
+            .map .list__item .entry.multiple .entry__icon {
+                flex-direction: column;
+            }
+
+                .map .list__item .entry.multiple .entry__icon img {
+                    height: 20px;
+                }
+
     .map .list__item .entry__icon {
         width: 30px;
         height: 30px;
@@ -298,28 +311,22 @@ html, body {
     }
 
     .map .list__item .entry__media {
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-@media (max-width: 600px) {
-    .map .list__item .entry__media {
+        text-align: right;
         font-size: 1.3rem;
     }
-}
 
-.map .list__item .entry__wrapper {
-    display: flex;
-}
+    .map .list__item .entry__wrapper {
+        display: flex;
+        flex-grow: 1;
+    }
 
-.map .list__item .entry__text {
-    font-weight: 400;
-    font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
+    .map .list__item .entry__text {
+        font-weight: 400;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
 
 @media (max-width: 600px) {
     .map .list__item .entry__text {
@@ -328,6 +335,7 @@ html, body {
 }
 
 .map .list__item .entry__address {
+    font-size: 1.3rem;
     text-align: left;
     margin: 0;
     display: flex;
@@ -375,6 +383,8 @@ html, body {
         display: none;
     }
 }
+
+/*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */
 #search_validation{
