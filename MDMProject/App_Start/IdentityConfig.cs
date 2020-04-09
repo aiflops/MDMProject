@@ -8,15 +8,35 @@ using Microsoft.Owin.Security;
 using MDMProject.Models;
 using MDMProject.Data;
 using MDMProject.Services.Identity;
+using System.Net.Mail;
+using System.Net.Configuration;
+using System.Configuration;
 
 namespace MDMProject
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
+            var smtpSection = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+            string username = smtpSection.Network.UserName;
+
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            using (SmtpClient client = new SmtpClient())
+            {
+                var from = new MailAddress(username, "Zespół Maska dla Medyka");
+
+                var mailMessage = new MailMessage();
+                
+                mailMessage.From = from;
+                mailMessage.Sender = from;
+                mailMessage.To.Add(message.Destination);
+                mailMessage.Subject = message.Subject;
+                mailMessage.Body = message.Body;
+                mailMessage.IsBodyHtml = true;
+
+                await client.SendMailAsync(mailMessage);
+            }
         }
     }
 
@@ -37,7 +57,7 @@ namespace MDMProject
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -78,7 +98,7 @@ namespace MDMProject
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
