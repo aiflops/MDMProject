@@ -392,7 +392,7 @@ html, body {
     height: calc(100vh - 56px);
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1000px) {
     #mapID {
         display: none;
     }

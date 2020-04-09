@@ -14,6 +14,20 @@ var popup = L.popup();
 function customParseFloat(lat, lon) {
     return [parseFloat(lat), parseFloat(lon)];
 }
+
+var Mobile = {
+    check: function () {
+        return (window.innerWidth < 1000) ? true : false;
+    },
+    windowResize: function () {
+        MapMDM.onInitFlag = true;
+        ListElement.createMoreLi(suppliersList);
+        MapMDM.onInitFlag = false;
+
+    }
+};
+window.onresize = Mobile.windowResize;
+
 var MapMDM = {
     onInitFlag: true,
     setView: function (lat, lon, zoom) {
@@ -43,34 +57,7 @@ var MapMDM = {
 
 };
 mymap.on('moveend', MapMDM.moveMap);
-function SPCButtonValidation(code) {
-    if (code.match(/\d{2}-\d{3}/)) {
-        return true;
-    }
-    document.getElementById("search__validation").style.display = "block";
-    return false;
-};
-function onSPCButtonClick(e) {
-    codeVal = document.getElementById("search").value;
-    document.getElementById("search__validation").style.display = "none";
-    if (SPCButtonValidation(codeVal)) {
-        var api_url = GEOCODE_API.replace('#postcode', codeVal);
-        $.ajax({
-            type: "GET",
-            url: api_url,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (value) {
-                console.log(value);
-                var firstResult = value[0];
-                MapMDM.setView(firstResult.lat, firstResult.lon, 12);
-            },
-            error: function () {
-                alert("Error while inserting data");
-            }
-        });
-    }
-};
+
 var ListElement = {
     liListID: [],
     activeElement: '',
@@ -191,6 +178,8 @@ var MarkerMDM = {
     },
 };
 
+
+
 function loadMapSuppliers() {
     $.ajax({
         type: "GET",
@@ -208,3 +197,37 @@ function loadMapSuppliers() {
         }
     });
 }
+
+function SPCButtonValidation(code) {
+    if (code.match(/\d{2}-\d{3}/)) {
+        return true;
+    }
+    document.getElementById("search__validation").style.display = "block";
+    return false;
+};
+function onSPCButtonClick(e) {
+    codeVal = document.getElementById("search").value;
+    document.getElementById("search__validation").style.display = "none";
+    if (SPCButtonValidation(codeVal)) {
+        var api_url = GEOCODE_API.replace('#postcode', codeVal);
+        $.ajax({
+            type: "GET",
+            url: api_url,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (value) {
+                console.log(value);
+                var firstResult = value[0];
+                if (Mobile.check()) {
+                    console.log(Mobile.check());
+                }
+                else {
+                    MapMDM.setView(firstResult.lat, firstResult.lon, 12);
+                }
+                },
+            error: function () {
+                alert("Error while inserting data");
+            }
+        });
+    }
+};
