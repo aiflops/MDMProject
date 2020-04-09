@@ -1,4 +1,5 @@
-﻿window.onload = loadMapSuppliers;
+﻿
+window.onload = loadMapSuppliers;
 var suppliersList = [];
 var suppliersListElHtml = document.getElementById('showSuppliers');
 var mymap = L.map('mapID').setView([51.643078, 19.609658], 7);
@@ -20,10 +21,10 @@ var Mobile = {
         return (window.innerWidth < 1000) ? true : false;
     },
     windowResize: function () {
+        ListElement.clearAllLi();
         MapMDM.onInitFlag = true;
         ListElement.createMoreLi(suppliersList);
         MapMDM.onInitFlag = false;
-
     }
 };
 window.onresize = Mobile.windowResize;
@@ -58,6 +59,7 @@ var MapMDM = {
 };
 mymap.on('moveend', MapMDM.moveMap);
 
+
 var ListElement = {
     liListID: [],
     activeElement: '',
@@ -66,7 +68,7 @@ var ListElement = {
             "<img src=#Src alt=#Alt></div><h3 class=\"entry__text pl-1\">#Name</h3></div>" +
                     "<address class=\"entry__address p-1\">#Adress</address>"+
                         "<div class=\"entry__media p-1\">"+
-                            "tel: <a href=\"tel:#Phone\" title=\"Zadzwoń: #Phone\">#Phone</a>"+
+                            "<a href=\"tel:#Phone\" title=\"Zadzwoń: #Phone\">#Phone</a>"+
                             "<br><a href=\"mailto:#Email\"title=\"Wyślij e-mail: #Email\">#Email</a>"+
                             "</div></div>",
 
@@ -101,6 +103,7 @@ var ListElement = {
             liElement.classList.add("active__item");
         }
         liElement.dataset.latlng = item.Address.Latitude + '-' + item.Address.Longitude;
+        liElement.dataset.postalcode = item.Address.PostalCode;
         liElement.addEventListener("click", ListElement.clickLi);
         liElement.innerHTML = tile;
         return liElement;
@@ -127,8 +130,11 @@ var ListElement = {
         document.getElementById(itemId).style.display = "list-item";
     },
     clickLi: function (e) {
-        if (this.dataset.latlng!=="null-null")
-            MapMDM.setView(this.dataset.latlng.split('-')[0], this.dataset.latlng.split('-')[1],20);
+        if (this.dataset.latlng !== "null-null" && !Mobile.check())
+            MapMDM.setView(this.dataset.latlng.split('-')[0], this.dataset.latlng.split('-')[1], 20);
+        //else if (this.dataset.latlng !== "null-null" && Mobile.check()) {
+
+        //}
     }
 }
 var MarkersGroupMDM = {
@@ -176,9 +182,36 @@ var MarkerMDM = {
         MarkersGroupMDM.addMarker(marker);
     }
     },
+    calculateDistance: function (_firstPoint, _secondPoint) {
+        var firstPoint = L.latLng(_firstPoint);
+        var secondPoint = L.latLng(_secondPoint);
+        return parseInt(L.GeometryUtil.length([firstPoint, secondPoint])*100)/100000;
+    },
 };
 
-
+var MobileListElement = {
+    allowDistance: 100,
+    distanceItemList : [],
+    create: function (pointA) {
+        ListElement.clearAllLi();
+        for (var i = 0; i < suppliersList.length; i++) {
+            if (suppliersList[i].Address.Latitude !== null && suppliersList[i].Address.Longitude !== null) {
+                var pointB = [suppliersList[i].Address.Latitude, suppliersList[i].Address.Longitude];
+                var distance = MarkerMDM.calculateDistance(pointA, pointB);
+                if (distance < 100) {
+                    var elList = suppliersList[i];
+                    elList['distance'] = distance;
+                    this.distanceItemList.push(elList);
+                    this.distanceItemList.sort(function (a, b) {
+                        return a.distance - b.distance;
+                    });
+                }
+            }
+        }
+        ListElement.createMoreLi(this.distanceItemList);
+        this.distanceItemList = [];
+    }
+}
 
 function loadMapSuppliers() {
     $.ajax({
@@ -216,10 +249,9 @@ function onSPCButtonClick(e) {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (value) {
-                console.log(value);
                 var firstResult = value[0];
                 if (Mobile.check()) {
-                    console.log(Mobile.check());
+                    MobileListElement.create(customParseFloat(firstResult.lat, firstResult.lon));
                 }
                 else {
                     MapMDM.setView(firstResult.lat, firstResult.lon, 12);
