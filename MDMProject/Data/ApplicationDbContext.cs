@@ -27,5 +27,11 @@ namespace MDMProject.Data
             modelBuilder.Entity<UserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
         }
+
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<EquipmentType> EquipmentTypes { get; set; }
+        public DbSet<HelpType> HelpTypes { get; set; }
+        public DbSet<OfferedHelp> OfferedHelps { get; set; }
+        public DbSet<ProtectiveEquipment> ProtectiveEquipments { get; set; }
     }
 }
