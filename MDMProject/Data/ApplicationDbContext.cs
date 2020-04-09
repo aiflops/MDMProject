@@ -1,13 +1,13 @@
 ﻿using MDMProject.Models;
+using MDMProject.Models.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
 
 namespace MDMProject.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
         public ApplicationDbContext()
-            : base("ApplicationDbConnection", throwIfV1Schema: false)
+            : base("ApplicationDbConnection")
         {
         }
 
