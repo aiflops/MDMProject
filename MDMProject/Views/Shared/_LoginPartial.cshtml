@@ -44,7 +44,7 @@ else
         var user = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId<int>());
         if (!user.IsProfileFinished)
         {
-            <span class="badge badge-error">!</span>
+            <span class="badge badge-error" title="Uzupełnij swój profil!">!</span>
         }
     }
 }
