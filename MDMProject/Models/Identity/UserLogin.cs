@@ -2,5 +2,5 @@
 
 namespace MDMProject.Models.Identity
 {
-    public class ApplicationUserLogin : IdentityUserLogin<int> { }
+    public class UserLogin : IdentityUserLogin<int> { }
 }

@@ -2,5 +2,5 @@
 
 namespace MDMProject.Models.Identity
 {
-    public class ApplicationUserRole : IdentityUserRole<int> { }
+    public class UserClaim : IdentityUserClaim<int> { }
 }

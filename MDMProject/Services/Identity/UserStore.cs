@@ -5,9 +5,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MDMProject.Services.Identity
 {
-    public class ApplicationUserStore : UserStore<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    public class UserStore : UserStore<User, Role, int, UserLogin, UserRole, UserClaim>
     {
-        public ApplicationUserStore(ApplicationDbContext context)
+        public UserStore(ApplicationDbContext context)
             : base(context)
         {
         }

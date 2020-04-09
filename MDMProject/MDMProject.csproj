@@ -191,15 +191,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Identity\ApplicationRole.cs" />
-    <Compile Include="Models\Identity\ApplicationUserClaim.cs" />
-    <Compile Include="Models\Identity\ApplicationUserLogin.cs" />
-    <Compile Include="Models\Identity\ApplicationUserRole.cs" />
-    <Compile Include="Services\Identity\ApplicationUserStore.cs" />
+    <Compile Include="Models\Identity\Role.cs" />
+    <Compile Include="Models\Identity\UserClaim.cs" />
+    <Compile Include="Models\Identity\UserLogin.cs" />
+    <Compile Include="Models\Identity\UserRole.cs" />
+    <Compile Include="Services\Identity\UserStore.cs" />
     <Compile Include="Models\HelpType.cs" />
     <Compile Include="Models\EquipmentType.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Services\Identity\ApplicationRoleStore.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Services\Identity\RoleStore.cs" />
     <Compile Include="Services\Identity\UserIdentityGenerator.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />

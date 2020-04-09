@@ -4,10 +4,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MDMProject.Services.Identity
 {
-
-    public class ApplicationRoleStore : RoleStore<ApplicationRole, int, ApplicationUserRole>
+    public class RoleStore : RoleStore<Role, int, UserRole>
     {
-        public ApplicationRoleStore(ApplicationDbContext context)
+        public RoleStore(ApplicationDbContext context)
             : base(context)
         {
         }

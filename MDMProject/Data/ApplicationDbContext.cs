@@ -5,7 +5,7 @@ using System.Data.Entity;
 
 namespace MDMProject.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    public class ApplicationDbContext : IdentityDbContext<User, Role, int, UserLogin, UserRole, UserClaim>
     {
         public ApplicationDbContext()
             : base("ApplicationDbConnection")
@@ -21,11 +21,11 @@ namespace MDMProject.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUser>().ToTable("Users");
-            modelBuilder.Entity<ApplicationRole>().ToTable("Roles");
-            modelBuilder.Entity<ApplicationUserRole>().ToTable("UserRoles");
-            modelBuilder.Entity<ApplicationUserClaim>().ToTable("UserClaims");
-            modelBuilder.Entity<ApplicationUserLogin>().ToTable("UserLogins");
+            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Role>().ToTable("Roles");
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<UserClaim>().ToTable("UserClaims");
+            modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
         }
     }
 }
