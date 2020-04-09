@@ -194,6 +194,7 @@
     <Compile Include="Models\HelpType.cs" />
     <Compile Include="Models\EquipmentType.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Services\UserIdentityGenerator.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
