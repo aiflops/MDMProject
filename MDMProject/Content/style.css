@@ -23,6 +23,16 @@
     color: #000;
 }
 
+.navbar-nav .badge.badge-error {
+    background: #d9534f;
+    padding: 2px 7px;
+}
+
+.navbar li > a > span {
+    vertical-align: middle;
+    display: inline-block;
+}
+
 html, body {
     font-family: "Montserrat", sans-serif;
 }
