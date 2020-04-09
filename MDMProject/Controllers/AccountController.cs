@@ -83,7 +83,7 @@ namespace MDMProject.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Niepoprawny login lub hasło.");
                     return View(model);
             }
         }
@@ -118,7 +118,7 @@ namespace MDMProject.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("ManageIndex", "Manage");
+                    return RedirectToAction("EditProfile", "Manage");
                 }
                 AddErrors(result);
             }

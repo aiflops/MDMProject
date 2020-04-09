@@ -11,10 +11,7 @@ namespace MDMProject.Models
         public bool IsProfileFinished { get; set; }
 
         [StringLength(256)]
-        public string FirstName { get; set; }
-
-        [StringLength(256)]
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         [StringLength(256)]
         public string AdditionalComment { get; set; }
@@ -24,8 +21,8 @@ namespace MDMProject.Models
 
         public virtual Address Address { get; set; }
 
-        public ICollection<ProtectiveEquipment> OfferedEquipment { get; set; }
+        public virtual ICollection<ProtectiveEquipment> OfferedEquipment { get; set; }
 
-        public ICollection<OfferedHelp> OfferedHelp { get; set; }
+        public virtual ICollection<OfferedHelp> OfferedHelp { get; set; }
     }
 }

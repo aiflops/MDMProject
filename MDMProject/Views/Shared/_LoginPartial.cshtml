@@ -1,23 +1,27 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using MDMProject.Models
+@using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.Owin
 
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
+        var user = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId<int>());
+
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    @User.Identity.GetUserName()
-                    @DisplayBadgeIfProfileNotActive()
+                    @(user != null ? user.Name : User.Identity.GetUserName())
+                    @DisplayBadgeIfProfileNotActive(user)
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="@Url.Action("ManageIndex", "Manage")" title="Edytuj profil">
-                            <span>Edytuj profil</span> @DisplayBadgeIfProfileNotActive()</a>
+                        <a href="@Url.Action("EditProfile", "Manage")" title="Edytuj profil">
+                            <span>Edytuj profil</span> @DisplayBadgeIfProfileNotActive(user)
+                        </a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()"><strong>Wyloguj</strong></a></li>
@@ -37,14 +41,10 @@ else
     </ul>
 }
 
-@helper DisplayBadgeIfProfileNotActive()
+@helper DisplayBadgeIfProfileNotActive(User user)
 {
-    if (Request.IsAuthenticated)
+    if (user != null && !user.IsProfileFinished)
     {
-        var user = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId<int>());
-        if (!user.IsProfileFinished)
-        {
-            <span class="badge badge-error" title="Uzupełnij swój profil!">!</span>
-        }
+        <span class="badge badge-error" title="Uzupełnij swój profil!">!</span>
     }
 }

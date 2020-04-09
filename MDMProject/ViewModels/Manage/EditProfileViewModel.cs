@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace MDMProject.ViewModels
 {
@@ -8,7 +9,7 @@ namespace MDMProject.ViewModels
         [Display(Name = "Imię i nazwisko")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Imię i nazwisko jest wymagane.")]
         [StringLength(256, MinimumLength = 3, ErrorMessage = "Pole może mieć maksymalnie 256 znaków, minimalnie 3.")]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "E-mail")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "E-mail jest wymagany.")]
@@ -44,7 +45,7 @@ namespace MDMProject.ViewModels
         [DataType(DataType.PostalCode)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Kod pocztowy jest wymagany.")]
         [StringLength(6, MinimumLength = 6, ErrorMessage = "Pole musi mieć 6 znaków (format 00-000).")]
-        [RegularExpression("[0-9]{2}-{[0-9]{3}", ErrorMessage = "Niepoprawny format kodu pocztowego (format 00-000).")]
+        [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Niepoprawny format kodu pocztowego (format 00-000).")]
         public string PostalCode { get; set; }
 
         [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
@@ -57,11 +58,12 @@ namespace MDMProject.ViewModels
         [Display(Name = "Maska")]
         public bool HasMaskAvailable { get; set; }
         [Display(Name = "Adapter")]
-        public bool Has3dPrinter { get; set; }
+        public bool HasAdapterAvailable { get; set; }
 
         /* Additional info */
         [Display(Name = "Dodatkowe informacje")]
         [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
+        [AllowHtml] // TODO: PREVENT SENDING HTML! Instead of sending and encoding
         public string AdditionalComment { get; set; }
     }
 }
