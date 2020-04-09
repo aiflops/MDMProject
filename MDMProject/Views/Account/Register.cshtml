@@ -1,9 +1,9 @@
 ﻿@model MDMProject.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Zarejestruj się";
+    ViewBag.Title = "Zarejestruj";
 }
 
-<div class="login">
+<main class="login">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -45,10 +45,10 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/scripts/validation")
 
     <script type="text/javascript">
         $.validator.addMethod("enforcetrue", function (value, element, param) {
