@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MDMProject.Models
+namespace MDMProject.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {
