@@ -5,9 +5,9 @@ namespace MDMProject.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Email jest wymagany.")]
-        [EmailAddress(ErrorMessage ="Email jest niepoprawny.")]
-        [Display(Name = "Email")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "E-mail jest wymagany.")]
+        [EmailAddress(ErrorMessage ="E-mail jest niepoprawny.")]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Hasło jest wymagane.")]
