@@ -3,10 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MDMProject.Data;
+using MDMProject.Mappers;
+using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MDMProject.Models;
 
 namespace MDMProject.Controllers
 {
@@ -32,9 +34,9 @@ namespace MDMProject.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -51,13 +53,108 @@ namespace MDMProject.Controllers
         }
 
         //
-        // GET: /Manage/Index
-        public async Task<ActionResult> ManageIndex(ManageMessageId? message)
+        // GET: /Manage/EditProfile
+        public ActionResult EditProfile()
         {
+            var user = UserManager.FindById(User.Identity.GetUserId<int>());
+            var viewModel = user.ToEditProfileViewModel();
 
+            return View(viewModel);
+        }
+
+        public ActionResult ShowProfile()
+        {
+            if (TempData["IsSuccess"] != null)
+            {
+                ViewBag.IsSuccess = true;
+                TempData.Remove("IsSuccess");
+            }
+
+            var user = UserManager.FindById(User.Identity.GetUserId<int>());
+            var viewModel = user.ToEditProfileViewModel();
+
+            return View(viewModel);
+        }
+
+        //
+        // POST: /Manage/EditProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile(EditProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int userId = User.Identity.GetUserId<int>();
+                try
+                {
+                    using (var db = new ApplicationDbContext())
+                    {
+                        var userWithSameMailExists = db.Users.Any(x => x.Id != userId && x.Email.ToLower() == model.Email.ToLower());
+                        var userWithSameMail = db.Users.Where(x => x.Id != userId && x.Email.ToLower() == model.Email.ToLower()).ToList();
+
+                        if (!userWithSameMailExists)
+                        {
+                            // Get user
+                            var user = db.Users.Find(userId);
+                            user.UpdateWith(model, db);
+
+                            await db.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(nameof(EditProfileViewModel.Email), "Użytkownik o podanym adresie e-mail już istnieje.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    TempData["IsSuccess"] = true;
+                    return RedirectToAction("ShowProfile", "Manage");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Manage/ChangePassword
+        public ActionResult ChangePassword()
+        {
             return View();
         }
-#region Helpers
+
+        //
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+
+            AddErrors(result);
+            return View(model);
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -79,7 +176,7 @@ namespace MDMProject.Controllers
 
         private bool HasPassword()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            var user = UserManager.FindById(User.Identity.GetUserId<int>());
             if (user != null)
             {
                 return user.PasswordHash != null;
@@ -89,7 +186,7 @@ namespace MDMProject.Controllers
 
         private bool HasPhoneNumber()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            var user = UserManager.FindById(User.Identity.GetUserId<int>());
             if (user != null)
             {
                 return user.PhoneNumber != null;
@@ -108,6 +205,6 @@ namespace MDMProject.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

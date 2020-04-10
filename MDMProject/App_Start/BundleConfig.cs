@@ -17,7 +17,8 @@ namespace MDMProject
             bundles.Add(
                 new ScriptBundle("~/scripts/validation")
                 .Include(
-                    "~/Scripts/jquery.validate*"
+                    "~/Scripts/jquery.validate*",
+                    "~/Scripts/custom/validationRules.js"
                 ));
 
             bundles.Add(

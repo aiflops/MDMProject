@@ -1,4 +1,4 @@
-﻿@using MDMProject.Models
+﻿@using MDMProject.ViewModels
 @model LoginViewModel
 @{
     ViewBag.Title = "Zaloguj";
@@ -28,10 +28,10 @@
                         </div>
                         <button type="submit" class="btn form-submit mt-3">Zaloguj</button>
                         <p>
-                            @Html.ActionLink("Zapomniałeś hasła?", "ForgotPassword")
+                            @Html.ActionLink("Nie pamiętam hasła", "ForgotPassword")
                         </p>
                         <p>
-                            @Html.ActionLink("Chcesz się zarejestrować?", "Register")
+                            @Html.ActionLink("Nie mam jeszcze konta", "Register")
                         </p>
                     }
                 </div>

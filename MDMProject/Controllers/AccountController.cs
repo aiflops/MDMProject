@@ -1,14 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MDMProject.Models;
+using MDMProject.ViewModels;
+using System.IO;
+using System.Web.Hosting;
 
 namespace MDMProject.Controllers
 {
@@ -79,14 +78,14 @@ namespace MDMProject.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("ManageIndex", "Manage");
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Niepoprawny login lub hasło.");
                     return View(model);
             }
         }
@@ -96,6 +95,7 @@ namespace MDMProject.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.IsRegisterView = true;
             return View();
         }
 
@@ -108,19 +108,19 @@ namespace MDMProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("EditProfile", "Manage");
                 }
                 AddErrors(result);
             }
@@ -132,9 +132,9 @@ namespace MDMProject.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<ActionResult> ConfirmEmail(int userId, string code)
         {
-            if (userId == null || code == null)
+            if (userId == default(int) || code == null)
             {
                 return View("Error");
             }
@@ -160,7 +160,9 @@ namespace MDMProject.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                /* TODO: This would be ok if we were checking the email existance */
+                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id))) 
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -168,14 +170,28 @@ namespace MDMProject.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                // Prepare email template
+                var emailTemplate = await GetEmailTemplateAsync();
+                var emailBody = emailTemplate.Replace(Models.Constants.EMAIL_TEMPLATE_URL, callbackUrl);
+
+                await UserManager.SendEmailAsync(user.Id, "Zresetuj Hasło", emailBody);
+                return RedirectToAction("ForgotPasswordConfirmation");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private async Task<string> GetEmailTemplateAsync()
+        {
+            using (StreamReader sr = new StreamReader(HostingEnvironment.MapPath("~/Content/email/template.html")))
+            {
+                var result = await sr.ReadToEndAsync();
+                return result;
+            }
         }
 
         //
@@ -238,7 +254,20 @@ namespace MDMProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [HttpGet]
+        public ActionResult ShowIsProfileFinished()
+        {
+            var isNotFinished = "<span class=\"badge badge-error\">!</span>";
+            if (Request.IsAuthenticated)
+            {
+                var user = UserManager.FindById(User.Identity.GetUserId<int>());
+                if (!user.IsProfileFinished)
+                {
+                    return Content(isNotFinished);
+                }
+            }
+            return Content("");
+        }
 
         #region Helpers
         // Used for XSRF protection when adding external logins

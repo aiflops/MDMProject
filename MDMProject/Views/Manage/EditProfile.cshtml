@@ -1,0 +1,117 @@
+﻿@using MDMProject.ViewModels
+@model EditProfileViewModel
+@{
+    ViewBag.Title = "Edytuj profil";
+}
+
+<main class="edit-profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-12">
+                <div class="form-container">
+                    <h1 class="form-header mb-3">Edytuj profil</h1>
+                    @using (Html.BeginForm("EditProfile", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-group", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="input-group mt-1">
+                            @Html.LabelFor(m => m.Name)
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Name) })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger " })
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mt-1">
+                                    @Html.LabelFor(m => m.Email)
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Email) })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mt-1">
+                                    @Html.LabelFor(m => m.PhoneNumber)
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.PhoneNumber) })
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mt-1">
+                                    @Html.LabelFor(m => m.StreetName)
+                                    @Html.TextBoxFor(m => m.StreetName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.StreetName) })
+                                    @Html.ValidationMessageFor(m => m.StreetName, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group mt-1">
+                                    @Html.LabelFor(m => m.HouseNumber)
+                                    @Html.TextBoxFor(m => m.HouseNumber, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.HouseNumber) })
+                                    @Html.ValidationMessageFor(m => m.HouseNumber, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group mt-1">
+                                    <label for="FlatNumber">Mieszkanie</label>
+                                    @*@Html.LabelFor(m => m.FlatNumber)*@
+                                    @Html.TextBoxFor(m => m.FlatNumber, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.FlatNumber) })
+                                    @Html.ValidationMessageFor(m => m.FlatNumber, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mt-1">
+                                    @Html.LabelFor(m => m.PostalCode)
+                                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.PostalCode) })
+                                    @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mt-1">
+                                    @Html.LabelFor(m => m.City)
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.City) })
+                                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mt-1">
+                                    <label>Dostarczane produkty:</label>
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.HasMaskAvailable)
+                                        @Html.LabelFor(m => m.HasMaskAvailable)
+                                    </div>
+
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.HasAdapterAvailable)
+                                        @Html.LabelFor(m => m.HasAdapterAvailable)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group mt-1">
+                            @Html.LabelFor(m => m.AdditionalComment)
+                            <br />
+                            @Html.TextAreaFor(m => m.AdditionalComment, new { @class = "form-control mb-1", rows = 4, placeholder = Html.DisplayNameFor(m => m.AdditionalComment) })
+                            @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
+                        </div>
+
+                        <button type="submit" class="btn form-submit mt-3">Zapisz</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/validation")
+}

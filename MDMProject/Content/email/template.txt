@@ -1,0 +1,10 @@
+﻿Witaj!
+
+Resetujesz hasło i w tym celu została wysłana wiadomość e-mail.
+
+Aby zakończyć resetowanie hasła wklej poniższy link w przeglądarce:
+CALLBACK_URL
+
+Jeśli prośba o zresetowanie hasła nie pochodzi od Ciebie, zignoruj tę wiadomość e-mail.
+
+Zespół Maska dla Medyka
