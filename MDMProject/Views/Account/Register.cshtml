@@ -36,7 +36,8 @@
                         <div class="input-group mt-1">
                             @Html.CheckBoxFor(m => m.AcceptTerms)
                             @Html.LabelFor(m => m.AcceptTerms, "Przeczytałem i akceptuję regulamin ")
-                            <a href="#" title="Regulamin" target="_blank">(Otwórz)</a>
+                            @Html.ActionLink(linkText: "(Otwórz)", actionName: "Rodo", controllerName: "Home", routeValues: null, htmlAttributes: new { target = "_blank" })
+
                             @Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
                         </div>
 
