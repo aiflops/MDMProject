@@ -1,4 +1,7 @@
-﻿var mymap = L.map('profileMap').setView([51.643078, 19.609658], 7);
+﻿var mymap =
+    L.map('profileMap')
+        .on('load', onLoad)
+    .setView([51.643078, 19.609658], 7);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -31,7 +34,7 @@ geocoderControl.on('markgeocode', function (result) {
 geocoderControl.addTo(mymap);
 
 mymap.on('click', function (e) {
-    geocoderControl.options.geocoder.reverse(e.latlng, mymap.options.crs.scale(mymap.getZoom()), function (results) {
+    geocoder.reverse(e.latlng, mymap.options.crs.scale(mymap.getZoom()), function (results) {
         var result = results[0];
         if (result)
             markPoint(result);
@@ -151,4 +154,21 @@ function doneTyping() {
 
 function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
+}
+
+function onLoad() {
+    setTimeout(loadInitialCoordinates, 200);
+}
+
+function loadInitialCoordinates() {
+    var lat = document.getElementById('Latitude').value;
+    var lng = document.getElementById('Longitude').value;
+    var zoom = 20;
+
+    if (lat && lng) {
+        // add a marker
+        marker = L.marker([lat, lng], {}).addTo(mymap);
+        // set the view
+        mymap.setView([lat, lng], zoom);
+    }
 }
