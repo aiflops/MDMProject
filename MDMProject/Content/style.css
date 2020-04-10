@@ -1,13 +1,15 @@
 ﻿.navbar {
     background-image: none;
-    background-color: #fff;
     border-radius: 0px;
     border: 0;
     border-bottom: 5px solid rgba(0, 103, 184, 0.5);
     margin-bottom: 0px;
     box-sizing: border-box;
-    height: 55px;
+    /*height: 55px;*/
     min-height: 55px;
+}
+#partialView {
+    padding-left: 10px;
 }
 
 .navbar-header {
@@ -32,7 +34,6 @@
     vertical-align: middle;
     display: inline-block;
 }
-
 html, body {
     font-family: "Montserrat", sans-serif;
 }
