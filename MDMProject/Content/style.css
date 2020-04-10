@@ -269,3 +269,23 @@ main {
     height: 400px;
     border: 1px solid #404040;
 }
+
+.rodo ol ol ol > li {
+    list-style: lower-roman;
+}
+
+.rodo ol ol > li {
+    list-style: lower-latin;
+}
+
+.rodo li:first-child {
+    margin-top: 1rem;
+}
+
+.rodo li:last-child {
+    margin-bottom: 1.5rem;
+}
+
+.rodo li {
+    margin-bottom: 0.5rem;
+}
