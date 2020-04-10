@@ -289,3 +289,7 @@ main {
 .rodo li {
     margin-bottom: 0.5rem;
 }
+
+#partialView > .navbar-nav {
+    margin: 0;
+}
