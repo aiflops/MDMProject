@@ -89,20 +89,16 @@ namespace MDMProject.Controllers
                 {
                     using (var db = new ApplicationDbContext())
                     {
-                        var userWithSameMailExists = db.Users.Any(x => x.Id != userId && x.Email.ToLower() == model.Email.ToLower());
-                        var userWithSameMail = db.Users.Where(x => x.Id != userId && x.Email.ToLower() == model.Email.ToLower()).ToList();
+                        ValidateUserEmail(model, userId, db);
+                        ValidateUserCoordinates(model);
 
-                        if (!userWithSameMailExists)
+                        if (ModelState.IsValid)
                         {
                             // Get user
                             var user = db.Users.Find(userId);
                             user.UpdateWith(model, db);
 
                             await db.SaveChangesAsync();
-                        }
-                        else
-                        {
-                            ModelState.AddModelError(nameof(EditProfileViewModel.Email), "Użytkownik o podanym adresie e-mail już istnieje.");
                         }
                     }
                 }
@@ -120,6 +116,23 @@ namespace MDMProject.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private void ValidateUserEmail(EditProfileViewModel model, int userId, ApplicationDbContext db)
+        {
+            var userWithSameMailExists = db.Users.Any(x => x.Id != userId && x.Email.ToLower() == model.Email.ToLower());
+            if (userWithSameMailExists)
+            {
+                ModelState.AddModelError(nameof(EditProfileViewModel.Email), "Użytkownik o podanym adresie e-mail już istnieje.");
+            }
+        }
+
+        private void ValidateUserCoordinates(EditProfileViewModel model)
+        {
+            if (model.PostalCode != null && (model.Latitude == null || model.Longitude == null))
+            {
+                ModelState.AddModelError(nameof(EditProfileViewModel.Latitude), "Nie oznaczono lokalizacji na mapie.");
+            }
         }
 
         //

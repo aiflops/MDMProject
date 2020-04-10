@@ -81,6 +81,18 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12 mt-2 map-container">
+                                <div class="input-group">
+                                    <label>Oznacz adres na mapie</label>
+                                    @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger " })
+                                    @Html.HiddenFor(m => m.Latitude)
+                                    @Html.HiddenFor(m => m.Longitude)
+                                    <div id="profileMap"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="input-group mt-1">
                                     <label>Dostarczane produkty:</label>
@@ -112,6 +124,23 @@
     </div>
 </main>
 
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+    @*<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />*@
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.css" />
+
+    @Styles.Render("~/Content/Map.css")
+}
+
 @section Scripts {
-    @Scripts.Render("~/scripts/validation")
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    @*<script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+        <script src="https://npmcdn.com/leaflet-geometryutil"></script>*@
+    <script src="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.js"></script>
+    @Scripts.Render("~/Scripts/custom/ProfileMap.js")
 }
