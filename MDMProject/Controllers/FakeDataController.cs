@@ -1,10 +1,16 @@
 ﻿using MDMProject.Data;
+using System;
 using System.Web.Mvc;
 
 namespace MDMProject.Controllers
 {
-    public class FakeDataController : Controller
+    public class FakeDataController : ControllerBase
     {
+        //public ActionResult TestException()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         //public ActionResult Reset()
         //{
         //    using (var context = new ApplicationDbContext())

@@ -4,6 +4,14 @@
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
+<div class="container">
+    <h1 class="text-danger">Błąd</h1>
+    <p class="text-danger mt-1">Wystąpił błąd podczas przetwarzania twojego żądania.</p>
+    @if (ViewBag.ErrorId != null)
+    {
+        <p>
+            <strong>Kod błędu: @ViewBag.ErrorId</strong>
+        </p>
+    }
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Wróć do strony głównej</a>
+</div>

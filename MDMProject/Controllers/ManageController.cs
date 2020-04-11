@@ -1,19 +1,19 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using MDMProject.Data;
+﻿using MDMProject.Data;
 using MDMProject.Mappers;
 using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace MDMProject.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : ControllerBase
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -104,6 +104,7 @@ namespace MDMProject.Controllers
                 }
                 catch (Exception ex)
                 {
+                    LogError(ex);
                     ModelState.AddModelError("", ex.Message);
                 }
 
