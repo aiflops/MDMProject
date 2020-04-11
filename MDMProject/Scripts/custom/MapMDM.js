@@ -79,7 +79,16 @@ var ListElement = {
         if (item.Address.FlatNumber !== null) {
             adress = adress + " " + item.Address.FlatNumber;
         }
-        tile = tile.replace("#Name", item.Name.split(" ")[0]).replace(/#Phone/gi, item.PhoneNumber).replace(/#Email/gi, item.Email).replace("#Adress", adress);
+        if (item.PhoneNumber === null)
+            tile = tile.replace(/#Phone/gi, '');
+        else
+            tile = tile.replace(/#Phone/gi, item.PhoneNumber);
+        if (item.Email === null)
+            tile = tile.replace(/#Email/gi, '');
+        else
+            tile = tile.replace(/#Email/gi, item.Email);
+
+        tile = tile.replace("#Name", item.Name.split(" ")[0]).replace("#Adress", adress);
         if (item.OfferedHelp !== null && item.OfferedEquipment !== null) {
             tile = tile.replace('<img src=#Src alt=#Alt>', '<img src=\"/Content/images/mask.png\" alt=\"Drukuję w 3D\"><img src=\"/Content/images/3d.png\" alt=\"Oferuję Maskę"\>')
             tile = tile.replace(/#Type/gi, "multiple");
