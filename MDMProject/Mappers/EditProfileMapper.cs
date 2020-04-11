@@ -86,7 +86,6 @@ namespace MDMProject.Mappers
         private static string GetString(string value)
         {
             var result = value?.Trim();
-            result = HttpUtility.HtmlEncode(result);
             return result;
         }
 

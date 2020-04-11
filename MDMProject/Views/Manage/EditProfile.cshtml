@@ -109,12 +109,13 @@
                             </div>
                         </div>
 
-                        <div class="input-group mt-1">
+                        @* TODO: Uncomment when displaying it will be implemented *@
+                        @*<div class="input-group mt-1">
                             @Html.LabelFor(m => m.AdditionalComment)
                             <br />
                             @Html.TextAreaFor(m => m.AdditionalComment, new { @class = "form-control mb-1", rows = 4, placeholder = Html.DisplayNameFor(m => m.AdditionalComment) })
                             @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
-                        </div>
+                        </div>*@
 
                         <button type="submit" class="btn form-submit mt-3">Zapisz</button>
                     }

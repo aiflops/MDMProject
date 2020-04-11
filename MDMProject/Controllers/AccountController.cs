@@ -1,18 +1,18 @@
-﻿using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using MDMProject.Models;
+using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MDMProject.Models;
-using MDMProject.ViewModels;
 using System.IO;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Hosting;
+using System.Web.Mvc;
 
 namespace MDMProject.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
