@@ -196,19 +196,19 @@ main {
 }
 
 .login {
-    background-image: url("./images/login.jpg");
+    background-image: url("/Content/images/login.jpg");
 }
 
 .register {
-    background-image: url("./images/register.jpg");
+    background-image: url("/Content/images/register.jpg");
 }
 
 .welcome {
-    background-image: url("./images/welcome.jpg");
+    background-image: url("/Content/images/welcome.jpg");
 }
 
 .edit-profile {
-    background-image: url("./images/register.jpg");
+    background-image: url("/Content/images/register.jpg");
 }
 
 .welcome__header {
