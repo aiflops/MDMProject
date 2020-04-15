@@ -172,7 +172,3 @@ function loadInitialCoordinates() {
         mymap.setView([lat, lng], zoom);
     }
 }
-
-setTimeout(function () {
-    throw new Error('Whoops!');
-}, 1000);
