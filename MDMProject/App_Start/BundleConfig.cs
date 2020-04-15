@@ -11,7 +11,8 @@ namespace MDMProject
                 .Include(
                     "~/Scripts/jquery-{version}.js",
                     "~/Scripts/bootstrap.js",
-                    "~/Scripts/modernizr-*"
+                    "~/Scripts/custom/errorHandler.js",
+                    "~/Scripts/custom/utils.js"
                 ));
 
             bundles.Add(

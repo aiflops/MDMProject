@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using MDMProject.Exceptions;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace MDMProject
@@ -11,6 +12,8 @@ namespace MDMProject
 
             config.Formatters.JsonFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("text/html"));
+
+            config.Filters.Add(new UnhandledExceptionFilterAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

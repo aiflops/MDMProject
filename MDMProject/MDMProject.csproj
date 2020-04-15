@@ -253,6 +253,7 @@
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
+    <Compile Include="Exceptions\UnhandledExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -297,6 +298,8 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="WebAPI Controllers\LogController.cs" />
+    <Compile Include="ViewModels\API\LogViewModel.cs" />
     <Compile Include="WebAPI Controllers\SuppliersController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -336,7 +339,9 @@
     <Content Include="Scripts\bootstrap.min.js">
       <DependentUpon>bootstrap.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\custom\errorHandler.js" />
     <Content Include="Scripts\custom\ProfileMap.js" />
+    <Content Include="Scripts\custom\utils.js" />
     <Content Include="Scripts\custom\validationRules.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
