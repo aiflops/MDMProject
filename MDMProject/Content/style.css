@@ -270,11 +270,37 @@ main {
     border: 1px solid #404040;
 }
 
-.rodo ol ol ol > li {
-    list-style: lower-roman;
+.rodo h1 {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
 }
 
-.rodo ol ol > li {
+.rodo p {
+    text-align: justify;
+    text-indent: 3rem;
+    line-height: 1.8em;
+}
+
+.rodo p + ol > li {
+    list-style: lower-latin;
+}
+
+.rodo ol.main-list {
+    margin-bottom: 4rem;
+    padding-left: 15px;
+}
+
+.rodo ol.main-list > li {
+    font-weight: bold;
+    list-style: upper-roman;
+}
+
+.rodo ol.main-list ol > li {
+    list-style: decimal;
+    font-weight: normal;
+}
+
+.rodo ol.main-list ol ol > li {
     list-style: lower-latin;
 }
 
@@ -287,6 +313,7 @@ main {
 }
 
 .rodo li {
+    line-height: 1.8em;
     margin-bottom: 0.5rem;
 }
 

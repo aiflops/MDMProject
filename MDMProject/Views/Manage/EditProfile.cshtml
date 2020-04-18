@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="input-group mt-1">
                                     <label>Dostarczane produkty:</label>
                                     <div class="checkbox">
@@ -104,6 +104,11 @@
                                     <div class="checkbox">
                                         @Html.CheckBoxFor(m => m.HasAdapterAvailable)
                                         @Html.LabelFor(m => m.HasAdapterAvailable)
+                                    </div>
+
+                                    <div class="alert alert-warning" role="alert">
+                                        Zaznaczenie opcji „maska” lub „adapter” powoduje automatyczne opublikowanie w Serwisie danych podanych w profilu.
+                                        Więcej informacji w <a href="@Url.Action("Rodo", "Home")#location-share" target="_blank">Regulaminie</a>.
                                     </div>
                                 </div>
                             </div>
