@@ -259,11 +259,32 @@
     </Compile>
     <Compile Include="Mappers\EditProfileMapper.cs" />
     <Compile Include="Mappers\SuppliersMapper.cs" />
-    <Compile Include="Models\Constants.cs" />
+    <Compile Include="Models\Constants\Constants.cs" />
     <Compile Include="Models\Identity\Role.cs" />
     <Compile Include="Models\Identity\UserClaim.cs" />
     <Compile Include="Models\Identity\UserLogin.cs" />
     <Compile Include="Models\Identity\UserRole.cs" />
+    <Compile Include="Models\Constants\ValidationConstants.cs" />
+    <Compile Include="Resources\EmailResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmailResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\PropertyNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyNames.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ValidationMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ViewResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\Identity\UserStore.cs" />
     <Compile Include="Models\HelpType.cs" />
     <Compile Include="Models\EquipmentType.cs" />
@@ -272,13 +293,8 @@
     <Compile Include="Services\Identity\UserIdentityGenerator.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\EditProfileViewModel.cs" />
-    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
-    <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="Models\OfferedHelp.cs" />
     <Compile Include="Models\ProtectiveEquipment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -286,18 +302,12 @@
     <Compile Include="Validation\EnforceTrueAttribute.cs" />
     <Compile Include="ViewModels\API\AddressViewModel.cs" />
     <Compile Include="ViewModels\API\OfferedHelpViewModel.cs" />
-    <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
-    <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\API\ProtectiveEquipmentViewModel.cs" />
     <Compile Include="ViewModels\API\SupplierViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
-    <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="WebAPI Controllers\LogController.cs" />
     <Compile Include="ViewModels\API\LogViewModel.cs" />
     <Compile Include="WebAPI Controllers\SuppliersController.cs" />
@@ -413,6 +423,24 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmailResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\PropertyNames.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyNames.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ValidationMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ViewResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

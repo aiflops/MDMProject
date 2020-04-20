@@ -1,27 +1,33 @@
-﻿using MDMProject.Validation;
+﻿using MDMProject.Models;
+using MDMProject.Resources;
+using MDMProject.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace MDMProject.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "E-mail jest wymagany.")]
-        [EmailAddress(ErrorMessage ="E-mail jest niepoprawny.")]
-        [Display(Name = "E-mail")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Email))]
+        [DataType(DataType.EmailAddress)]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [EmailAddress(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.EmailIsIncorrect))]
+        [MaxLength(ValidationConstants.User.MAX_EMAIL_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Email { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Hasło jest wymagane.")]
-        [StringLength(100, ErrorMessage = "Hasło musi mieć conajmniej {2} znaków.", MinimumLength = 6)]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Password))]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MinLength(ValidationConstants.User.MIN_PASSWORD_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]
+        [MaxLength(ValidationConstants.User.MAX_PASSWORD_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Password { get; set; }
 
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_ConfirmPassword))]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare(nameof(Password), ErrorMessage = "Hasła nie pasują do siebie.")]
+        [Compare(nameof(Password), ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.PasswordDoesntMatch))]
         public string ConfirmPassword { get; set; }
 
-        [EnforceTrue(ErrorMessage = "To pole jest wymagane.")]
+        [EnforceTrue(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.ThisFieldIsRequired))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.RegisterViewModel_AcceptTerms))]
         public bool AcceptTerms { get; set; }
     }
 }

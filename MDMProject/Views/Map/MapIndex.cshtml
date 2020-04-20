@@ -1,7 +1,7 @@
-﻿@{
-    ViewBag.Title = "Map";
+﻿@using MDMProject.Resources
+@{
+    ViewBag.Title = ViewResources.Map_Index__Title;
 }
-
 
 <main class="map">
 
@@ -11,15 +11,15 @@
             <div class="col-xs-12 col-md-6 col-lg-5">
                 <div class="d-flex justify-between align-center wrap mt-2 mb-2">
 
-                    <div class="pr-2">Lista dostępnych:</div>
+                    <div class="pr-2">@ViewResources.Map_Index__AvailableList:</div>
                     <div action="" class="form-group m-0">
                         <div class="search">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="search" placeholder="Kod pocztowy">
+                                <input type="text" class="form-control" id="search" placeholder="@ViewResources.Map_Index__PostalCode">
                             </div>
-                            <button type="submit" onclick="onSPCButtonClick()" class="btn form-submit">Szukaj</button>
+                            <button type="submit" onclick="onSPCButtonClick()" class="btn form-submit">@ViewResources.Map_Index__Search</button>
                         </div>
-                        <span class="search__validation" id="search__validation">Popraw kod pocztowy</span>
+                        <span class="search__validation" id="search__validation">@ViewResources.Map_Index__FixPostalCode</span>
                     </div>
                 </div>
                 <div class="entry-container mb-2">

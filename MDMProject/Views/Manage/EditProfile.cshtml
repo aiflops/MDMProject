@@ -1,7 +1,9 @@
-﻿@using MDMProject.ViewModels
+﻿@using MDMProject.Resources
+@using MDMProject.ViewModels
+
 @model EditProfileViewModel
 @{
-    ViewBag.Title = "Edytuj profil";
+    ViewBag.Title = ViewResources.Manage_EditProfile__Title;
 }
 
 <main class="edit-profile">
@@ -9,7 +11,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-8 col-12">
                 <div class="form-container">
-                    <h1 class="form-header mb-3">Edytuj profil</h1>
+                    <h1 class="form-header mb-3">@ViewResources.Manage_EditProfile__EditProfile</h1>
                     @using (Html.BeginForm("EditProfile", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-group", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
@@ -55,7 +57,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group mt-1">
-                                    <label for="FlatNumber">Mieszkanie</label>
+                                    <label for="FlatNumber">@ViewResources.Manage_EditProfile__Flat</label>
                                     @*@Html.LabelFor(m => m.FlatNumber)*@
                                     @Html.TextBoxFor(m => m.FlatNumber, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.FlatNumber) })
                                     @Html.ValidationMessageFor(m => m.FlatNumber, "", new { @class = "text-danger " })
@@ -83,7 +85,7 @@
                         <div class="row">
                             <div class="col-md-12 mt-2 map-container">
                                 <div class="input-group">
-                                    <label>Oznacz adres na mapie</label>
+                                    <label>@ViewResources.Manage_EditProfile__MarkAddressOnMap</label>
                                     @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger " })
                                     @Html.HiddenFor(m => m.Latitude)
                                     @Html.HiddenFor(m => m.Longitude)
@@ -95,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group mt-1">
-                                    <label>Dostarczane produkty:</label>
+                                    <label>@ViewResources.Manage_EditProfile__AvailableProducts:</label>
                                     <div class="checkbox">
                                         @Html.CheckBoxFor(m => m.HasMaskAvailable)
                                         @Html.LabelFor(m => m.HasMaskAvailable)
@@ -107,8 +109,8 @@
                                     </div>
 
                                     <div class="alert alert-warning" role="alert">
-                                        Zaznaczenie opcji „maska” lub „adapter” powoduje automatyczne opublikowanie w Serwisie danych podanych w profilu.
-                                        Więcej informacji w <a href="@Url.Action("Rodo", "Home")#location-share" target="_blank">Regulaminie</a>.
+                                        @ViewResources.Manage_EditProfile__SelectingWillPublishProfile
+                                        @ViewResources.Manage_EditProfile__MoreInfo <a href="@Url.Action("Rodo", "Home")#location-share" target="_blank">@ViewResources.Manage_EditProfile__TermsAndConditions</a>.
                                     </div>
                                 </div>
                             </div>
@@ -116,13 +118,13 @@
 
                         @* TODO: Uncomment when displaying it will be implemented *@
                         @*<div class="input-group mt-1">
-                            @Html.LabelFor(m => m.AdditionalComment)
-                            <br />
-                            @Html.TextAreaFor(m => m.AdditionalComment, new { @class = "form-control mb-1", rows = 4, placeholder = Html.DisplayNameFor(m => m.AdditionalComment) })
-                            @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
-                        </div>*@
+                                @Html.LabelFor(m => m.AdditionalComment)
+                                <br />
+                                @Html.TextAreaFor(m => m.AdditionalComment, new { @class = "form-control mb-1", rows = 4, placeholder = Html.DisplayNameFor(m => m.AdditionalComment) })
+                                @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
+                            </div>*@
 
-                        <button type="submit" class="btn form-submit mt-3">Zapisz</button>
+                        <button type="submit" class="btn form-submit mt-3">@ViewResources.Manage_EditProfile__Save</button>
                     }
                 </div>
             </div>
@@ -148,5 +150,6 @@
     @*<script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
         <script src="https://npmcdn.com/leaflet-geometryutil"></script>*@
     <script src="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.js"></script>
+    @Scripts.Render("~/scripts/validation")
     @Scripts.Render("~/Scripts/custom/ProfileMap.js")
 }

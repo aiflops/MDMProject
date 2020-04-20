@@ -1,7 +1,8 @@
-﻿@using MDMProject.ViewModels
+﻿@using MDMProject.Resources
+@using MDMProject.ViewModels
 @model EditProfileViewModel
 @{
-    ViewBag.Title = "Twój profil";
+    ViewBag.Title = ViewResources.Manage_ShowProfile__Title;
 }
 
 <main class="edit-profile">
@@ -9,21 +10,20 @@
         <div class="row">
             <div class="col-lg-6 col-md-8 col-12">
                 <div class="form-container">
-                    <h1 class="form-header mb-3">Twój profil</h1>
+                    <h1 class="form-header mb-3">@ViewResources.Manage_ShowProfile__YourProfile</h1>
 
                     @if (ViewBag.IsSuccess)
                     {
                         <div class="alert alert-success" role="alert">
-                            <strong>Sukces!</strong>
-                            <p>Twoje zmiany zostały zapisane. Możesz teraz przejść do mapy.</p>
-                            <a href="@Url.Action("MapIndex", "Map")" class="btn btn-primary mt-2">Przejdź do mapy</a>
+                            <strong>@ViewResources.Manage_ShowProfile__Success!</strong>
+                            <p>@ViewResources.Manage_ShowProfile__ChangesSavedGoToMap</p>
+                            <a href="@Url.Action("MapIndex", "Map")" class="btn btn-primary mt-2">@ViewResources.Manage_ShowProfile__GoToMap</a>
                         </div>
                     }
 
                     <div class="input-group mt-1">
                         @Html.LabelFor(m => m.Name)
                         <p>@Html.DisplayFor(m => m.Name)</p>
-                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger " })
                     </div>
 
                     <div class="row">
@@ -31,14 +31,12 @@
                             <div class="input-group mt-1">
                                 @Html.LabelFor(m => m.Email)
                                 <p>@Html.DisplayFor(m => m.Email)</p>
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger " })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group mt-1">
                                 @Html.LabelFor(m => m.PhoneNumber)
                                 <p>@Html.DisplayFor(m => m.PhoneNumber)</p>
-                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger " })
                             </div>
                         </div>
                     </div>
@@ -48,22 +46,19 @@
                             <div class="input-group mt-1">
                                 @Html.LabelFor(m => m.StreetName)
                                 <p>@Html.DisplayFor(m => m.StreetName)</p>
-                                @Html.ValidationMessageFor(m => m.StreetName, "", new { @class = "text-danger " })
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group mt-1">
                                 @Html.LabelFor(m => m.HouseNumber)
                                 <p>@Html.DisplayFor(m => m.HouseNumber)</p>
-                                @Html.ValidationMessageFor(m => m.HouseNumber, "", new { @class = "text-danger " })
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group mt-1">
-                                <label for="FlatNumber">Mieszkanie</label>
+                                <label>@ViewResources.Manage_EditProfile__Flat</label>
                                 @*@Html.LabelFor(m => m.FlatNumber)*@
                                 <p>@Html.DisplayFor(m => m.FlatNumber)</p>
-                                @Html.ValidationMessageFor(m => m.FlatNumber, "", new { @class = "text-danger " })
                             </div>
                         </div>
                     </div>
@@ -73,14 +68,12 @@
                             <div class="input-group mt-1">
                                 @Html.LabelFor(m => m.PostalCode)
                                 <p>@Html.DisplayFor(m => m.PostalCode)</p>
-                                @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "text-danger " })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group mt-1">
                                 @Html.LabelFor(m => m.City)
                                 <p>@Html.DisplayFor(m => m.City)</p>
-                                @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger " })
                             </div>
                         </div>
                     </div>
@@ -88,7 +81,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group mt-1">
-                                <label>Dostarczane produkty:</label>
+                                <label>@ViewResources.Manage_EditProfile__AvailableProducts:</label>
                                 <div class="checkbox">
                                     @Html.CheckBoxFor(m => m.HasMaskAvailable, new { disabled = "disabled" })
                                     @Html.LabelFor(m => m.HasMaskAvailable)
@@ -103,13 +96,13 @@
                     </div>
 
                     @*<div class="input-group mt-1">
-                        @Html.LabelFor(m => m.AdditionalComment)
-                        <br />
-                        <p>
-                            @Html.Raw(Model.AdditionalComment != null ? Model.AdditionalComment.Replace("\n", "<br>") : "")
-                        </p>
-                        @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
-                    </div>*@
+                            @Html.LabelFor(m => m.AdditionalComment)
+                            <br />
+                            <p>
+                                @Html.Raw(Model.AdditionalComment != null ? Model.AdditionalComment.Replace("\n", "<br>") : "")
+                            </p>
+                            @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
+                        </div>*@
                 </div>
             </div>
         </div>

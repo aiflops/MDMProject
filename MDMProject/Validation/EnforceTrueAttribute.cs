@@ -14,11 +14,6 @@ namespace MDMProject.Validation
             return (bool)value == true;
         }
 
-        public override string FormatErrorMessage(string name)
-        {
-            return "The " + name + " field must be checked in order to continue.";
-        }
-
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
             yield return new ModelClientValidationRule

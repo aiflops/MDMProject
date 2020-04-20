@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account_ConfirmEmail__Login" xml:space="preserve">
+    <value>zaloguj się!</value>
+  </data>
+  <data name="Account_ConfirmEmail__Please" xml:space="preserve">
+    <value>Proszę,</value>
+  </data>
+  <data name="Account_ConfirmEmail__Title" xml:space="preserve">
+    <value>Dzięki za rejestrację!</value>
+  </data>
+  <data name="Account_ForgotPasswordConfirmation__MessageSent" xml:space="preserve">
+    <value>Jeżeli dany e-mail istnieje w naszym serwisie, to na podany adres e-mail wysłany został link do zresetowania hasła.</value>
+  </data>
+  <data name="Account_ForgotPasswordConfirmation__Title" xml:space="preserve">
+    <value>Potwierdzenie zmiany hasła</value>
+  </data>
+  <data name="Account_ForgotPassword__Placeholder" xml:space="preserve">
+    <value>Podaj email, aby zresetować hasło</value>
+  </data>
+  <data name="Account_ForgotPassword__ProvideEmailAndWeSendResetPassword" xml:space="preserve">
+    <value>Jeśli zapomniałeś hasła do swojego konta, to wystarczy, że podasz swój email, a my wyślemy Ci kod do zmiany hasła.</value>
+  </data>
+  <data name="Account_ForgotPassword__Send" xml:space="preserve">
+    <value>Wyślij</value>
+  </data>
+  <data name="Account_ForgotPassword__Title" xml:space="preserve">
+    <value>Zresetuj hasło</value>
+  </data>
+  <data name="Account_Login_DontHaveAnAccount" xml:space="preserve">
+    <value>Nie mam jeszcze konta</value>
+  </data>
+  <data name="Account_Login__ForgotPassword" xml:space="preserve">
+    <value>Nie pamiętam hasła</value>
+  </data>
+  <data name="Account_Login__Header" xml:space="preserve">
+    <value>Zaloguj się</value>
+  </data>
+  <data name="Account_Login__Login" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="Account_Login__Title" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="Account_Register__Open" xml:space="preserve">
+    <value>Otwórz</value>
+  </data>
+  <data name="Account_Register__Register" xml:space="preserve">
+    <value>Zarejestruj się</value>
+  </data>
+  <data name="Account_Register__Title" xml:space="preserve">
+    <value>Zarejestruj</value>
+  </data>
+  <data name="Account_ResetPasswordConfirmation__ClickAndLogin" xml:space="preserve">
+    <value>kliknij i zaloguj się</value>
+  </data>
+  <data name="Account_ResetPasswordConfirmation__PasswordHasBeenReset" xml:space="preserve">
+    <value>Hasło zresetowane,</value>
+  </data>
+  <data name="Account_ResetPasswordConfirmation__Title" xml:space="preserve">
+    <value>Reset hasła potwierdzony</value>
+  </data>
+  <data name="Account_ResetPassword__Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Account_ResetPassword__Title" xml:space="preserve">
+    <value>Reset hasła</value>
+  </data>
+  <data name="Error__BackToHomePage" xml:space="preserve">
+    <value>Wróć do strony głównej</value>
+  </data>
+  <data name="Error__Error" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
+  <data name="Error__ErrorCode" xml:space="preserve">
+    <value>Kod błędu</value>
+  </data>
+  <data name="Error__ErrorOccuredWhilePerformingRequest" xml:space="preserve">
+    <value>Wystąpił błąd podczas przetwarzania twojego żądania.</value>
+  </data>
+  <data name="Error__Title" xml:space="preserve">
+    <value>Wystąpił błąd</value>
+  </data>
+  <data name="Home_Index__Im" xml:space="preserve">
+    <value>Jestem</value>
+  </data>
+  <data name="Home_Index__ImAMedic" xml:space="preserve">
+    <value>Jestem Medykiem</value>
+  </data>
+  <data name="Home_Index__ImASupplier" xml:space="preserve">
+    <value>Jestem Dostawcą</value>
+  </data>
+  <data name="Home_Rodo__Title" xml:space="preserve">
+    <value>Regulamin</value>
+  </data>
+  <data name="Layout__MainPageLink" xml:space="preserve">
+    <value>Maska dla medyka</value>
+  </data>
+  <data name="Layout__Title" xml:space="preserve">
+    <value>Maska dla medyka</value>
+  </data>
+  <data name="Layout__ToggleNavigation" xml:space="preserve">
+    <value>Pokaż/ukryj nawigację</value>
+  </data>
+  <data name="Lockout__AccountLocked" xml:space="preserve">
+    <value>Konto zablokowane</value>
+  </data>
+  <data name="Lockout__AccountLockedTryAgainLater" xml:space="preserve">
+    <value>To konto zostało zablokowane, spróbuj ponownie później.</value>
+  </data>
+  <data name="Lockout__Title" xml:space="preserve">
+    <value>Konto zablokowane</value>
+  </data>
+  <data name="LoginPartial__EditProfile" xml:space="preserve">
+    <value>Edytuj profil</value>
+  </data>
+  <data name="LoginPartial__FinishProfile" xml:space="preserve">
+    <value>Uzupełnij swój profil!</value>
+  </data>
+  <data name="LoginPartial__Login" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="LoginPartial__Logout" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="LoginPartial__Register" xml:space="preserve">
+    <value>Zarejestruj</value>
+  </data>
+  <data name="Manage_EditProfile__AvailableProducts" xml:space="preserve">
+    <value>Dostarczane produkty</value>
+  </data>
+  <data name="Manage_EditProfile__EditProfile" xml:space="preserve">
+    <value>Edytuj profil</value>
+  </data>
+  <data name="Manage_EditProfile__Flat" xml:space="preserve">
+    <value>Mieszkanie</value>
+  </data>
+  <data name="Manage_EditProfile__MarkAddressOnMap" xml:space="preserve">
+    <value>Oznacz adres na mapie</value>
+  </data>
+  <data name="Manage_EditProfile__MoreInfo" xml:space="preserve">
+    <value>Więcej informacji w</value>
+  </data>
+  <data name="Manage_EditProfile__Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="Manage_EditProfile__SelectingWillPublishProfile" xml:space="preserve">
+    <value>Zaznaczenie opcji „maska” lub „adapter” powoduje automatyczne opublikowanie w Serwisie danych podanych w profilu.</value>
+  </data>
+  <data name="Manage_EditProfile__TermsAndConditions" xml:space="preserve">
+    <value>Regulaminie</value>
+  </data>
+  <data name="Manage_EditProfile__Title" xml:space="preserve">
+    <value>Edytuj profil</value>
+  </data>
+  <data name="Manage_ShowProfile__ChangesSavedGoToMap" xml:space="preserve">
+    <value>Twoje zmiany zostały zapisane. Możesz teraz przejść do mapy.</value>
+  </data>
+  <data name="Manage_ShowProfile__GoToMap" xml:space="preserve">
+    <value>Przejdź do mapy</value>
+  </data>
+  <data name="Manage_ShowProfile__Success" xml:space="preserve">
+    <value>Sukces</value>
+  </data>
+  <data name="Manage_ShowProfile__Title" xml:space="preserve">
+    <value>Twój profil</value>
+  </data>
+  <data name="Manage_ShowProfile__YourProfile" xml:space="preserve">
+    <value>Twój profil</value>
+  </data>
+  <data name="Map_Index__AvailableList" xml:space="preserve">
+    <value>Lista dostępnych</value>
+  </data>
+  <data name="Map_Index__FixPostalCode" xml:space="preserve">
+    <value>Popraw kod pocztowy</value>
+  </data>
+  <data name="Map_Index__PostalCode" xml:space="preserve">
+    <value>Kod pocztowy</value>
+  </data>
+  <data name="Map_Index__Search" xml:space="preserve">
+    <value>Szukaj</value>
+  </data>
+  <data name="Map_Index__Title" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+</root>

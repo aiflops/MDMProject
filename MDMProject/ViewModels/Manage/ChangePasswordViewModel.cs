@@ -1,23 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MDMProject.Models;
+using MDMProject.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace MDMProject.ViewModels
 {
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.ChangePasswordViewModel_OldPassword))]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_NewPassword))]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MinLength(ValidationConstants.User.MIN_PASSWORD_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]
+        [MaxLength(ValidationConstants.User.MAX_PASSWORD_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string NewPassword { get; set; }
 
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_ConfirmNewPassword))]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare(nameof(NewPassword), ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.PasswordDoesntMatch))]
         public string ConfirmPassword { get; set; }
     }
 }

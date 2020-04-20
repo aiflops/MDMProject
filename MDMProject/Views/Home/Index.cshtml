@@ -1,20 +1,21 @@
-﻿<main class="welcome">
+﻿@using MDMProject.Resources
+<main class="welcome">
 
     <div class="container">
         <div class="row d-none">
             <div class="col-md-12">
                 <h1 class="welcome__header mt-3">
-                    Jestem:
+                    @ViewResources.Home_Index__Im:
                 </h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-6">
-                @Html.ActionLink("Jestem Medykiem", "MapIndex", new { controller = "Map" }, new { @class = "welcome__choose" })
+                @Html.ActionLink(ViewResources.Home_Index__ImAMedic, "MapIndex", new { controller = "Map" }, new { @class = "welcome__choose" })
             </div>
             <div class="col-xs-6">
-                @Html.ActionLink("Jestem Dostawcą", "Login", new { controller = "Account" }, new { @class = "welcome__choose" })
+                @Html.ActionLink(ViewResources.Home_Index__ImASupplier, "Login", new { controller = "Account" }, new { @class = "welcome__choose" })
             </div>
         </div>
 

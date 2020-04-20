@@ -11,6 +11,7 @@ using MDMProject.Services.Identity;
 using System.Net.Mail;
 using System.Net.Configuration;
 using System.Configuration;
+using MDMProject.Resources;
 
 namespace MDMProject
 {
@@ -24,7 +25,7 @@ namespace MDMProject
             // Plug in your email service here to send an email.
             using (SmtpClient client = new SmtpClient())
             {
-                var from = new MailAddress(username, "Zespół Maska dla Medyka");
+                var from = new MailAddress(username, EmailResources.EmailFrom);
 
                 var mailMessage = new MailMessage();
                 
@@ -81,18 +82,6 @@ namespace MDMProject
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
-
-            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
-            // You can write your own provider and plug it in here.
-            manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<User, int>
-            {
-                MessageFormat = "Your security code is {0}"
-            });
-            manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<User, int>
-            {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
-            });
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;

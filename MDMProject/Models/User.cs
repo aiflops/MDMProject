@@ -10,10 +10,10 @@ namespace MDMProject.Models
     {
         public bool IsProfileFinished { get; set; }
 
-        [StringLength(256)]
+        [StringLength(ValidationConstants.User.MAX_USER_NAME_LENGTH)]
         public string Name { get; set; }
 
-        [StringLength(256)]
+        [StringLength(ValidationConstants.User.MAX_ADDITIONAL_COMMENT_LENGTH)]
         public string AdditionalComment { get; set; }
 
         [ForeignKey(nameof(Address))]

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MDMProject.Models;
+using MDMProject.Resources;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace MDMProject.ViewModels
@@ -6,63 +8,65 @@ namespace MDMProject.ViewModels
     public class EditProfileViewModel
     {
         /* Basic info */
-        [Display(Name = "Imię i nazwisko")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Imię i nazwisko jest wymagane.")]
-        [StringLength(256, MinimumLength = 3, ErrorMessage = "Pole może mieć maksymalnie 256 znaków, minimalnie 3.")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_Name))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MinLength(ValidationConstants.User.MIN_USER_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]
+        [MaxLength(ValidationConstants.User.MAX_USER_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Name { get; set; }
 
-        [Display(Name = "E-mail")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "E-mail jest wymagany.")]
-        [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
-        [EmailAddress(ErrorMessage = "E-mail jest niepoprawny.")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Email))]
+        [DataType(DataType.EmailAddress)]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [EmailAddress(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.EmailIsIncorrect))]
+        [MaxLength(ValidationConstants.User.MAX_EMAIL_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Email { get; set; }
 
-        [Display(Name = "Telefon")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_PhoneNumber))]
         [DataType(DataType.PhoneNumber)]
-        [StringLength(50, ErrorMessage = "Pole może mieć maksymalnie 50 znaków.")]
+        [MaxLength(ValidationConstants.User.MAX_PHONE_NUMBER_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string PhoneNumber { get; set; }
 
         /* Address */
-        [Display(Name = "Miasto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Miasto jest wymagane.")]
-        [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_City))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MaxLength(ValidationConstants.Address.MAX_CITY_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string City { get; set; }
 
-        [Display(Name = "Ulica")]
-        [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_StreetName))]
+        [MaxLength(ValidationConstants.Address.MAX_STREET_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string StreetName { get; set; }
 
-        [Display(Name = "Nr domu")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Nr domu jest wymagany.")]
-        [StringLength(50, ErrorMessage = "Pole może mieć maksymalnie 50 znaków.")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HouseNumber))]
+        [MaxLength(ValidationConstants.Address.MAX_HOUSE_NUMBER_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string HouseNumber { get; set; }
 
-        [Display(Name = "Nr mieszkania")]
-        [StringLength(50, ErrorMessage = "Pole może mieć maksymalnie 50 znaków.")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_FlatNumber))]
+        [MaxLength(ValidationConstants.Address.MAX_FLAT_NUMBER_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string FlatNumber { get; set; }
 
-        [Display(Name = "Kod pocztowy")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_PostalCode))]
         [DataType(DataType.PostalCode)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Kod pocztowy jest wymagany.")]
-        [StringLength(6, MinimumLength = 6, ErrorMessage = "Pole musi mieć 6 znaków (format 00-000).")]
-        [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Niepoprawny format kodu pocztowego (format 00-000).")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [StringLength(ValidationConstants.Address.POSTAL_CODE_LENGTH, MinimumLength = ValidationConstants.Address.POSTAL_CODE_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.ExactFieldLength))]
+        [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.PostCodeIncorrect))]
         public string PostalCode { get; set; }
 
-        [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
+        [MaxLength(ValidationConstants.Address.MAX_LATITUDE_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Latitude { get; set; }
 
-        [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
+        [MaxLength(ValidationConstants.Address.MAX_LONGITUDE_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Longitude { get; set; }
 
         /* Help offered */
-        [Display(Name = "Maska")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HasMaskAvailable))]
         public bool HasMaskAvailable { get; set; }
-        [Display(Name = "Adapter")]
+
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HasAdapterAvailable))]
         public bool HasAdapterAvailable { get; set; }
 
         /* Additional info */
-        [Display(Name = "Dodatkowe informacje")]
-        [StringLength(256, ErrorMessage = "Pole może mieć maksymalnie 256 znaków.")]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_AdditionalComment))]
+        [MaxLength(ValidationConstants.User.MAX_ADDITIONAL_COMMENT_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         [AllowHtml] // TODO: PREVENT SENDING HTML! Instead of sending and encoding
         public string AdditionalComment { get; set; }
     }

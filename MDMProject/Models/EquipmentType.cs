@@ -10,7 +10,7 @@ namespace MDMProject.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(ValidationConstants.EquipmentType.MAX_NAME_LENGTH)]
         public string Name { get; set; }
     }
 }

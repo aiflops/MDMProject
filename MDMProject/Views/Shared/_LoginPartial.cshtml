@@ -1,4 +1,5 @@
 ﻿@using MDMProject.Models
+@using MDMProject.Resources
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.Owin
 
@@ -19,12 +20,12 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="@Url.Action("EditProfile", "Manage")" title="Edytuj profil">
-                            <span>Edytuj profil</span> @DisplayBadgeIfProfileNotActive(user)
+                        <a href="@Url.Action("EditProfile", "Manage")" title="@ViewResources.LoginPartial__EditProfile">
+                            <span>@ViewResources.LoginPartial__EditProfile</span> @DisplayBadgeIfProfileNotActive(user)
                         </a>
                     </li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><strong>Wyloguj</strong></a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><strong>@ViewResources.LoginPartial__Logout</strong></a></li>
                 </ul>
             </li>
         </ul>
@@ -35,9 +36,9 @@ else
     <ul class="nav navbar-nav navbar-right">
         @if (ViewBag.IsRegisterView != true)
         {
-            <li>@Html.ActionLink("Zarejestruj", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink(ViewResources.LoginPartial__Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         }
-        <li>@Html.ActionLink("Zaloguj", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink(ViewResources.LoginPartial__Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
 
@@ -45,6 +46,6 @@ else
 {
     if (user != null && !user.IsProfileFinished)
     {
-        <span class="badge badge-error" title="Uzupełnij swój profil!">!</span>
+        <span class="badge badge-error" title="@ViewResources.LoginPartial__FinishProfile">!</span>
     }
 }

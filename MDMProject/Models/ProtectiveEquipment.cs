@@ -9,12 +9,12 @@ namespace MDMProject.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(ValidationConstants.ProtectiveEquipment.MAX_NAME_LENGTH)]
         public string Name { get; set; }
 
         public int? Amount { get; set; }
 
-        [StringLength(256)]
+        [StringLength(ValidationConstants.ProtectiveEquipment.MAX_COMMENT_LENGTH)]
         public string Comment { get; set; }
 
         [ForeignKey(nameof(User))]

@@ -1,4 +1,5 @@
 ﻿using MDMProject.Models;
+using MDMProject.Resources;
 using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -25,6 +26,14 @@ namespace MDMProject.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -81,11 +90,9 @@ namespace MDMProject.Controllers
                     return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Niepoprawny login lub hasło.");
+                    ModelState.AddModelError("", ValidationMessages.IncorrectCredentials);
                     return View(model);
             }
         }
@@ -134,7 +141,7 @@ namespace MDMProject.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(int userId, string code)
         {
-            if (userId == default(int) || code == null)
+            if (userId == default || code == null)
             {
                 return View("Error");
             }
@@ -177,21 +184,12 @@ namespace MDMProject.Controllers
                 var emailTemplate = await GetEmailTemplateAsync();
                 var emailBody = emailTemplate.Replace(Models.Constants.EMAIL_TEMPLATE_URL, callbackUrl);
 
-                await UserManager.SendEmailAsync(user.Id, "Zresetuj Hasło", emailBody);
+                await UserManager.SendEmailAsync(user.Id, EmailResources.EmailTitle, emailBody);
                 return RedirectToAction("ForgotPasswordConfirmation");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
-
-        private async Task<string> GetEmailTemplateAsync()
-        {
-            using (StreamReader sr = new StreamReader(HostingEnvironment.MapPath("~/Content/email/template.html")))
-            {
-                var result = await sr.ReadToEndAsync();
-                return result;
-            }
         }
 
         //
@@ -270,17 +268,6 @@ namespace MDMProject.Controllers
         }
 
         #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -289,41 +276,12 @@ namespace MDMProject.Controllers
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        private async Task<string> GetEmailTemplateAsync()
         {
-            if (Url.IsLocalUrl(returnUrl))
+            using (StreamReader sr = new StreamReader(HostingEnvironment.MapPath("~/Content/email/template.html")))
             {
-                return Redirect(returnUrl);
-            }
-            return RedirectToAction("Index", "Home");
-        }
-
-        internal class ChallengeResult : HttpUnauthorizedResult
-        {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null)
-            {
-            }
-
-            public ChallengeResult(string provider, string redirectUri, string userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
-            public string LoginProvider { get; set; }
-            public string RedirectUri { get; set; }
-            public string UserId { get; set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != null)
-                {
-                    properties.Dictionary[XsrfKey] = UserId;
-                }
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+                var result = await sr.ReadToEndAsync();
+                return result;
             }
         }
         #endregion

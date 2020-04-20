@@ -1,16 +1,19 @@
-﻿@{
-    ViewBag.Title = "Dzięki za rejestrację!";
+﻿@using MDMProject.Resources
+@{
+    ViewBag.Title = ViewResources.Account_ConfirmEmail__Title;
 }
 
 <main class="login">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-8 col-xs-12 form-container">
-                <h2>@ViewBag.Title.</h2>
-                <div>
-                    <p>
-                        Proszę, @Html.ActionLink("zaloguj się !", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-                    </p>
+            <div class="col-md-4">
+                <div class="form-container">
+                    <h2>@ViewBag.Title</h2>
+                    <div>
+                        <p>
+                            @ViewResources.Account_ConfirmEmail__Please @Html.ActionLink(ViewResources.Account_ConfirmEmail__Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

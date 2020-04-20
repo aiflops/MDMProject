@@ -1,10 +1,11 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@using MDMProject.Resources
+@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Locked Out";
+    ViewBag.Title = @ViewResources.Lockout__Title;
 }
 
 <hgroup>
-    <h1 class="text-danger">Konto zablokowane.</h1>
-    <h2 class="text-danger">To konto zostało zablokowane, spróbuj ponownie później.</h2>
+    <h1 class="text-danger">@ViewResources.Lockout__AccountLocked</h1>
+    <h2 class="text-danger">@ViewResources.Lockout__AccountLockedTryAgainLater</h2>
 </hgroup>

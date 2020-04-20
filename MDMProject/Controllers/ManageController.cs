@@ -1,9 +1,9 @@
 ﻿using MDMProject.Data;
 using MDMProject.Mappers;
+using MDMProject.Resources;
 using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -124,7 +124,7 @@ namespace MDMProject.Controllers
             var userWithSameMailExists = db.Users.Any(x => x.Id != userId && x.Email.ToLower() == model.Email.ToLower());
             if (userWithSameMailExists)
             {
-                ModelState.AddModelError(nameof(EditProfileViewModel.Email), "Użytkownik o podanym adresie e-mail już istnieje.");
+                ModelState.AddModelError(nameof(EditProfileViewModel.Email), ValidationMessages.EmailAlreadyExists);
             }
         }
 
@@ -132,7 +132,7 @@ namespace MDMProject.Controllers
         {
             if (model.PostalCode != null && (model.Latitude == null || model.Longitude == null))
             {
-                ModelState.AddModelError(nameof(EditProfileViewModel.Latitude), "Nie oznaczono lokalizacji na mapie.");
+                ModelState.AddModelError(nameof(EditProfileViewModel.Latitude), ValidationMessages.LocationNotMarkedOnMap);
             }
         }
 
@@ -169,43 +169,12 @@ namespace MDMProject.Controllers
         }
 
         #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
             }
-        }
-
-        private bool HasPassword()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId<int>());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
-
-        private bool HasPhoneNumber()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId<int>());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
         }
 
         public enum ManageMessageId

@@ -46,7 +46,7 @@ namespace MDMProject
         {
             var ex = Server.GetLastError();
             //log the error!
-            Log.Logger.Error(ex, "Global application occured");
+            Log.Logger.Error(ex, "Global application error occured");
         }
     }
 }

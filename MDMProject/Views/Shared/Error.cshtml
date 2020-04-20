@@ -1,17 +1,18 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@using MDMProject.Resources
+@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = ViewResources.Error__Title;
 }
 
 <div class="container">
-    <h1 class="text-danger">Błąd</h1>
-    <p class="text-danger mt-1">Wystąpił błąd podczas przetwarzania twojego żądania.</p>
+    <h1 class="text-danger">@ViewResources.Error__Error</h1>
+    <p class="text-danger mt-1">@ViewResources.Error__ErrorOccuredWhilePerformingRequest</p>
     @if (ViewBag.ErrorId != null)
     {
         <p>
-            <strong>Kod błędu: @ViewBag.ErrorId</strong>
+            <strong>@ViewResources.Error__ErrorCode: @ViewBag.ErrorId</strong>
         </p>
     }
-    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Wróć do strony głównej</a>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@ViewResources.Error__BackToHomePage</a>
 </div>
