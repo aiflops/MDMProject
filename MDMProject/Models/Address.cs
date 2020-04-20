@@ -16,7 +16,6 @@ namespace MDMProject.Models
         [StringLength(ValidationConstants.Address.MAX_STREET_NAME_LENGTH)]
         public string StreetName { get; set; }
 
-        [Required]
         [StringLength(ValidationConstants.Address.MAX_HOUSE_NUMBER_LENGTH)]
         public string HouseNumber { get; set; }
 
