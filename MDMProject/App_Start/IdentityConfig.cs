@@ -9,9 +9,9 @@ using MDMProject.Models;
 using MDMProject.Data;
 using MDMProject.Services.Identity;
 using System.Net.Mail;
-using System.Net.Configuration;
 using System.Configuration;
 using MDMProject.Resources;
+using System.Net;
 
 namespace MDMProject
 {
@@ -19,13 +19,24 @@ namespace MDMProject
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            var smtpSection = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
-            string username = smtpSection.Network.UserName;
+            // Get configuration settings
+            var emailFrom = ConfigurationManager.AppSettings["EmailFrom"];
+            var emailSmtpHost = ConfigurationManager.AppSettings["EmailSmtpHost"];
+            var emailSmtpPort = int.Parse(ConfigurationManager.AppSettings["EmailSmtpPort"]);
+            var emailUserName = ConfigurationManager.AppSettings["EmailUserName"];
+            var emailPassword = ConfigurationManager.AppSettings["EmailPassword"];
+            var emailEnableSSL = bool.Parse(ConfigurationManager.AppSettings["EmailEnableSSL"]);
 
-            // Plug in your email service here to send an email.
             using (SmtpClient client = new SmtpClient())
             {
-                var from = new MailAddress(username, EmailResources.EmailFrom);
+                // Configure smtp server
+                client.Host = emailSmtpHost;
+                client.Port = emailSmtpPort;
+                client.Credentials = new NetworkCredential(emailUserName, emailPassword);
+                client.EnableSsl = emailEnableSSL;
+
+                // Create message
+                var from = new MailAddress(emailFrom, EmailResources.EmailFrom);
 
                 var mailMessage = new MailMessage();
                 
@@ -36,6 +47,7 @@ namespace MDMProject
                 mailMessage.Body = message.Body;
                 mailMessage.IsBodyHtml = true;
 
+                // Send message
                 await client.SendMailAsync(mailMessage);
             }
         }
