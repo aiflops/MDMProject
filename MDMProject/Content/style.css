@@ -324,3 +324,7 @@ main {
 .button-group {
     display: flex;
 }
+
+.validation-summary-errors ul {
+    padding-left: 15px;
+}
