@@ -8,7 +8,7 @@ namespace MDMProject.Controllers
     {
         protected ILogger _logger;
 
-        public ControllerBase()
+        protected ControllerBase()
         {
             _logger = Log.Logger;
         }

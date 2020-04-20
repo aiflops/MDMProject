@@ -30,30 +30,19 @@ namespace MDMProject.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
+            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            private set => _signInManager = value;
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? HttpContext.GetOwinContext().Get<ApplicationUserManager>();
+            private set => _userManager = value;
         }
 
         //
         // GET: /Manage/EditProfile
+        [HttpGet]
         public ActionResult EditProfile()
         {
             var user = UserManager.FindById(User.Identity.GetUserId<int>());
@@ -62,6 +51,7 @@ namespace MDMProject.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public ActionResult ShowProfile()
         {
             if (TempData["IsSuccess"] != null)
@@ -138,6 +128,7 @@ namespace MDMProject.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        [HttpGet]
         public ActionResult ChangePassword()
         {
             return View();
