@@ -49,17 +49,18 @@
     }
 
     function loadInitialCoordinates() {
-        console.log('loadInitialCoordinates');
-        var lat = document.getElementById('Latitude').value;
-        var lng = document.getElementById('Longitude').value;
-        var zoom = 20;
+        setTimeout(function () {
+            var lat = document.getElementById('Latitude').value;
+            var lng = document.getElementById('Longitude').value;
+            var zoom = 20;
 
-        if (lat && lng) {
-            // add a marker
-            marker = L.marker([lat, lng], {}).addTo(mymap);
-            // set the view
-            mymap.setView([lat, lng], zoom);
-        }
+            if (lat && lng) {
+                // add a marker
+                marker = L.marker([lat, lng], {}).addTo(mymap);
+                // set the view
+                mymap.setView([lat, lng], zoom);
+            }
+        }, 200);
     }
 
     //#endregion
