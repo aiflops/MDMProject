@@ -414,6 +414,7 @@
       <DependentUpon>jquery.validate.js</DependentUpon>
     </None>
     <Content Include="Views\Manage\ShowProfile.cshtml" />
+    <Content Include="Views\Account\ConfirmationEmailSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -428,6 +429,7 @@
     <EmbeddedResource Include="Resources\EmailResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>EmailResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\PropertyNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -436,10 +438,12 @@
     <EmbeddedResource Include="Resources\ValidationMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ViewResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ViewResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

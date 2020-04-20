@@ -1,0 +1,20 @@
+﻿@using MDMProject.Resources
+@{
+    ViewBag.Title = ViewResources.Account_ConfirmationEmailSent__Title;
+}
+
+<main class="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h1 class="form-header mb-3">@ViewBag.Title</h1>
+                    <p>
+                        @string.Format(ViewResources.Account_ConfirmationEmailSent__LinkHasBeenSent, ViewBag.Email)<br /><br />
+                        @ViewResources.Account_ConfirmationEmailSent__ActivateAccountToUseService 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

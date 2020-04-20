@@ -150,4 +150,7 @@
   <data name="ThisFieldIsRequired" xml:space="preserve">
     <value>To pole jest wymagane.</value>
   </data>
+  <data name="UserAccountIsInactive" xml:space="preserve">
+    <value>Konto użytkownika jest nieaktywne. Aktywuj konto poprzez link aktywacyjny, wysłany na Twój email.</value>
+  </data>
 </root>

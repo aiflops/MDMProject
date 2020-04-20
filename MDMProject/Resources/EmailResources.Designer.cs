@@ -61,6 +61,24 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potwierdź swój adres e-mail klikając &lt;a href=&quot;{0}&quot;&gt;tutaj&lt;/a&gt;..
+        /// </summary>
+        internal static string ConfirmationEmail_Message {
+            get {
+                return ResourceManager.GetString("ConfirmationEmail_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdź adres e-mail.
+        /// </summary>
+        internal static string ConfirmationEmail_Title {
+            get {
+                return ResourceManager.GetString("ConfirmationEmail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zespół Maska dla Medyka.
         /// </summary>
         internal static string EmailFrom {

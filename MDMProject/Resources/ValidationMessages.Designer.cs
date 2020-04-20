@@ -158,5 +158,14 @@ namespace MDMProject.Resources {
                 return ResourceManager.GetString("ThisFieldIsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konto użytkownika jest nieaktywne. Aktywuj konto poprzez link aktywacyjny, wysłany na Twój email..
+        /// </summary>
+        internal static string UserAccountIsInactive {
+            get {
+                return ResourceManager.GetString("UserAccountIsInactive", resourceCulture);
+            }
+        }
     }
 }

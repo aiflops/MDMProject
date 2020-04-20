@@ -68,6 +68,13 @@ namespace MDMProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            if (IsEmailVerificationEnabled)
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+                if (user != null && !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                    ModelState.AddModelError("", ValidationMessages.UserAccountIsInactive);
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -79,7 +86,11 @@ namespace MDMProject.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "Home");
+                    var user = await UserManager.FindByNameAsync(model.Email);
+                    if (!user.IsProfileFinished)
+                        return RedirectToAction("EditProfile", "Manage");
+                    else
+                        return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
@@ -112,15 +123,23 @@ namespace MDMProject.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    if (IsEmailVerificationEnabled)
+                    {
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        await UserManager.SendEmailAsync(user.Id, EmailResources.ConfirmationEmail_Title, string.Format(EmailResources.ConfirmationEmail_Message, callbackUrl));
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        ViewBag.Email = model.Email;
+                        return View("ConfirmationEmailSent");
+                    }
+                    else
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("EditProfile", "Manage");
+                        return RedirectToAction("EditProfile", "Manage");
+                    }
                 }
                 AddErrors(result);
             }
@@ -161,9 +180,7 @@ namespace MDMProject.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                /* TODO: This would be ok if we were checking the email existance */
-                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id))) 
-                if (user == null)
+                if (user == null || (IsEmailVerificationEnabled && !(await UserManager.IsEmailConfirmedAsync(user.Id))))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");

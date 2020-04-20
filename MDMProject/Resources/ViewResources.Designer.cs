@@ -61,6 +61,33 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aktywuj konto, aby móc korzystać z serwisu..
+        /// </summary>
+        public static string Account_ConfirmationEmailSent__ActivateAccountToUseService {
+            get {
+                return ResourceManager.GetString("Account_ConfirmationEmailSent__ActivateAccountToUseService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Na adres {0} został wysłany mail z linkiem aktywacyjnym..
+        /// </summary>
+        public static string Account_ConfirmationEmailSent__LinkHasBeenSent {
+            get {
+                return ResourceManager.GetString("Account_ConfirmationEmailSent__LinkHasBeenSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdź adres e-mail.
+        /// </summary>
+        public static string Account_ConfirmationEmailSent__Title {
+            get {
+                return ResourceManager.GetString("Account_ConfirmationEmailSent__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to zaloguj się!.
         /// </summary>
         public static string Account_ConfirmEmail__Login {
