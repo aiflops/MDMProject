@@ -320,3 +320,7 @@ main {
 #partialView > .navbar-nav {
     margin: 0;
 }
+
+.button-group {
+    display: flex;
+}

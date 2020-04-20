@@ -246,6 +246,9 @@
   <data name="Manage_EditProfile__AvailableProducts" xml:space="preserve">
     <value>Dostarczane produkty</value>
   </data>
+  <data name="Manage_EditProfile__Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
   <data name="Manage_EditProfile__EditProfile" xml:space="preserve">
     <value>Edytuj profil</value>
   </data>

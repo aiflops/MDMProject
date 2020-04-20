@@ -448,6 +448,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anuluj.
+        /// </summary>
+        public static string Manage_EditProfile__Cancel {
+            get {
+                return ResourceManager.GetString("Manage_EditProfile__Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edytuj profil.
         /// </summary>
         public static string Manage_EditProfile__EditProfile {

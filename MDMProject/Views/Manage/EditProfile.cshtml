@@ -123,8 +123,10 @@
                                 @Html.TextAreaFor(m => m.AdditionalComment, new { @class = "form-control mb-1", rows = 4, placeholder = Html.DisplayNameFor(m => m.AdditionalComment) })
                                 @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
                             </div>*@
-
-                        <button type="submit" class="btn form-submit mt-3">@ViewResources.Manage_EditProfile__Save</button>
+                        <div class="button-group">
+                            <a href="@Url.Action("MapIndex", "Map")" class="btn btn-default mt-3">@ViewResources.Manage_EditProfile__Cancel</a>
+                            <button type="submit" class="btn form-submit mt-3">@ViewResources.Manage_EditProfile__Save</button>
+                        </div>
                     }
                 </div>
             </div>
