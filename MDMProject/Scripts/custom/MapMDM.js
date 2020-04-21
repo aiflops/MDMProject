@@ -152,9 +152,13 @@ var MarkerMDM = {
     markerList:[],
     iconsMask: L.icon({
         iconUrl: '/Content/images/mask.png',
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
     }),
     iconsPrinter : L.icon({
         iconUrl: '/Content/images/3d.png',
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
     }),
     onClick: function (e) {
         var key = customParseFloat(this.getLatLng().lat, this.getLatLng().lng).join("-")
