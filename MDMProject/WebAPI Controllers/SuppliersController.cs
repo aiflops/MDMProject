@@ -24,7 +24,7 @@ namespace MDMProject.WebAPI_Controllers
                 var equipmentTypes = await db.EquipmentTypes.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.Name);
                 var helpTypes = await db.HelpTypes.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.Name);
 
-                var usersToMap = allUsers.Where(x => x.Address != null && x.Address.Latitude != null && x.Address.Longitude != null).ToList();
+                var usersToMap = allUsers.Where(x => x.Address != null && x.Address.Latitude != null && x.Address.Longitude != null && (x.HasMask || x.HasAdapter)).ToList();
                 var supplierViewModels = usersToMap.ToSupplierViewModels(equipmentTypes, helpTypes).ToList();
 
                 return supplierViewModels;

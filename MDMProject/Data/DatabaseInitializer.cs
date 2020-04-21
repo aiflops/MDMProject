@@ -60,6 +60,7 @@ namespace MDMProject.Data
             userToUpdate.AdditionalComment = user.AdditionalComment;
             userToUpdate.PhoneNumber = user.PhoneNumber;
             userToUpdate.Address = user.Address;
+            userToUpdate.EmailConfirmed = true;
 
             user.OfferedEquipment?.ForEach(x => userToUpdate.OfferedEquipment.Add(x));
             user.OfferedHelp?.ForEach(x => userToUpdate.OfferedHelp.Add(x));

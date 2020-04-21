@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace MDMProject.Models
 {
@@ -24,5 +25,17 @@ namespace MDMProject.Models
         public virtual ICollection<ProtectiveEquipment> OfferedEquipment { get; set; }
 
         public virtual ICollection<OfferedHelp> OfferedHelp { get; set; }
+
+        [NotMapped]
+        public bool HasMask
+        {
+            get => OfferedEquipment.Any(x => x.EquipmentType != null && x.EquipmentType.Name == Constants.MASK_NAME);
+        }
+
+        [NotMapped]
+        public bool HasAdapter
+        {
+            get => OfferedHelp.Any(x => x.HelpType != null && x.HelpType.Name == Constants.ADAPTER_NAME);
+        }
     }
 }
