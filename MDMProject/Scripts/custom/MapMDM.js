@@ -66,29 +66,13 @@ var ListElement = {
     htmlEl: "<div role = \"button\" class= \"entry #Type\" >" +
              "<div class=\"entry__wrapper p-1\"><div class=\"entry__icon\">"+
             "<img src=#Src alt=#Alt></div><h3 class=\"entry__text pl-1\">#Name</h3></div>" +
-                    "<address class=\"entry__address p-1\">#Adress</address>"+
                         "<div class=\"entry__media p-1\">"+
-                            "<a href=\"tel:#Phone\" title=\"Zadzwoń: #Phone\">#Phone</a>"+
-                            "<br><a href=\"mailto:#Email\"title=\"Wyślij e-mail: #Email\">#Email</a>"+
-                            "</div></div>",
+                            "#City</div></div>",
 
     createLi: function (item) {
         var tile = this.htmlEl;
         tile = tile.replace('#Id', 'supplier-' + item.Id);
-        var adress = item.Address.City + ", " + item.Address.StreetName + " " + item.Address.HouseNumber;
-        if (item.Address.FlatNumber !== null) {
-            adress = adress + " " + item.Address.FlatNumber;
-        }
-        if (item.PhoneNumber === null)
-            tile = tile.replace(/#Phone/gi, '');
-        else
-            tile = tile.replace(/#Phone/gi, item.PhoneNumber);
-        if (item.Email === null)
-            tile = tile.replace(/#Email/gi, '');
-        else
-            tile = tile.replace(/#Email/gi, item.Email);
-
-        tile = tile.replace("#Name", item.Name.split(" ")[0]).replace("#Adress", adress);
+        tile = tile.replace("#Name", item.Name.split(" ")[0]).replace("#City", item.Address.City);
         if (item.OfferedHelp !== null && item.OfferedEquipment !== null) {
             tile = tile.replace('<img src=#Src alt=#Alt>', '<img src=\"/Content/images/mask.png\" alt=\"Drukuję w 3D\"><img src=\"/Content/images/3d.png\" alt=\"Oferuję Maskę"\>')
             tile = tile.replace(/#Type/gi, "multiple");
@@ -114,6 +98,7 @@ var ListElement = {
         liElement.dataset.latlng = item.Address.Latitude + '-' + item.Address.Longitude;
         liElement.dataset.postalcode = item.Address.PostalCode;
         liElement.addEventListener("click", ListElement.clickLi);
+        tile = tile.replace(/null/gi, "");
         liElement.innerHTML = tile;
         return liElement;
     },
