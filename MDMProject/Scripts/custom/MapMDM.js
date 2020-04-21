@@ -5,7 +5,7 @@ var suppliersListElHtml = document.getElementById('showSuppliers');
 var mymap = L.map('mapID').setView([51.643078, 19.609658], 7);
 var GEOCODE_API = "https:\//nominatim.openstreetmap.org/search?q=#postcode,Poland&accept-language=pl&format=json";
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
+    maxZoom: 25,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1
@@ -125,10 +125,7 @@ var ListElement = {
     },
     clickLi: function (e) {
         if (this.dataset.latlng !== "null-null" && !Mobile.check())
-            MapMDM.setView(this.dataset.latlng.split('-')[0], this.dataset.latlng.split('-')[1], 20);
-        //else if (this.dataset.latlng !== "null-null" && Mobile.check()) {
-
-        //}
+            MapMDM.setView(this.dataset.latlng.split('-')[0], this.dataset.latlng.split('-')[1], 19);
     }
 }
 var MarkersGroupMDM = {
