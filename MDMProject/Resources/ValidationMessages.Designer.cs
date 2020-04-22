@@ -61,6 +61,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Captcha jest niepoprawna..
+        /// </summary>
+        internal static string CaptchaIsIncorrect {
+            get {
+                return ResourceManager.GetString("CaptchaIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Użytkownik o podanym adresie e-mail już istnieje..
         /// </summary>
         internal static string EmailAlreadyExists {
