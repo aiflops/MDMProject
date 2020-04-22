@@ -69,5 +69,6 @@ namespace MDMProject.ViewModels
         [MaxLength(ValidationConstants.User.MAX_ADDITIONAL_COMMENT_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         [AllowHtml] // TODO: PREVENT SENDING HTML! Instead of sending and encoding
         public string AdditionalComment { get; set; }
+        public bool HasMaskCollectionPoint { get; internal set; }
     }
 }

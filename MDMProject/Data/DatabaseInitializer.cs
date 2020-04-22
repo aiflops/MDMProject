@@ -19,6 +19,7 @@ namespace MDMProject.Data
         private static void AddRequiredData(ApplicationDbContext context)
         {
             context.HelpTypes.Add(new HelpType { Name = Constants.ADAPTER_NAME });
+            context.HelpTypes.Add(new HelpType { Name = Constants.MASK_COLLECTION_POINT_NAME });
             context.EquipmentTypes.Add(new EquipmentType { Name = Constants.MASK_NAME });
             context.Roles.Add(new Role { Name = "Admin" });
             context.SaveChanges();
@@ -29,9 +30,10 @@ namespace MDMProject.Data
             var userManager = new ApplicationUserManager(new UserStore(context));
 
             var adapterHelpType = context.HelpTypes.First(x => x.Name == Constants.ADAPTER_NAME);
+            var maskCollectionPointType = context.HelpTypes.First(x => x.Name == Constants.MASK_COLLECTION_POINT_NAME);
             var maskEquipmentType = context.EquipmentTypes.First(x => x.Name == Constants.MASK_NAME);
 
-            List<User> data = GetUsersToAdd(adapterHelpType, maskEquipmentType);
+            List<User> data = GetUsersToAdd(adapterHelpType, maskEquipmentType, maskCollectionPointType);
             var duplicatedEmails = data.GroupBy(x => x.Email.Trim().ToLower()).Where(x => x.Count() > 1).Select(x => x.Key);
             if (duplicatedEmails.Any())
                 throw new System.Exception("Duplicated emails in data source!");
@@ -79,7 +81,7 @@ namespace MDMProject.Data
             context.SaveChanges();
         }
 
-        private static List<User> GetUsersToAdd(HelpType adapterHelpType, EquipmentType maskEquipmentType)
+        private static List<User> GetUsersToAdd(HelpType adapterHelpType, EquipmentType maskEquipmentType, HelpType collectionPointHelpType)
         {
             List<User> data = new List<User>();
             data.Add(new User
@@ -144,8 +146,8 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = HasMask(maskEquipmentType),
-                OfferedHelp = null,
+                OfferedEquipment = null,
+                OfferedHelp = HasCollectionPoint(collectionPointHelpType),
                 AdditionalComment = null,
                 IsProfileFinished = true
             });
@@ -317,6 +319,18 @@ namespace MDMProject.Data
                 new OfferedHelp
                 {
                     HelpType = adapterHelpType
+                }
+            };
+            return result;
+        }
+
+        private static ICollection<OfferedHelp> HasCollectionPoint(HelpType collectionPointHelpType)
+        {
+            var result = new List<OfferedHelp>
+            {
+                new OfferedHelp
+                {
+                    HelpType = collectionPointHelpType
                 }
             };
             return result;

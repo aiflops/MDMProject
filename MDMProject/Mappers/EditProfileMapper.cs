@@ -17,6 +17,7 @@ namespace MDMProject.Mappers
                 PhoneNumber = user.PhoneNumber,
                 HasMaskAvailable = HasMaskAvailable(user),
                 HasAdapterAvailable = HasAdapterAvailable(user),
+                HasMaskCollectionPoint = HasMaskCollectionPoint(user),
                 AdditionalComment = user.AdditionalComment,
 
                 City = user.Address?.City,
@@ -67,6 +68,20 @@ namespace MDMProject.Mappers
                 // Remove adapter
                 var offeredAdapter = GetAdapter(user);
                 db.OfferedHelps.Remove(offeredAdapter);
+            }
+
+            /* UPDATE MASK COLLECTION POINT */
+            if (viewModel.HasMaskCollectionPoint && !HasMaskCollectionPoint(user))
+            {
+                // Add mask collection point
+                var maskCollectionPointType = GetMaskCollectionPointType(db);
+                user.OfferedHelp.Add(new OfferedHelp { HelpType = maskCollectionPointType });
+            }
+            else if (!viewModel.HasMaskCollectionPoint && HasMaskCollectionPoint(user))
+            {
+                // Remove mask collection point
+                var maskCollectionPoint = GetMaskCollectionPoint(user);
+                db.OfferedHelps.Remove(maskCollectionPoint);
             }
 
             /* UPDATE ADDRESS */
@@ -120,6 +135,22 @@ namespace MDMProject.Mappers
         private static HelpType GetAdapterType(ApplicationDbContext db)
         {
             return db.HelpTypes.First(x => x.Name == Constants.ADAPTER_NAME);
+        }
+
+        private static bool HasMaskCollectionPoint(User user)
+        {
+            var maskCollectionPoint = GetMaskCollectionPoint(user);
+            return maskCollectionPoint != null;
+        }
+
+        private static OfferedHelp GetMaskCollectionPoint(User user)
+        {
+            return user.OfferedHelp.FirstOrDefault(x => x.HelpType != null && x.HelpType.Name == Constants.MASK_COLLECTION_POINT_NAME);
+        }
+
+        private static HelpType GetMaskCollectionPointType(ApplicationDbContext db)
+        {
+            return db.HelpTypes.First(x => x.Name == Constants.MASK_COLLECTION_POINT_NAME);
         }
         #endregion
     }

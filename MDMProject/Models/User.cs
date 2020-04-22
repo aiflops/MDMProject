@@ -37,5 +37,11 @@ namespace MDMProject.Models
         {
             get => OfferedHelp.Any(x => x.HelpType != null && x.HelpType.Name == Constants.ADAPTER_NAME);
         }
+
+        [NotMapped]
+        public bool HasMaskCollectionPoint
+        {
+            get => OfferedHelp.Any(x => x.HelpType != null && x.HelpType.Name == Constants.MASK_COLLECTION_POINT_NAME);
+        }
     }
 }
