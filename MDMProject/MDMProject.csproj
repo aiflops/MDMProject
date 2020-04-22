@@ -254,9 +254,11 @@
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Exceptions\UnhandledExceptionFilterAttribute.cs" />
+    <Compile Include="Filters\ValidateGoogleCaptchaAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GoogleCaptchaHelper.cs" />
     <Compile Include="Mappers\EditProfileMapper.cs" />
     <Compile Include="Mappers\SuppliersMapper.cs" />
     <Compile Include="Models\Constants\Constants.cs" />
@@ -417,6 +419,7 @@
     <Content Include="Views\Account\ConfirmationEmailSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

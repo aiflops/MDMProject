@@ -1,4 +1,5 @@
-﻿using MDMProject.Models;
+﻿using MDMProject.Filters;
+using MDMProject.Models;
 using MDMProject.Resources;
 using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -115,6 +116,7 @@ namespace MDMProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateGoogleCaptcha]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
