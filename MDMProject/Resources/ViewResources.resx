@@ -274,7 +274,7 @@
     <value>Zapisz</value>
   </data>
   <data name="Manage_EditProfile__SelectingWillPublishProfile" xml:space="preserve">
-    <value>Zaznaczenie opcji „maska” lub „adapter” powoduje automatyczne opublikowanie w Serwisie danych podanych w profilu.</value>
+    <value>Zaznaczenie opcji „maska”, „adapter” lub "punkt zbiórki masek" powoduje automatyczne opublikowanie w Serwisie danych podanych w profilu.</value>
   </data>
   <data name="Manage_EditProfile__TermsAndConditions" xml:space="preserve">
     <value>Regulaminie</value>

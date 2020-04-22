@@ -12,7 +12,7 @@
                 <div class="form-container">
                     <h1 class="form-header mb-3">@ViewResources.Manage_ShowProfile__YourProfile</h1>
 
-                    @if (ViewBag.IsSuccess)
+                    @if (ViewBag.IsSuccess == true)
                     {
                         <div class="alert alert-success" role="alert">
                             <strong>@ViewResources.Manage_ShowProfile__Success!</strong>
@@ -90,6 +90,11 @@
                                 <div class="checkbox">
                                     @Html.CheckBoxFor(m => m.HasAdapterAvailable, new { disabled = "disabled" })
                                     @Html.LabelFor(m => m.HasAdapterAvailable)
+                                </div>
+
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.HasMaskCollectionPoint, new { disabled = "disabled" })
+                                    @Html.LabelFor(m => m.HasMaskCollectionPoint)
                                 </div>
                             </div>
                         </div>

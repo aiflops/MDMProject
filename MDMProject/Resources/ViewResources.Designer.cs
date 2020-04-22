@@ -529,7 +529,7 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zaznaczenie opcji „maska” lub „adapter” powoduje automatyczne opublikowanie w Serwisie danych podanych w profilu..
+        ///   Looks up a localized string similar to Zaznaczenie opcji „maska”, „adapter” lub &quot;punkt zbiórki masek&quot; powoduje automatyczne opublikowanie w Serwisie danych podanych w profilu..
         /// </summary>
         public static string Manage_EditProfile__SelectingWillPublishProfile {
             get {

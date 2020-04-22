@@ -108,6 +108,11 @@
                                         @Html.LabelFor(m => m.HasAdapterAvailable)
                                     </div>
 
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.HasMaskCollectionPoint)
+                                        @Html.LabelFor(m => m.HasMaskCollectionPoint)
+                                    </div>
+
                                     <div class="alert alert-warning" role="alert">
                                         @ViewResources.Manage_EditProfile__SelectingWillPublishProfile
                                         @ViewResources.Manage_EditProfile__MoreInfo <a href="@Url.Action("Rodo", "Home")#location-share" target="_blank">@ViewResources.Manage_EditProfile__TermsAndConditions</a>.

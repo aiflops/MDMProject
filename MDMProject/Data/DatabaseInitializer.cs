@@ -13,7 +13,7 @@ namespace MDMProject.Data
         protected override void Seed(ApplicationDbContext context)
         {
             AddRequiredData(context);
-            //AddFakeData(context);
+            AddFakeData(context);
         }
 
         private static void AddRequiredData(ApplicationDbContext context)

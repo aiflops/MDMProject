@@ -64,11 +64,13 @@ namespace MDMProject.ViewModels
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HasAdapterAvailable))]
         public bool HasAdapterAvailable { get; set; }
 
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HasMaskCollectionPoint))]
+        public bool HasMaskCollectionPoint { get; set; }
+
         /* Additional info */
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_AdditionalComment))]
         [MaxLength(ValidationConstants.User.MAX_ADDITIONAL_COMMENT_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         [AllowHtml] // TODO: PREVENT SENDING HTML! Instead of sending and encoding
         public string AdditionalComment { get; set; }
-        public bool HasMaskCollectionPoint { get; internal set; }
     }
 }

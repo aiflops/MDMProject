@@ -160,6 +160,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Punkt zbioru masek.
+        /// </summary>
+        public static string EditProfileViewModel_HasMaskCollectionPoint {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_HasMaskCollectionPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nr domu.
         /// </summary>
         public static string EditProfileViewModel_HouseNumber {

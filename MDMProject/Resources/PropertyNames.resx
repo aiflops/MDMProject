@@ -150,6 +150,9 @@
   <data name="EditProfileViewModel_HasMaskAvailable" xml:space="preserve">
     <value>Maska</value>
   </data>
+  <data name="EditProfileViewModel_HasMaskCollectionPoint" xml:space="preserve">
+    <value>Punkt zbioru masek</value>
+  </data>
   <data name="EditProfileViewModel_HouseNumber" xml:space="preserve">
     <value>Nr domu</value>
   </data>
