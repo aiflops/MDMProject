@@ -54,6 +54,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -315,6 +318,15 @@
     <Compile Include="WebAPI Controllers\SuppliersController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js">
+      <DependentUpon>mvcfoolproof.unobtrusive.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js">
+      <DependentUpon>MvcFoolproofJQueryValidation.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\MvcFoolproofValidation.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.css.map">
       <DependentUpon>bootstrap-theme.css</DependentUpon>
@@ -388,6 +400,9 @@
       <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
     </Content>
     <Content Include="Scripts\custom\MapMDM.js" />
+    <Content Include="Scripts\MvcFoolproofValidation.min.js">
+      <DependentUpon>MvcFoolproofValidation.js</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

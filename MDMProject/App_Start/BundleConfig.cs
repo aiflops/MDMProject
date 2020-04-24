@@ -19,6 +19,7 @@ namespace MDMProject
                 new ScriptBundle("~/scripts/validation")
                 .Include(
                     "~/Scripts/jquery.validate*",
+                    "~/Scripts/mvcfoolproof.unobtrusive.js",
                     "~/Scripts/custom/validationRules.js"
                 ));
 
