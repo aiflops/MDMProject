@@ -1,10 +1,12 @@
-﻿using MDMProject.Filters;
+﻿using MDMProject.Data;
+using MDMProject.Filters;
 using MDMProject.Models;
 using MDMProject.Resources;
 using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
@@ -138,6 +140,11 @@ namespace MDMProject.Controllers
                     }
                     else
                     {
+                        using (var db = new ApplicationDbContext())
+                        {
+                            user.CreatedDate = DateTime.Now;
+                            await db.SaveChangesAsync();
+                        }
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         return RedirectToAction("EditProfile", "Manage");
