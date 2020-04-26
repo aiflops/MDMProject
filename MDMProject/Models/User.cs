@@ -45,6 +45,7 @@ namespace MDMProject.Models
 
         public virtual User Coordinator { get; set; }
 
+        [StringLength(ValidationConstants.User.MAX_COORDINATOR_DETAILS_LENGTH)]
         public string OtherCoordinatorDetails { get; set; }
 
         public virtual User ApprovedBy { get; set; } // Person who approved the account
@@ -53,6 +54,7 @@ namespace MDMProject.Models
 
         // Coordinator details (when user is Coordinator)
         // TODO: required if role == coordinator
+        [StringLength(ValidationConstants.User.MAX_COORDINATED_REGION_LENGTH)]
         public string CoordinatedRegion { get; set; }
 
         // Other properties - for future purposes

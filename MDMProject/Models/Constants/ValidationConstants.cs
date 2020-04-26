@@ -13,6 +13,8 @@
             public const int MAX_COMPANY_NAME_LENGTH = 256;
             public const int MAX_PHONE_NUMBER_LENGTH = 50;
             public const int MAX_ADDITIONAL_COMMENT_LENGTH = 256;
+            public const int MAX_COORDINATOR_DETAILS_LENGTH = 256;
+            public const int MAX_COORDINATED_REGION_LENGTH = 50;
         }
 
         public static class Address

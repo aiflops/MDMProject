@@ -49,6 +49,7 @@ namespace MDMProject.ViewModels
 
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_OtherCoordinatorDetails))]
         [RequiredIf(nameof(CoordinatorId), Operator.EqualTo, Constants.OTHER_COORDINATOR_ID, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MaxLength(ValidationConstants.User.MAX_COORDINATOR_DETAILS_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string OtherCoordinatorDetails { get; set; }
 
         public List<SelectListItem> CoordinatorsSelectList { get; set; }
