@@ -1,5 +1,7 @@
-﻿using MDMProject.Models;
+﻿using Foolproof;
+using MDMProject.Models;
 using MDMProject.Resources;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -8,11 +10,26 @@ namespace MDMProject.ViewModels
     public class EditProfileViewModel
     {
         /* Basic info */
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_Name))]
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
-        [MinLength(ValidationConstants.User.MIN_USER_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]
-        [MaxLength(ValidationConstants.User.MAX_USER_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
-        public string Name { get; set; }
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_UserType))]
+        public UserTypeEnum UserType { get; set; }
+
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_CompanyName))]
+        [RequiredIf(nameof(UserType), Operator.EqualTo, UserTypeEnum.Company, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MinLength(ValidationConstants.User.MIN_COMPANY_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]
+        [MaxLength(ValidationConstants.User.MAX_COMPANY_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
+        public string CompanyName { get; set; }
+
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_ContactName))]
+        [RequiredIf(nameof(UserType), Operator.EqualTo, UserTypeEnum.Company, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MinLength(ValidationConstants.User.MIN_CONTACT_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]
+        [MaxLength(ValidationConstants.User.MAX_CONTACT_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
+        public string ContactPersonName { get; set; }
+
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_UserName))]
+        [RequiredIf(nameof(UserType), Operator.EqualTo, UserTypeEnum.Individual, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        [MinLength(ValidationConstants.User.MIN_CONTACT_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]
+        [MaxLength(ValidationConstants.User.MAX_CONTACT_NAME_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
+        public string IndividualName { get; set; }
 
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Email))]
         [DataType(DataType.EmailAddress)]
@@ -25,6 +42,16 @@ namespace MDMProject.ViewModels
         [DataType(DataType.PhoneNumber)]
         [MaxLength(ValidationConstants.User.MAX_PHONE_NUMBER_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string PhoneNumber { get; set; }
+
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_Coordinator))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        public int? CoordinatorId { get; set; }
+
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_OtherCoordinatorDetails))]
+        [RequiredIf(nameof(CoordinatorId), Operator.EqualTo, Constants.OTHER_COORDINATOR_ID, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
+        public string OtherCoordinatorDetails { get; set; }
+
+        public List<SelectListItem> CoordinatorsSelectList { get; set; }
 
         /* Address */
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_City))]
@@ -57,20 +84,10 @@ namespace MDMProject.ViewModels
         [MaxLength(ValidationConstants.Address.MAX_LONGITUDE_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Longitude { get; set; }
 
-        /* Help offered */
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HasMaskAvailable))]
-        public bool HasMaskAvailable { get; set; }
-
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HasAdapterAvailable))]
-        public bool HasAdapterAvailable { get; set; }
-
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HasMaskCollectionPoint))]
-        public bool HasMaskCollectionPoint { get; set; }
-
         /* Additional info */
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_AdditionalComment))]
         [MaxLength(ValidationConstants.User.MAX_ADDITIONAL_COMMENT_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
-        [AllowHtml] // TODO: PREVENT SENDING HTML! Instead of sending and encoding
+        //[AllowHtml] // TODO: PREVENT SENDING HTML! Instead of sending and encoding
         public string AdditionalComment { get; set; }
     }
 }

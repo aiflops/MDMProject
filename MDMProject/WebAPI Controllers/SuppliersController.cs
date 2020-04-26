@@ -3,7 +3,6 @@ using MDMProject.Mappers;
 using MDMProject.ViewModels;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -13,26 +12,22 @@ namespace MDMProject.WebAPI_Controllers
     public class SuppliersController : ApiController
     {
         // GET: api/Supplier
-        public async Task<IEnumerable<SupplierViewModel>> Get()
+        public async Task<IEnumerable<CollectionPointViewModel>> Get()
         {
             using (var db = new ApplicationDbContext())
             {
-                var allUsers = await db.Users.AsNoTracking().ToListAsync();
-                var allOfferedEquipments = await db.ProtectiveEquipments.AsNoTracking().ToListAsync();
+                var allUsers = await db.GetAllCollectionPoints().AsNoTracking().ToListAsync();
                 var allAddresses = await db.Addresses.AsNoTracking().ToListAsync();
-                var offeredHelps = await db.OfferedHelps.AsNoTracking().ToListAsync();
-                var equipmentTypes = await db.EquipmentTypes.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.Name);
-                var helpTypes = await db.HelpTypes.AsNoTracking().ToDictionaryAsync(x => x.Id, x => x.Name);
 
-                var usersToMap = allUsers.Where(x => x.Address != null && x.Address.Latitude != null && x.Address.Longitude != null && (x.HasMask || x.HasAdapter || x.HasMaskCollectionPoint)).ToList();
-                var supplierViewModels = usersToMap.ToSupplierViewModels(equipmentTypes, helpTypes).ToList();
+                var usersToMap = allUsers.Where(x => x.Address != null && x.Address.Latitude != null && x.Address.Longitude != null && x.ApprovedBy != null).ToList();
+                var collectionPointViewModels = usersToMap.ToCollectionPointViewModels().ToList();
 
-                return supplierViewModels;
+                return collectionPointViewModels;
             }
         }
 
         // GET: api/Supplier/5
-        public async Task<SupplierViewModel> Get(int id)
+        public async Task<CollectionPointViewModel> Get(int id)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -40,10 +35,7 @@ namespace MDMProject.WebAPI_Controllers
 
                 if (user != null)
                 {
-                    var equipmentTypes = db.EquipmentTypes.AsNoTracking().ToDictionary(x => x.Id, x => x.Name);
-                    var helpTypes = db.HelpTypes.AsNoTracking().ToDictionary(x => x.Id, x => x.Name);
-
-                    var supplierViewModel = user.ToSupplierViewModel(equipmentTypes, helpTypes);
+                    var supplierViewModel = user.ToCollectionPointViewModel();
                     return supplierViewModel;
                 }
 

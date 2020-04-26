@@ -263,13 +263,14 @@
     </Compile>
     <Compile Include="Helpers\GoogleCaptchaHelper.cs" />
     <Compile Include="Mappers\EditProfileMapper.cs" />
-    <Compile Include="Mappers\SuppliersMapper.cs" />
+    <Compile Include="Mappers\CollectionPointMapper.cs" />
     <Compile Include="Models\Constants\Constants.cs" />
     <Compile Include="Models\Identity\Role.cs" />
     <Compile Include="Models\Identity\UserClaim.cs" />
     <Compile Include="Models\Identity\UserLogin.cs" />
     <Compile Include="Models\Identity\UserRole.cs" />
     <Compile Include="Models\Constants\ValidationConstants.cs" />
+    <Compile Include="Models\UserTypeEnum.cs" />
     <Compile Include="Resources\EmailResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -309,7 +310,7 @@
     <Compile Include="ViewModels\API\OfferedHelpViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\API\ProtectiveEquipmentViewModel.cs" />
-    <Compile Include="ViewModels\API\SupplierViewModel.cs" />
+    <Compile Include="ViewModels\API\CollectionPointViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
@@ -318,6 +319,7 @@
     <Compile Include="WebAPI Controllers\SuppliersController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\custom\userProfile.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js">
       <DependentUpon>mvcfoolproof.unobtrusive.js</DependentUpon>
@@ -452,6 +454,7 @@
     <EmbeddedResource Include="Resources\PropertyNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PropertyNames.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ValidationMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>

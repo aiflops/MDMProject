@@ -1,10 +1,10 @@
 ﻿using MDMProject.Models;
 using MDMProject.Models.Identity;
 using MDMProject.Services.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using WebGrease.Css.Extensions;
 
 namespace MDMProject.Data
 {
@@ -18,10 +18,9 @@ namespace MDMProject.Data
 
         private static void AddRequiredData(ApplicationDbContext context)
         {
-            context.HelpTypes.Add(new HelpType { Name = Constants.ADAPTER_NAME });
-            context.HelpTypes.Add(new HelpType { Name = Constants.MASK_COLLECTION_POINT_NAME });
-            context.EquipmentTypes.Add(new EquipmentType { Name = Constants.MASK_NAME });
-            context.Roles.Add(new Role { Name = "Admin" });
+            context.Roles.Add(new Role { Name = Constants.ADMIN_ROLE_NAME });
+            context.Roles.Add(new Role { Name = Constants.COORDINATOR_ROLE_NAME });
+            context.Roles.Add(new Role { Name = Constants.COLLECTION_POINT_ROLE_NAME });
             context.SaveChanges();
         }
 
@@ -29,14 +28,10 @@ namespace MDMProject.Data
         {
             var userManager = new ApplicationUserManager(new UserStore(context));
 
-            var adapterHelpType = context.HelpTypes.First(x => x.Name == Constants.ADAPTER_NAME);
-            var maskCollectionPointType = context.HelpTypes.First(x => x.Name == Constants.MASK_COLLECTION_POINT_NAME);
-            var maskEquipmentType = context.EquipmentTypes.First(x => x.Name == Constants.MASK_NAME);
-
-            List<User> data = GetUsersToAdd(adapterHelpType, maskEquipmentType, maskCollectionPointType);
+            List<User> data = GetUsersToAdd(context);
             var duplicatedEmails = data.GroupBy(x => x.Email.Trim().ToLower()).Where(x => x.Count() > 1).Select(x => x.Key);
             if (duplicatedEmails.Any())
-                throw new System.Exception("Duplicated emails in data source!");
+                throw new Exception("Duplicated emails in data source!");
 
             foreach (var user in data)
             {
@@ -45,11 +40,11 @@ namespace MDMProject.Data
 
                 var usersToUpdate = context.Users
                     .Where(x => x.Email == user.Email)
-                    .Include(x => x.OfferedEquipment)
-                    .Include(x => x.OfferedHelp)
+                    .Include(x => x.Coordinator)
                     .ToList();
                 var userToUpdate = usersToUpdate.First();
                 UpdateUser(userToUpdate, user);
+                UpdateUserRoles(userToUpdate, user, userManager, context);
             }
 
             context.SaveChanges();
@@ -57,16 +52,33 @@ namespace MDMProject.Data
 
         private static void UpdateUser(User userToUpdate, User user)
         {
-            userToUpdate.IsProfileFinished = user.IsProfileFinished;
-            userToUpdate.Name = user.Name;
-            userToUpdate.AdditionalComment = user.AdditionalComment;
+            userToUpdate.ProfileFinishedDate = user.ProfileFinishedDate;
+            userToUpdate.IndividualName = user.IndividualName;
             userToUpdate.PhoneNumber = user.PhoneNumber;
             userToUpdate.Address = user.Address;
             userToUpdate.EmailConfirmed = true;
-
-            user.OfferedEquipment?.ForEach(x => userToUpdate.OfferedEquipment.Add(x));
-            user.OfferedHelp?.ForEach(x => userToUpdate.OfferedHelp.Add(x));
         }
+
+        private static void UpdateUserRoles(User userToUpdate, User user, ApplicationUserManager userManager, ApplicationDbContext db)
+        {
+            var admin = db.Roles.First(x => x.Name == Constants.ADMIN_ROLE_NAME);
+            var coordinator = db.Roles.First(x => x.Name == Constants.COORDINATOR_ROLE_NAME);
+            var collectionPoint = db.Roles.First(x => x.Name == Constants.COLLECTION_POINT_ROLE_NAME);
+
+            if (user.Roles.Any(x => x.RoleId == admin.Id))
+            {
+                var addToRoleResult = userManager.AddToRoleAsync(userToUpdate.Id, admin.Name).Result;
+            }
+            if (user.Roles.Any(x => x.RoleId == coordinator.Id))
+            {
+                var addToRoleResult = userManager.AddToRoleAsync(userToUpdate.Id, coordinator.Name).Result;
+            }
+            if (user.Roles.Any(x => x.RoleId == collectionPoint.Id))
+            {
+                var addToRoleResult = userManager.AddToRoleAsync(userToUpdate.Id, collectionPoint.Name).Result;
+            }
+        }
+
 
         public static void DropAllUsers(ApplicationDbContext context)
         {
@@ -81,17 +93,27 @@ namespace MDMProject.Data
             context.SaveChanges();
         }
 
-        private static List<User> GetUsersToAdd(HelpType adapterHelpType, EquipmentType maskEquipmentType, HelpType collectionPointHelpType)
+        private static List<User> GetUsersToAdd(ApplicationDbContext db)
         {
+            var admin = db.Roles.First(x => x.Name == Constants.ADMIN_ROLE_NAME);
+            var coordinator = db.Roles.First(x => x.Name == Constants.COORDINATOR_ROLE_NAME);
+            var collectionPoint = db.Roles.First(x => x.Name == Constants.COLLECTION_POINT_ROLE_NAME);
+
             List<User> data = new List<User>();
             data.Add(new User
             {
                 Email = "admin@admin.com"
-            });
+            }.WithRole(admin));
 
             data.Add(new User
             {
-                Name = "Krzysztof Kowalkiewicz",
+                Email = "coordinator@coordinator.com",
+                CoordinatedRegion = "Wrocław Krzyki"
+            }.WithRole(coordinator));
+
+            data.Add(new User
+            {
+                IndividualName = "Krzysztof Kowalkiewicz",
                 Email = "krzysztof@kowalkiewicz.pl",
                 PhoneNumber = "+48 77 12 50 321",
                 Address = new Address
@@ -104,15 +126,12 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = HasMask(maskEquipmentType),
-                OfferedHelp = null,
-                AdditionalComment = "Tylko po 17:00!",
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             data.Add(new User
             {
-                Name = "Sebastian Smykała",
+                IndividualName = "Sebastian Smykała",
                 Email = "sebastian@onet.pl",
                 PhoneNumber = "77 99 99 999",
                 Address = new Address
@@ -125,15 +144,12 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = null,
-                OfferedHelp = HasAdapter(adapterHelpType),
-                AdditionalComment = null,
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             data.Add(new User
             {
-                Name = "Donata Dubielewicz",
+                IndividualName = "Donata Dubielewicz",
                 Email = "donata@dubielewicz.pl",
                 PhoneNumber = "+48-77-99-99-999",
                 Address = new Address
@@ -146,15 +162,12 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = null,
-                OfferedHelp = HasCollectionPoint(collectionPointHelpType),
-                AdditionalComment = null,
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             data.Add(new User
             {
-                Name = "Elżbieta Elokwentnicz",
+                IndividualName = "Elżbieta Elokwentnicz",
                 Email = "elokwentnicz@onet.pl",
                 Address = new Address
                 {
@@ -166,15 +179,12 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = HasMask(maskEquipmentType),
-                OfferedHelp = null,
-                AdditionalComment = null,
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             data.Add(new User
             {
-                Name = "Florian Faktowicz",
+                IndividualName = "Florian Faktowicz",
                 Email = "Florian@gmail.pl",
                 Address = new Address
                 {
@@ -186,15 +196,13 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = HasMask(maskEquipmentType),
-                OfferedHelp = HasAdapter(adapterHelpType),
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             // 2x Wrocław
             data.Add(new User
             {
-                Name = "Example Mask",
+                IndividualName = "Example Mask",
                 Email = "example@email1.com",
                 PhoneNumber = "900 789 789",
                 Address = new Address
@@ -207,15 +215,12 @@ namespace MDMProject.Data
                     Latitude = "51.07946",
                     Longitude = "17.06339"
                 },
-                OfferedEquipment = HasMask(maskEquipmentType),
-                OfferedHelp = null,
-                AdditionalComment = "Proszę o kontakt przed 18:00.",
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             data.Add(new User
             {
-                Name = "Example Print",
+                IndividualName = "Example Print",
                 Email = "print@email2.com",
                 PhoneNumber = "800 800 800",
                 Address = new Address
@@ -228,16 +233,13 @@ namespace MDMProject.Data
                     Latitude = "51.08002",
                     Longitude = "17.05894"
                 },
-                OfferedEquipment = null,
-                OfferedHelp = HasAdapter(adapterHelpType),
-                AdditionalComment = "Kontakt do 15:00",
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             // 3x Warszawa
             data.Add(new User
             {
-                Name = "Jakub Jeromy",
+                IndividualName = "Jakub Jeromy",
                 Email = "example@email3.com",
                 PhoneNumber = "900 789 789",
                 Address = new Address
@@ -250,15 +252,12 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = HasMask(maskEquipmentType),
-                OfferedHelp = null,
-                AdditionalComment = null,
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             data.Add(new User
             {
-                Name = "Cyprian Czmychała",
+                IndividualName = "Cyprian Czmychała",
                 Email = "example@email4.com",
                 PhoneNumber = "900 789 789",
                 Address = new Address
@@ -271,15 +270,12 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = HasMask(maskEquipmentType),
-                OfferedHelp = null,
-                AdditionalComment = null,
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
 
             data.Add(new User
             {
-                Name = "Bernard Print S.A.",
+                IndividualName = "Bernard Print S.A.",
                 Email = "print@email5.com",
                 PhoneNumber = "800 800 800",
                 Address = new Address
@@ -292,48 +288,22 @@ namespace MDMProject.Data
                     Latitude = null,
                     Longitude = null
                 },
-                OfferedEquipment = null,
-                OfferedHelp = HasAdapter(adapterHelpType),
-                AdditionalComment = null,
-                IsProfileFinished = true
-            });
+                ProfileFinishedDate = DateTime.Now
+            }.WithRole(collectionPoint));
             return data;
         }
+    }
 
-        private static ICollection<ProtectiveEquipment> HasMask(EquipmentType maskEquipmentType)
+    public static class UserRoleHelper
+    {
+        public static User WithRole(this User user, Role role)
         {
-            var result = new List<ProtectiveEquipment>
+            user.Roles.Add(new UserRole
             {
-                new ProtectiveEquipment
-                {
-                    EquipmentType = maskEquipmentType
-                }
-            };
-            return result;
-        }
+                RoleId = role.Id
+            });
 
-        private static ICollection<OfferedHelp> HasAdapter(HelpType adapterHelpType)
-        {
-            var result = new List<OfferedHelp>
-            {
-                new OfferedHelp
-                {
-                    HelpType = adapterHelpType
-                }
-            };
-            return result;
-        }
-
-        private static ICollection<OfferedHelp> HasCollectionPoint(HelpType collectionPointHelpType)
-        {
-            var result = new List<OfferedHelp>
-            {
-                new OfferedHelp
-                {
-                    HelpType = collectionPointHelpType
-                }
-            };
-            return result;
+            return user;
         }
     }
 }

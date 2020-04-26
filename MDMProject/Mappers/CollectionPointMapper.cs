@@ -5,25 +5,24 @@ using System.Linq;
 
 namespace MDMProject.Mappers
 {
-    public static class SuppliersMapper
+    public static class CollectionPointMapper
     {
-        public static IEnumerable<SupplierViewModel> ToSupplierViewModels(this IEnumerable<User> collection, Dictionary<int, string> equipmentTypes, Dictionary<int, string> helpTypes)
+        public static IEnumerable<CollectionPointViewModel> ToCollectionPointViewModels(this IEnumerable<User> collection)
         {
-            var result = collection.Select(x => x.ToSupplierViewModel(equipmentTypes, helpTypes));
+            var result = collection.Select(x => x.ToCollectionPointViewModel());
             return result;
         }
 
-        public static SupplierViewModel ToSupplierViewModel(this User user, Dictionary<int, string> equipmentTypes, Dictionary<int, string> helpTypes)
+        public static CollectionPointViewModel ToCollectionPointViewModel(this User user)
         {
-            var viewModel = new SupplierViewModel();
+            var viewModel = new CollectionPointViewModel();
             viewModel.Id = user.Id;
-            viewModel.Name = user.Name;
+            viewModel.UserType = user.UserType;
+            viewModel.CompanyName = user.CompanyName;
+            viewModel.PersonName = user.UserType == UserTypeEnum.Individual ? user.IndividualName : user.ContactPersonName;
             viewModel.Email = user.Email;
             viewModel.PhoneNumber = user.PhoneNumber;
-            viewModel.AdditionalComment = user.AdditionalComment;
             viewModel.Address = user.Address.ToAddressViewModel();
-            viewModel.OfferedEquipment = user.OfferedEquipment.ToProtectiveEquipmentViewModels(equipmentTypes);
-            viewModel.OfferedHelp = user.OfferedHelp.ToOfferedHelpViewModels(helpTypes);
 
             return viewModel;
         }

@@ -1,10 +1,12 @@
 ﻿using MDMProject.Data;
 using MDMProject.Mappers;
+using MDMProject.Models;
 using MDMProject.Resources;
 using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -46,7 +48,8 @@ namespace MDMProject.Controllers
         public ActionResult EditProfile()
         {
             var user = UserManager.FindById(User.Identity.GetUserId<int>());
-            var viewModel = user.ToEditProfileViewModel();
+            var allCoordinators = GetAllCoordinators();
+            var viewModel = user.ToEditProfileViewModel(allCoordinators);
 
             return View(viewModel);
         }
@@ -61,7 +64,8 @@ namespace MDMProject.Controllers
             }
 
             var user = UserManager.FindById(User.Identity.GetUserId<int>());
-            var viewModel = user.ToEditProfileViewModel();
+            var allCoordinators = GetAllCoordinators();
+            var viewModel = user.ToEditProfileViewModel(allCoordinators);
 
             return View(viewModel);
         }
@@ -165,6 +169,14 @@ namespace MDMProject.Controllers
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
+            }
+        }
+
+        private IEnumerable<User> GetAllCoordinators()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                return db.GetAllCoordinators().ToList();
             }
         }
 

@@ -1,24 +1,34 @@
 ﻿using MDMProject.Data;
 using MDMProject.Models;
+using MDMProject.Resources;
 using MDMProject.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace MDMProject.Mappers
 {
     public static class EditProfileMapper
     {
-        public static EditProfileViewModel ToEditProfileViewModel(this User user)
+        public static EditProfileViewModel ToEditProfileViewModel(this User user, IEnumerable<User> allCoordinators)
         {
+            var coordinatorId = user.Coordinator?.Id ?? (!string.IsNullOrWhiteSpace(user.OtherCoordinatorDetails) ? Constants.OTHER_COORDINATOR_ID : default(int?));
+
             EditProfileViewModel viewModel = new EditProfileViewModel
             {
-                Name = user.Name,
+                UserType = user.UserType,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                HasMaskAvailable = HasMaskAvailable(user),
-                HasAdapterAvailable = HasAdapterAvailable(user),
-                HasMaskCollectionPoint = HasMaskCollectionPoint(user),
                 AdditionalComment = user.AdditionalComment,
+
+                IndividualName = user.IndividualName,
+                CompanyName = user.CompanyName,
+                ContactPersonName = user.ContactPersonName,
+                
+                CoordinatorId = coordinatorId, // if no coordinator selected
+                OtherCoordinatorDetails = user.OtherCoordinatorDetails, // if no coordinator selected
+                CoordinatorsSelectList = allCoordinators.ToCoordinatorsSelectList(coordinatorId),
 
                 City = user.Address?.City,
                 StreetName = user.Address?.StreetName,
@@ -34,55 +44,24 @@ namespace MDMProject.Mappers
 
         public static void UpdateWith(this User user, EditProfileViewModel viewModel, ApplicationDbContext db)
         {
+            var allCoordinators = db.GetAllCoordinators().ToList();
+
             /* UPDATE BASIC INFO */
-            user.Name = GetString(viewModel.Name);
+            user.UserType = viewModel.UserType;
             user.Email = GetString(viewModel.Email);
             user.UserName = user.Email; /* UserName (login credentials) will always be the same as email */
             user.PhoneNumber = GetString(viewModel.PhoneNumber);
+            user.ProfileFinishedDate = user.ProfileFinishedDate ?? DateTime.Now; /* If any change to profile is made, mark it as finished */
             user.AdditionalComment = GetString(viewModel.AdditionalComment);
-            user.IsProfileFinished = true; /* If any change to profile is made, mark it as finished */
 
-            /* UPDATE MASK */
-            if (viewModel.HasMaskAvailable && !HasMaskAvailable(user))
-            {
-                // Add mask
-                var maskType = GetMaskType(db);
-                user.OfferedEquipment.Add(new ProtectiveEquipment { EquipmentType = maskType });
-            }
-            else if (!viewModel.HasMaskAvailable && HasMaskAvailable(user))
-            {
-                // Remove mask
-                var offeredMask = GetMask(user);
-                db.ProtectiveEquipments.Remove(offeredMask);
-            }
+            user.IndividualName = GetString(viewModel.IndividualName);
+            user.CompanyName = GetString(viewModel.CompanyName);
+            user.ContactPersonName = GetString(viewModel.ContactPersonName);
 
-            /* UPDATE ADAPTER */
-            if (viewModel.HasAdapterAvailable && !HasAdapterAvailable(user))
-            {
-                // Add adapter
-                var adapterType = GetAdapterType(db);
-                user.OfferedHelp.Add(new OfferedHelp { HelpType = adapterType });
-            }
-            else if (!viewModel.HasAdapterAvailable && HasAdapterAvailable(user))
-            {
-                // Remove adapter
-                var offeredAdapter = GetAdapter(user);
-                db.OfferedHelps.Remove(offeredAdapter);
-            }
-
-            /* UPDATE MASK COLLECTION POINT */
-            if (viewModel.HasMaskCollectionPoint && !HasMaskCollectionPoint(user))
-            {
-                // Add mask collection point
-                var maskCollectionPointType = GetMaskCollectionPointType(db);
-                user.OfferedHelp.Add(new OfferedHelp { HelpType = maskCollectionPointType });
-            }
-            else if (!viewModel.HasMaskCollectionPoint && HasMaskCollectionPoint(user))
-            {
-                // Remove mask collection point
-                var maskCollectionPoint = GetMaskCollectionPoint(user);
-                db.OfferedHelps.Remove(maskCollectionPoint);
-            }
+            var userCoordinator = viewModel.CoordinatorId != null ? allCoordinators.First(x => x.Id == viewModel.CoordinatorId) : null;
+            user.CoordinatorId = userCoordinator.Id;
+            user.Coordinator = userCoordinator;
+            user.OtherCoordinatorDetails = viewModel.OtherCoordinatorDetails;
 
             /* UPDATE ADDRESS */
             // Create new address if not exists
@@ -98,60 +77,35 @@ namespace MDMProject.Mappers
             user.Address.Longitude = GetString(viewModel.Longitude);
         }
 
+        public static List<SelectListItem> ToCoordinatorsSelectList(this IEnumerable<User> coordinatorsList, int? selectedId)
+        {
+            var coordinatorsSelectList = new List<SelectListItem>();
+
+            // Add placeholder for "Other"
+            coordinatorsSelectList.Add(new SelectListItem
+            {
+                Value = Constants.OTHER_COORDINATOR_ID.ToString(),
+                Text = PropertyNames.EditProfileViewModel_OtherCoordinator,
+                Selected = selectedId == Constants.OTHER_COORDINATOR_ID
+            });
+
+            // Add other coordinators select list
+            var collection = coordinatorsList.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.FullUserName,
+                Selected = x.Id == selectedId
+            }).OrderBy(x => x.Text);
+
+            coordinatorsSelectList.AddRange(collection);
+
+            return coordinatorsSelectList;
+        }
+
         private static string GetString(string value)
         {
             var result = value?.Trim();
             return result;
         }
-
-        #region Helpers
-        private static bool HasMaskAvailable(User user)
-        {
-            var offeredEquipment = GetMask(user);
-            return offeredEquipment != null;
-        }
-
-        private static ProtectiveEquipment GetMask(User user)
-        {
-            return user.OfferedEquipment.FirstOrDefault(x => x.EquipmentType != null && x.EquipmentType.Name == Constants.MASK_NAME);
-        }
-
-        private static EquipmentType GetMaskType(ApplicationDbContext db)
-        {
-            return db.EquipmentTypes.First(x => x.Name == Constants.MASK_NAME);
-        }
-
-        private static bool HasAdapterAvailable(User user)
-        {
-            var offered3dPrinter = GetAdapter(user);
-            return offered3dPrinter != null;
-        }
-
-        private static OfferedHelp GetAdapter(User user)
-        {
-            return user.OfferedHelp.FirstOrDefault(x => x.HelpType != null && x.HelpType.Name == Constants.ADAPTER_NAME);
-        }
-
-        private static HelpType GetAdapterType(ApplicationDbContext db)
-        {
-            return db.HelpTypes.First(x => x.Name == Constants.ADAPTER_NAME);
-        }
-
-        private static bool HasMaskCollectionPoint(User user)
-        {
-            var maskCollectionPoint = GetMaskCollectionPoint(user);
-            return maskCollectionPoint != null;
-        }
-
-        private static OfferedHelp GetMaskCollectionPoint(User user)
-        {
-            return user.OfferedHelp.FirstOrDefault(x => x.HelpType != null && x.HelpType.Name == Constants.MASK_COLLECTION_POINT_NAME);
-        }
-
-        private static HelpType GetMaskCollectionPointType(ApplicationDbContext db)
-        {
-            return db.HelpTypes.First(x => x.Name == Constants.MASK_COLLECTION_POINT_NAME);
-        }
-        #endregion
     }
 }

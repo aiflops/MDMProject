@@ -133,6 +133,42 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nazwa.
+        /// </summary>
+        public static string EditProfileViewModel_CompanyName {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_CompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Osoba kontaktowa.
+        /// </summary>
+        public static string EditProfileViewModel_ContactName {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_ContactName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordynator.
+        /// </summary>
+        public static string EditProfileViewModel_Coordinator {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_Coordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - wybierz -.
+        /// </summary>
+        public static string EditProfileViewModel_CoordinatorId_Placeholder {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_CoordinatorId_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nr mieszkania.
         /// </summary>
         public static string EditProfileViewModel_FlatNumber {
@@ -187,6 +223,24 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inny koordynator....
+        /// </summary>
+        public static string EditProfileViewModel_OtherCoordinator {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_OtherCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dane koordynatora (imię, nazwisko, dane kontaktowe).
+        /// </summary>
+        public static string EditProfileViewModel_OtherCoordinatorDetails {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_OtherCoordinatorDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telefon.
         /// </summary>
         public static string EditProfileViewModel_PhoneNumber {
@@ -210,6 +264,42 @@ namespace MDMProject.Resources {
         public static string EditProfileViewModel_StreetName {
             get {
                 return ResourceManager.GetString("EditProfileViewModel_StreetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imię i nazwisko.
+        /// </summary>
+        public static string EditProfileViewModel_UserName {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ użytkownika.
+        /// </summary>
+        public static string EditProfileViewModel_UserType {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_UserType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firma.
+        /// </summary>
+        public static string EditProfileViewModel_UserType_Company {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_UserType_Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Osoba fizyczna.
+        /// </summary>
+        public static string EditProfileViewModel_UserType_IndividualPerson {
+            get {
+                return ResourceManager.GetString("EditProfileViewModel_UserType_IndividualPerson", resourceCulture);
             }
         }
         

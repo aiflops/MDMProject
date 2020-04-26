@@ -7,8 +7,10 @@
             public const int MIN_PASSWORD_LENGTH = 8;
             public const int MAX_PASSWORD_LENGTH = 100;
             public const int MAX_EMAIL_LENGTH = 256;
-            public const int MIN_USER_NAME_LENGTH = 3;
-            public const int MAX_USER_NAME_LENGTH = 256;
+            public const int MIN_CONTACT_NAME_LENGTH = 3;
+            public const int MAX_CONTACT_NAME_LENGTH = 256;
+            public const int MIN_COMPANY_NAME_LENGTH = 3;
+            public const int MAX_COMPANY_NAME_LENGTH = 256;
             public const int MAX_PHONE_NUMBER_LENGTH = 50;
             public const int MAX_ADDITIONAL_COMMENT_LENGTH = 256;
         }

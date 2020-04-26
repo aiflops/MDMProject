@@ -1,47 +1,72 @@
 ﻿using MDMProject.Models.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace MDMProject.Models
 {
     public class User : IdentityUser<int, UserLogin, UserRole, UserClaim>
     {
-        public bool IsProfileFinished { get; set; }
+        // General details
+        public UserTypeEnum UserType { get; set; }
 
-        [StringLength(ValidationConstants.User.MAX_USER_NAME_LENGTH)]
-        public string Name { get; set; }
+        public DateTime? CreatedDate { get; set; } // TODO: fill during registration
+
+        public DateTime? ProfileFinishedDate { get; set; }
 
         [StringLength(ValidationConstants.User.MAX_ADDITIONAL_COMMENT_LENGTH)]
         public string AdditionalComment { get; set; }
 
+        // Individual details
+        // TODO: Required if userType == Individual Name
+        [StringLength(ValidationConstants.User.MAX_CONTACT_NAME_LENGTH)]
+        public string IndividualName { get; set; }
+
+        // Company details
+        // TODO: Required if userType == Company
+        [StringLength(ValidationConstants.User.MAX_COMPANY_NAME_LENGTH)]
+        public string CompanyName { get; set; }
+
+        // // TODO: NOT!!! Required if userType == Company
+        [StringLength(ValidationConstants.User.MAX_CONTACT_NAME_LENGTH)]
+        public string ContactPersonName { get; set; }
+
+        // Address details
         [ForeignKey(nameof(Address))]
         public int? AddressId { get; set; }
 
         public virtual Address Address { get; set; }
 
+        // Coordinator details (when user is Collection Point)
+        //[ForeignKey(nameof(Coordinator))]
+        public int? CoordinatorId { get; set; }
+
+        public virtual User Coordinator { get; set; }
+
+        public string OtherCoordinatorDetails { get; set; }
+
+        public virtual User ApprovedBy { get; set; } // Person who approved the account
+
+        public DateTime? ApprovedDate { get; set; }
+
+        // Coordinator details (when user is Coordinator)
+        // TODO: required if role == coordinator
+        public string CoordinatedRegion { get; set; }
+
+        // Other properties - for future purposes
         public virtual ICollection<ProtectiveEquipment> OfferedEquipment { get; set; }
 
         public virtual ICollection<OfferedHelp> OfferedHelp { get; set; }
 
         [NotMapped]
-        public bool HasMask
-        {
-            get => OfferedEquipment.Any(x => x.EquipmentType != null && x.EquipmentType.Name == Constants.MASK_NAME);
-        }
+        public bool IsProfileFinished => ProfileFinishedDate != null;
 
         [NotMapped]
-        public bool HasAdapter
-        {
-            get => OfferedHelp.Any(x => x.HelpType != null && x.HelpType.Name == Constants.ADAPTER_NAME);
-        }
-
-        [NotMapped]
-        public bool HasMaskCollectionPoint
-        {
-            get => OfferedHelp.Any(x => x.HelpType != null && x.HelpType.Name == Constants.MASK_COLLECTION_POINT_NAME);
-        }
+        public string FullUserName => 
+            UserType == UserTypeEnum.Company ? 
+            $"{CompanyName}" + (ContactPersonName != null ? " - " + ContactPersonName : "") :
+            $"{IndividualName}";
     }
 }

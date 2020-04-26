@@ -141,6 +141,18 @@
   <data name="EditProfileViewModel_City" xml:space="preserve">
     <value>Miasto</value>
   </data>
+  <data name="EditProfileViewModel_CompanyName" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="EditProfileViewModel_ContactName" xml:space="preserve">
+    <value>Osoba kontaktowa</value>
+  </data>
+  <data name="EditProfileViewModel_Coordinator" xml:space="preserve">
+    <value>Koordynator</value>
+  </data>
+  <data name="EditProfileViewModel_CoordinatorId_Placeholder" xml:space="preserve">
+    <value>- wybierz -</value>
+  </data>
   <data name="EditProfileViewModel_FlatNumber" xml:space="preserve">
     <value>Nr mieszkania</value>
   </data>
@@ -159,6 +171,12 @@
   <data name="EditProfileViewModel_Name" xml:space="preserve">
     <value>Imię i nazwisko</value>
   </data>
+  <data name="EditProfileViewModel_OtherCoordinator" xml:space="preserve">
+    <value>Inny koordynator...</value>
+  </data>
+  <data name="EditProfileViewModel_OtherCoordinatorDetails" xml:space="preserve">
+    <value>Dane koordynatora (imię, nazwisko, dane kontaktowe)</value>
+  </data>
   <data name="EditProfileViewModel_PhoneNumber" xml:space="preserve">
     <value>Telefon</value>
   </data>
@@ -167,6 +185,18 @@
   </data>
   <data name="EditProfileViewModel_StreetName" xml:space="preserve">
     <value>Ulica</value>
+  </data>
+  <data name="EditProfileViewModel_UserName" xml:space="preserve">
+    <value>Imię i nazwisko</value>
+  </data>
+  <data name="EditProfileViewModel_UserType" xml:space="preserve">
+    <value>Typ użytkownika</value>
+  </data>
+  <data name="EditProfileViewModel_UserType_Company" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="EditProfileViewModel_UserType_IndividualPerson" xml:space="preserve">
+    <value>Osoba fizyczna</value>
   </data>
   <data name="LoginViewModel_RememberMe" xml:space="preserve">
     <value>Zapamiętaj mnie?</value>

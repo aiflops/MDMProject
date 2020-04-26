@@ -1,4 +1,5 @@
-﻿@using MDMProject.Resources
+﻿@using MDMProject.Models
+@using MDMProject.Resources
 @using MDMProject.ViewModels
 
 @model EditProfileViewModel
@@ -17,17 +18,60 @@
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        <div class="input-group mt-1">
-                            @Html.LabelFor(m => m.Name)
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Name) })
-                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger " })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <label>@PropertyNames.EditProfileViewModel_UserType</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="radio">
+                                    <label>
+                                        @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Company)
+                                        @PropertyNames.EditProfileViewModel_UserType_Company
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="radio">
+                                    <label>
+                                        @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Individual)
+                                        @PropertyNames.EditProfileViewModel_UserType_IndividualPerson
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mt-1 company-field">
+                                    @Html.LabelFor(m => m.CompanyName)
+                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.CompanyName) })
+                                    @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mt-1 company-field">
+                                    @Html.LabelFor(m => m.ContactPersonName)
+                                    @Html.TextBoxFor(m => m.ContactPersonName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.ContactPersonName) })
+                                    @Html.ValidationMessageFor(m => m.ContactPersonName, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group mt-1 individual-field">
+                            @Html.LabelFor(m => m.IndividualName)
+                            @Html.TextBoxFor(m => m.IndividualName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.IndividualName) })
+                            @Html.ValidationMessageFor(m => m.IndividualName, "", new { @class = "text-danger " })
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="input-group mt-1">
                                     @Html.LabelFor(m => m.Email)
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Email) })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Email), disabled = "disabled" })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger " })
                                 </div>
                             </div>
@@ -38,6 +82,18 @@
                                     @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger " })
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="input-group mt-1">
+                            @Html.LabelFor(m => m.CoordinatorId)
+                            @Html.DropDownListFor(m => m.CoordinatorId, Model.CoordinatorsSelectList, PropertyNames.EditProfileViewModel_CoordinatorId_Placeholder, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CoordinatorId, "", new { @class = "text-danger " })
+                        </div>
+
+                        <div class="input-group mt-1">
+                            @Html.LabelFor(m => m.OtherCoordinatorDetails)
+                            @Html.TextAreaFor(m => m.OtherCoordinatorDetails, new { @class = "form-control mt-1", rows = 3, placeholder = Html.DisplayNameFor(m => m.OtherCoordinatorDetails) })
+                            @Html.ValidationMessageFor(m => m.OtherCoordinatorDetails, "", new { @class = "text-danger " })
                         </div>
 
                         <div class="row">
@@ -94,40 +150,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="input-group mt-1">
-                                    <label>@ViewResources.Manage_EditProfile__AvailableProducts:</label>
-                                    <div class="checkbox">
-                                        @Html.CheckBoxFor(m => m.HasMaskAvailable)
-                                        @Html.LabelFor(m => m.HasMaskAvailable)
-                                    </div>
-
-                                    <div class="checkbox">
-                                        @Html.CheckBoxFor(m => m.HasAdapterAvailable)
-                                        @Html.LabelFor(m => m.HasAdapterAvailable)
-                                    </div>
-
-                                    <div class="checkbox">
-                                        @Html.CheckBoxFor(m => m.HasMaskCollectionPoint)
-                                        @Html.LabelFor(m => m.HasMaskCollectionPoint)
-                                    </div>
-
-                                    <div class="alert alert-warning" role="alert">
-                                        @ViewResources.Manage_EditProfile__SelectingWillPublishProfile
-                                        @ViewResources.Manage_EditProfile__MoreInfo <a href="@Url.Action("Rodo", "Home")#location-share" target="_blank">@ViewResources.Manage_EditProfile__TermsAndConditions</a>.
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="input-group mt-1">
+                            @Html.LabelFor(m => m.AdditionalComment)
+                            @Html.TextAreaFor(m => m.AdditionalComment, new { @class = "form-control", rows = 4, placeholder = Html.DisplayNameFor(m => m.AdditionalComment) })
+                            @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
                         </div>
 
-                        @* TODO: Uncomment when displaying it will be implemented *@
-                        @*<div class="input-group mt-1">
-                                @Html.LabelFor(m => m.AdditionalComment)
-                                <br />
-                                @Html.TextAreaFor(m => m.AdditionalComment, new { @class = "form-control mb-1", rows = 4, placeholder = Html.DisplayNameFor(m => m.AdditionalComment) })
-                                @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
-                            </div>*@
                         <div class="button-group">
                             <a href="@Url.Action("MapIndex", "Map")" class="btn btn-default mt-3">@ViewResources.Manage_EditProfile__Cancel</a>
                             <button type="submit" class="btn form-submit mt-3">@ViewResources.Manage_EditProfile__Save</button>
@@ -143,20 +171,15 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
           integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
           crossorigin="" />
-    @*<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />*@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.css" />
-
-    @Styles.Render("~/Content/Map.css")
 }
 
 @section Scripts {
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
-    @*<script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
-        <script src="https://npmcdn.com/leaflet-geometryutil"></script>*@
     <script src="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.js"></script>
     @Scripts.Render("~/scripts/validation")
+    @Scripts.Render("~/Scripts/custom/profile.js")
     @Scripts.Render("~/Scripts/custom/ProfileMap.js")
 }
