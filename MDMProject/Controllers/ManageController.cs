@@ -110,6 +110,7 @@ namespace MDMProject.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            model.CoordinatorsSelectList = GetAllCoordinators().ToCoordinatorsSelectList(model.CoordinatorId);
             return View(model);
         }
 

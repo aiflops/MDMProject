@@ -73,6 +73,7 @@
                                     @Html.LabelFor(m => m.Email)
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Email), disabled = "disabled" })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger " })
+                                    @Html.HiddenFor(m => m.Email)
                                 </div>
                             </div>
                             <div class="col-md-6">

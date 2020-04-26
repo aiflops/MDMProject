@@ -52,9 +52,19 @@ namespace MDMProject.Data
 
         private static void UpdateUser(User userToUpdate, User user)
         {
+            userToUpdate.UserType = user.UserType;
+            userToUpdate.PhoneNumber = user.PhoneNumber;
+            userToUpdate.AdditionalComment = user.AdditionalComment;
+
+            userToUpdate.IndividualName = user.IndividualName;
+            userToUpdate.CompanyName = user.CompanyName;
+            userToUpdate.ContactPersonName = user.ContactPersonName;
+
+            userToUpdate.CoordinatorId = user.CoordinatorId;
+            userToUpdate.OtherCoordinatorDetails = user.OtherCoordinatorDetails;
+
             userToUpdate.ProfileFinishedDate = user.ProfileFinishedDate;
             userToUpdate.IndividualName = user.IndividualName;
-            userToUpdate.PhoneNumber = user.PhoneNumber;
             userToUpdate.Address = user.Address;
             userToUpdate.EmailConfirmed = true;
         }
@@ -102,17 +112,30 @@ namespace MDMProject.Data
             List<User> data = new List<User>();
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 Email = "admin@admin.com"
             }.WithRole(admin));
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Company,
+                CompanyName = "Firma sp. z o.o.",
+                ContactPersonName = "Karol Kontaktowy",
                 Email = "coordinator@coordinator.com",
                 CoordinatedRegion = "Wrocław Krzyki"
             }.WithRole(coordinator));
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
+                IndividualName = "Maria Mieciuga",
+                Email = "mieciuga@coordinator.com",
+                CoordinatedRegion = "Wrocław Klecina"
+            }.WithRole(coordinator));
+
+            data.Add(new User
+            {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Krzysztof Kowalkiewicz",
                 Email = "krzysztof@kowalkiewicz.pl",
                 PhoneNumber = "+48 77 12 50 321",
@@ -131,6 +154,7 @@ namespace MDMProject.Data
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Sebastian Smykała",
                 Email = "sebastian@onet.pl",
                 PhoneNumber = "77 99 99 999",
@@ -149,6 +173,7 @@ namespace MDMProject.Data
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Donata Dubielewicz",
                 Email = "donata@dubielewicz.pl",
                 PhoneNumber = "+48-77-99-99-999",
@@ -167,6 +192,7 @@ namespace MDMProject.Data
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Elżbieta Elokwentnicz",
                 Email = "elokwentnicz@onet.pl",
                 Address = new Address
@@ -184,6 +210,7 @@ namespace MDMProject.Data
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Florian Faktowicz",
                 Email = "Florian@gmail.pl",
                 Address = new Address
@@ -202,6 +229,7 @@ namespace MDMProject.Data
             // 2x Wrocław
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Example Mask",
                 Email = "example@email1.com",
                 PhoneNumber = "900 789 789",
@@ -220,6 +248,7 @@ namespace MDMProject.Data
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Company,
                 IndividualName = "Example Print",
                 Email = "print@email2.com",
                 PhoneNumber = "800 800 800",
@@ -239,6 +268,7 @@ namespace MDMProject.Data
             // 3x Warszawa
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Jakub Jeromy",
                 Email = "example@email3.com",
                 PhoneNumber = "900 789 789",
@@ -257,6 +287,7 @@ namespace MDMProject.Data
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Individual,
                 IndividualName = "Cyprian Czmychała",
                 Email = "example@email4.com",
                 PhoneNumber = "900 789 789",
@@ -275,6 +306,7 @@ namespace MDMProject.Data
 
             data.Add(new User
             {
+                UserType = UserTypeEnum.Company,
                 IndividualName = "Bernard Print S.A.",
                 Email = "print@email5.com",
                 PhoneNumber = "800 800 800",

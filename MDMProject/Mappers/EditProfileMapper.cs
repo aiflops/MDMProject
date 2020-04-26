@@ -54,12 +54,12 @@ namespace MDMProject.Mappers
             user.ProfileFinishedDate = user.ProfileFinishedDate ?? DateTime.Now; /* If any change to profile is made, mark it as finished */
             user.AdditionalComment = GetString(viewModel.AdditionalComment);
 
-            user.IndividualName = GetString(viewModel.IndividualName);
-            user.CompanyName = GetString(viewModel.CompanyName);
-            user.ContactPersonName = GetString(viewModel.ContactPersonName);
+            user.IndividualName = user.UserType == UserTypeEnum.Individual ? GetString(viewModel.IndividualName) : null;
+            user.CompanyName = user.UserType == UserTypeEnum.Company ? GetString(viewModel.CompanyName) : null;
+            user.ContactPersonName = user.UserType == UserTypeEnum.Company ? GetString(viewModel.ContactPersonName) : null;
 
-            var userCoordinator = viewModel.CoordinatorId != null ? allCoordinators.First(x => x.Id == viewModel.CoordinatorId) : null;
-            user.CoordinatorId = userCoordinator.Id;
+            var userCoordinator = viewModel.CoordinatorId != null && viewModel.CoordinatorId != Constants.OTHER_COORDINATOR_ID ? allCoordinators.First(x => x.Id == viewModel.CoordinatorId) : null;
+            user.CoordinatorId = userCoordinator?.Id;
             user.Coordinator = userCoordinator;
             user.OtherCoordinatorDetails = viewModel.CoordinatorId == Constants.OTHER_COORDINATOR_ID ? viewModel.OtherCoordinatorDetails : null;
 

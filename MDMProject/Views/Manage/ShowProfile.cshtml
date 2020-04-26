@@ -1,4 +1,5 @@
-﻿@using MDMProject.Resources
+﻿@using MDMProject.Models
+@using MDMProject.Resources
 @using MDMProject.ViewModels
 @model EditProfileViewModel
 @{
@@ -70,12 +71,14 @@
                         <p>@Model.CoordinatorsSelectList.First(x => x.Value == Model.CoordinatorId.Value.ToString()).Text</p>
                     </div>
 
-                    <div class="input-group mt-1">
-                        @Html.LabelFor(m => m.OtherCoordinatorDetails)
-                        <p>
-                            @Html.Raw(Model.OtherCoordinatorDetails != null ? Model.OtherCoordinatorDetails.Replace("\n", "<br>") : "")
-                        </p>
-                    </div>
+                    @if (Model.CoordinatorId == Constants.OTHER_COORDINATOR_ID) { 
+                        <div class="input-group mt-1">
+                            @Html.LabelFor(m => m.OtherCoordinatorDetails)
+                            <p>
+                                @Html.Raw(Model.OtherCoordinatorDetails != null ? Model.OtherCoordinatorDetails.Replace("\n", "<br>") : "")
+                            </p>
+                        </div>
+                    }
 
                     <div class="row">
                         <div class="col-md-6">
