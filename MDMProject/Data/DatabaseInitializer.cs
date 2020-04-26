@@ -43,8 +43,24 @@ namespace MDMProject.Data
                     .Include(x => x.Coordinator)
                     .ToList();
                 var userToUpdate = usersToUpdate.First();
+
                 UpdateUser(userToUpdate, user);
                 UpdateUserRoles(userToUpdate, user, userManager, context);
+            }
+
+            var addedUsers = context.Users.ToArray();
+            foreach (var user in data)
+            {
+                var usersToUpdate = context.Users
+                    .Where(x => x.Email == user.Email)
+                    .Include(x => x.Coordinator)
+                    .ToList();
+                var userToUpdate = usersToUpdate.First();
+
+                userToUpdate.ApprovedBy = user.ApprovedBy != null ? addedUsers.First(x => x.Email == user.ApprovedBy.Email) : null;
+                userToUpdate.ApprovedDate = user.ApprovedDate;
+                userToUpdate.Coordinator = user.Coordinator != null ? addedUsers.First(x => x.Email == user.Coordinator.Email) : null;
+                userToUpdate.OtherCoordinatorDetails = user.OtherCoordinatorDetails;
             }
 
             context.SaveChanges();
@@ -89,7 +105,6 @@ namespace MDMProject.Data
             }
         }
 
-
         public static void DropAllUsers(ApplicationDbContext context)
         {
             context.OfferedHelps.RemoveRange(context.OfferedHelps);
@@ -110,35 +125,56 @@ namespace MDMProject.Data
             var collectionPoint = db.Roles.First(x => x.Name == Constants.COLLECTION_POINT_ROLE_NAME);
 
             List<User> data = new List<User>();
-            data.Add(new User
+
+            // Add admin
+            var adminUser = new User
             {
                 UserType = UserTypeEnum.Individual,
                 Email = "admin@admin.com"
-            }.WithRole(admin));
+            }.WithRole(admin);
+            data.Add(adminUser);
 
-            data.Add(new User
+            // Add coordinators
+            var koordynatorWroclaw = new User
             {
                 UserType = UserTypeEnum.Company,
                 CompanyName = "Firma sp. z o.o.",
                 ContactPersonName = "Karol Kontaktowy",
                 Email = "coordinator@coordinator.com",
-                CoordinatedRegion = "Wrocław Krzyki"
-            }.WithRole(coordinator));
+                CoordinatedRegion = "Wrocław Krzyki",
+            }.WithRole(coordinator);
+            data.Add(koordynatorWroclaw);
 
-            data.Add(new User
+            var koordynatorOpole = new User
+            {
+                UserType = UserTypeEnum.Individual,
+                IndividualName = "Maciej Maleński",
+                Email = "malenski@coordinator.com",
+                CoordinatedRegion = "Opole"
+            }.WithRole(coordinator);
+            data.Add(koordynatorOpole);
+
+            var koordynatorWarszawa = new User
             {
                 UserType = UserTypeEnum.Individual,
                 IndividualName = "Maria Mieciuga",
                 Email = "mieciuga@coordinator.com",
-                CoordinatedRegion = "Wrocław Klecina"
-            }.WithRole(coordinator));
+                CoordinatedRegion = "Warszawa"
+            }.WithRole(coordinator);
+            data.Add(koordynatorWarszawa);
 
+            // Add collection points
+            // 5x Opole
             data.Add(new User
             {
                 UserType = UserTypeEnum.Individual,
                 IndividualName = "Krzysztof Kowalkiewicz",
                 Email = "krzysztof@kowalkiewicz.pl",
                 PhoneNumber = "+48 77 12 50 321",
+                ApprovedBy = koordynatorOpole,
+                ApprovedDate = DateTime.Now,
+                Coordinator = koordynatorOpole,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Opole",
@@ -146,8 +182,8 @@ namespace MDMProject.Data
                     PostalCode = "45-075",
                     HouseNumber = "44",
                     FlatNumber = null,
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "50.6633741",
+                    Longitude = "17.925381243554725"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
@@ -158,6 +194,10 @@ namespace MDMProject.Data
                 IndividualName = "Sebastian Smykała",
                 Email = "sebastian@onet.pl",
                 PhoneNumber = "77 99 99 999",
+                ApprovedBy = koordynatorOpole,
+                ApprovedDate = DateTime.Now,
+                Coordinator = koordynatorOpole,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Opole",
@@ -165,8 +205,8 @@ namespace MDMProject.Data
                     PostalCode = "45-018",
                     HouseNumber = "41a",
                     FlatNumber = "9",
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "50.66551335",
+                    Longitude = "17.92546319716522"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
@@ -177,6 +217,10 @@ namespace MDMProject.Data
                 IndividualName = "Donata Dubielewicz",
                 Email = "donata@dubielewicz.pl",
                 PhoneNumber = "+48-77-99-99-999",
+                ApprovedBy = adminUser,
+                ApprovedDate = DateTime.Now,
+                Coordinator = koordynatorOpole,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Opole",
@@ -184,8 +228,8 @@ namespace MDMProject.Data
                     PostalCode = "46-020",
                     HouseNumber = "1",
                     FlatNumber = null,
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "50.6637987",
+                    Longitude = "17.915931537338913"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
@@ -195,6 +239,10 @@ namespace MDMProject.Data
                 UserType = UserTypeEnum.Individual,
                 IndividualName = "Elżbieta Elokwentnicz",
                 Email = "elokwentnicz@onet.pl",
+                ApprovedBy = null,
+                ApprovedDate = null,
+                Coordinator = koordynatorOpole,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Opole",
@@ -202,8 +250,8 @@ namespace MDMProject.Data
                     PostalCode = "46-020",
                     HouseNumber = "18",
                     FlatNumber = null,
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "50.6541815",
+                    Longitude = "17.951389184873687"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
@@ -213,6 +261,10 @@ namespace MDMProject.Data
                 UserType = UserTypeEnum.Individual,
                 IndividualName = "Florian Faktowicz",
                 Email = "Florian@gmail.pl",
+                ApprovedBy = null,
+                ApprovedDate = null,
+                Coordinator = null,
+                OtherCoordinatorDetails = "Tomasz Wójtowicz,\ntel. 780 530 220",
                 Address = new Address
                 {
                     City = "Opole",
@@ -220,8 +272,8 @@ namespace MDMProject.Data
                     PostalCode = "45-713",
                     HouseNumber = "7",
                     FlatNumber = "1A",
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "51.108615",
+                    Longitude = "17.09772361596369"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
@@ -233,6 +285,10 @@ namespace MDMProject.Data
                 IndividualName = "Example Mask",
                 Email = "example@email1.com",
                 PhoneNumber = "900 789 789",
+                ApprovedBy = adminUser,
+                ApprovedDate = DateTime.Now,
+                Coordinator = koordynatorWroclaw,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Wrocław",
@@ -249,9 +305,14 @@ namespace MDMProject.Data
             data.Add(new User
             {
                 UserType = UserTypeEnum.Company,
-                IndividualName = "Example Print",
+                CompanyName = "Example Print",
+                ContactPersonName = "Piotrek Print",
                 Email = "print@email2.com",
                 PhoneNumber = "800 800 800",
+                ApprovedBy = null,
+                ApprovedDate = null,
+                Coordinator = koordynatorWroclaw,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Wrocław",
@@ -272,6 +333,10 @@ namespace MDMProject.Data
                 IndividualName = "Jakub Jeromy",
                 Email = "example@email3.com",
                 PhoneNumber = "900 789 789",
+                ApprovedBy = koordynatorWarszawa,
+                ApprovedDate = DateTime.Now,
+                Coordinator = koordynatorWarszawa,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Warszawa",
@@ -279,8 +344,8 @@ namespace MDMProject.Data
                     HouseNumber = "4",
                     FlatNumber = null,
                     PostalCode = "01-202",
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "52.234579",
+                    Longitude = "20.979369966980165"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
@@ -291,6 +356,10 @@ namespace MDMProject.Data
                 IndividualName = "Cyprian Czmychała",
                 Email = "example@email4.com",
                 PhoneNumber = "900 789 789",
+                ApprovedBy = null,
+                ApprovedDate = null,
+                Coordinator = koordynatorWarszawa,
+                OtherCoordinatorDetails = null,
                 Address = new Address
                 {
                     City = "Warszawa",
@@ -298,8 +367,8 @@ namespace MDMProject.Data
                     HouseNumber = " 29",
                     FlatNumber = null,
                     PostalCode = "01-413",
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "52.2454704",
+                    Longitude = "20.952813428535354"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
@@ -307,9 +376,14 @@ namespace MDMProject.Data
             data.Add(new User
             {
                 UserType = UserTypeEnum.Company,
-                IndividualName = "Bernard Print S.A.",
+                CompanyName = "Bernard Print S.A.",
+                ContactPersonName = "Barnard Stachłowicz",
                 Email = "print@email5.com",
                 PhoneNumber = "800 800 800",
+                ApprovedBy = null,
+                ApprovedDate = null,
+                Coordinator = null,
+                OtherCoordinatorDetails = "Tomasz Mazowiecki, tel. 900 900 900, email: tomasz@mazowiecki.pl",
                 Address = new Address
                 {
                     City = "Warszawa",
@@ -317,8 +391,8 @@ namespace MDMProject.Data
                     HouseNumber = "35",
                     FlatNumber = "74",
                     PostalCode = "01-445",
-                    Latitude = null,
-                    Longitude = null
+                    Latitude = "52.6854155",
+                    Longitude = "21.1111435"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
