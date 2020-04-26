@@ -72,23 +72,38 @@ var ListElement = {
     createLi: function (item) {
         var tile = this.htmlEl;
         tile = tile.replace('#Id', 'supplier-' + item.Id);
-        tile = tile.replace("#Name", item.Name.split(" ")[0]).replace("#City", item.Address.City);
-        if (item.OfferedHelp !== null && item.OfferedEquipment !== null) {
-            tile = tile.replace('<img src=#Src alt=#Alt>', '<img src=\"/Content/images/mask.png\" alt=\"Drukuję w 3D\"><img src=\"/Content/images/3d.png\" alt=\"Oferuję Maskę"\>')
-            tile = tile.replace(/#Type/gi, "multiple");
-            if (MapMDM.onInitFlag)
-                MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsPrinter, item.Id);
+        /* COMMENTED FOR REFACTOR */
+        //tile = tile.replace("#Name", item.Name.split(" ")[0]).replace("#City", item.Address.City);
+        //if (item.OfferedHelp !== null && item.OfferedEquipment !== null) {
+        //    tile = tile.replace('<img src=#Src alt=#Alt>', '<img src=\"/Content/images/mask.png\" alt=\"Drukuję w 3D\"><img src=\"/Content/images/3d.png\" alt=\"Oferuję Maskę"\>')
+        //    tile = tile.replace(/#Type/gi, "multiple");
+        //    if (MapMDM.onInitFlag)
+        //        MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsPrinter, item.Id);
+        //}
+        //else if(item.OfferedHelp !== null) {
+        //tile = tile.replace(/#Src/gi, "/Content/images/3d.png").replace(/#Alt/gi, "Drukuję w 3D").replace(/#Type/gi, "print");
+        //    if (MapMDM.onInitFlag)
+        //    MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsPrinter, item.Id);
+        //}
+        //else if (item.OfferedEquipment !== null) {
+        //    tile = tile.replace(/#Src/gi, "/Content/images/mask.png").replace(/#Alt/gi, "Oferuję Maskę").replace(/#Type/gi, "mask");
+        //    if (MapMDM.onInitFlag)
+        //        MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsMask, item.Id);
+        //}
+
+        /* ADDED AFTER REFACTOR */
+        if (item.UserType == 1) { /* Individual */
+            tile = tile.replace("#Name", item.PersonName.split(" ")[0]).replace("#City", item.Address.City);
         }
-        else if(item.OfferedHelp !== null) {
-        tile = tile.replace(/#Src/gi, "/Content/images/3d.png").replace(/#Alt/gi, "Drukuję w 3D").replace(/#Type/gi, "print");
-            if (MapMDM.onInitFlag)
-            MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsPrinter, item.Id);
+        else { /* Company */
+            tile = tile.replace("#Name", item.CompanyName).replace("#City", item.Address.City);
         }
-        else if (item.OfferedEquipment !== null) {
-            tile = tile.replace(/#Src/gi, "/Content/images/mask.png").replace(/#Alt/gi, "Oferuję Maskę").replace(/#Type/gi, "mask");
+        tile = tile.replace(/#Src/gi, "/Content/images/mask.png").replace(/#Alt/gi, "Oferuję Maskę").replace(/#Type/gi, "mask");
             if (MapMDM.onInitFlag)
                 MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsMask, item.Id);
-        }
+        /* END: ADDED AFTER REFACTOR */
+
+
         var liElement = document.createElement('li');
         liElement.classList.add("list__item");
         liElement.id = 'supplier-' + item.Id;
@@ -109,8 +124,13 @@ var ListElement = {
     createMoreLi: function (itemsList) {
         MarkersGroupMDM.clearAllMarkers();
         for (var i = 0; i < itemsList.length; i++) {
-            if (itemsList[i].OfferedHelp !== null || itemsList[i].OfferedEquipment !== null)
-                suppliersListElHtml.appendChild(this.createLi(itemsList[i]));
+            /* Removed after refactor */
+            //if (itemsList[i].OfferedHelp !== null || itemsList[i].OfferedEquipment !== null)
+            //    suppliersListElHtml.appendChild(this.createLi(itemsList[i]));
+
+            /* ADDED AFTER REFACTOR */
+            suppliersListElHtml.appendChild(this.createLi(itemsList[i]));
+            /* END: ADDED AFTER REFACTOR */
         }
         MapMDM.addCluster(MarkersGroupMDM.cluster);
     },
