@@ -574,6 +574,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Twój profil został zaktualizowany i oczekuje na potwierdzenie przez koordynatora. Otrzymasz potwierdzenie email, gdy tylko koordynator potwierdzi Twoją tożsamość..
+        /// </summary>
+        public static string Manage_ShowProfile__ProfileUpdatedAndAwaitingApproval {
+            get {
+                return ResourceManager.GetString("Manage_ShowProfile__ProfileUpdatedAndAwaitingApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sukces.
         /// </summary>
         public static string Manage_ShowProfile__Success {

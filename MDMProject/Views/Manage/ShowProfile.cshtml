@@ -16,16 +16,40 @@
                     {
                         <div class="alert alert-success" role="alert">
                             <strong>@ViewResources.Manage_ShowProfile__Success!</strong>
-                            <p>@ViewResources.Manage_ShowProfile__ChangesSavedGoToMap</p>
+                            <p>@ViewResources.Manage_ShowProfile__ProfileUpdatedAndAwaitingApproval</p>
                             <a href="@Url.Action("MapIndex", "Map")" class="btn btn-primary mt-2">@ViewResources.Manage_ShowProfile__GoToMap</a>
                         </div>
                     }
 
-                    <div class="input-group mt-1">
-                        @Html.LabelFor(m => m.Name)
-                        <p>@Html.DisplayFor(m => m.Name)</p>
+                    <div class="input-group  mt-1">
+                        @Html.LabelFor(m => m.UserType)
+                        <p>@(Model.UserType == MDMProject.Models.UserTypeEnum.Company ? PropertyNames.EditProfileViewModel_UserType_Company : PropertyNames.EditProfileViewModel_UserType_IndividualPerson)</p>
                     </div>
 
+                    @if (Model.UserType == MDMProject.Models.UserTypeEnum.Company)
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mt-1 company-field">
+                                    @Html.LabelFor(m => m.CompanyName)
+                                    <p>@Html.DisplayFor(m => m.CompanyName)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mt-1 company-field">
+                                    @Html.LabelFor(m => m.ContactPersonName)
+                                    <p>@Html.DisplayFor(m => m.ContactPersonName)</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="input-group mt-1 individual-field">
+                            @Html.LabelFor(m => m.IndividualName)
+                            <p>@Html.DisplayFor(m => m.IndividualName)</p>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group mt-1">
@@ -39,6 +63,18 @@
                                 <p>@Html.DisplayFor(m => m.PhoneNumber)</p>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="input-group mt-1">
+                        @Html.LabelFor(m => m.CoordinatorId)
+                        <p>@Model.CoordinatorsSelectList.First(x => x.Value == Model.CoordinatorId.Value.ToString()).Text</p>
+                    </div>
+
+                    <div class="input-group mt-1">
+                        @Html.LabelFor(m => m.OtherCoordinatorDetails)
+                        <p>
+                            @Html.Raw(Model.OtherCoordinatorDetails != null ? Model.OtherCoordinatorDetails.Replace("\n", "<br>") : "")
+                        </p>
                     </div>
 
                     <div class="row">
@@ -78,36 +114,12 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group mt-1">
-                                <label>@ViewResources.Manage_EditProfile__AvailableProducts:</label>
-                                <div class="checkbox">
-                                    @Html.CheckBoxFor(m => m.HasMaskAvailable, new { disabled = "disabled" })
-                                    @Html.LabelFor(m => m.HasMaskAvailable)
-                                </div>
-
-                                <div class="checkbox">
-                                    @Html.CheckBoxFor(m => m.HasAdapterAvailable, new { disabled = "disabled" })
-                                    @Html.LabelFor(m => m.HasAdapterAvailable)
-                                </div>
-
-                                <div class="checkbox">
-                                    @Html.CheckBoxFor(m => m.HasMaskCollectionPoint, new { disabled = "disabled" })
-                                    @Html.LabelFor(m => m.HasMaskCollectionPoint)
-                                </div>
-                            </div>
-                        </div>
+                    <div class="input-group mt-1">
+                        @Html.LabelFor(m => m.AdditionalComment)
+                        <p>
+                            @Html.Raw(Model.AdditionalComment != null ? Model.AdditionalComment.Replace("\n", "<br>") : "")
+                        </p>
                     </div>
-
-                    @*<div class="input-group mt-1">
-                            @Html.LabelFor(m => m.AdditionalComment)
-                            <br />
-                            <p>
-                                @Html.Raw(Model.AdditionalComment != null ? Model.AdditionalComment.Replace("\n", "<br>") : "")
-                            </p>
-                            @Html.ValidationMessageFor(m => m.AdditionalComment, "", new { @class = "text-danger " })
-                        </div>*@
                 </div>
             </div>
         </div>

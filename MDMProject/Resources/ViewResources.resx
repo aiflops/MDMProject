@@ -288,6 +288,9 @@
   <data name="Manage_ShowProfile__GoToMap" xml:space="preserve">
     <value>Przejdź do mapy</value>
   </data>
+  <data name="Manage_ShowProfile__ProfileUpdatedAndAwaitingApproval" xml:space="preserve">
+    <value>Twój profil został zaktualizowany i oczekuje na potwierdzenie przez koordynatora. Otrzymasz potwierdzenie email, gdy tylko koordynator potwierdzi Twoją tożsamość.</value>
+  </data>
   <data name="Manage_ShowProfile__Success" xml:space="preserve">
     <value>Sukces</value>
   </data>
