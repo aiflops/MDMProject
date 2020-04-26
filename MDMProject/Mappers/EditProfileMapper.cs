@@ -61,7 +61,7 @@ namespace MDMProject.Mappers
             var userCoordinator = viewModel.CoordinatorId != null ? allCoordinators.First(x => x.Id == viewModel.CoordinatorId) : null;
             user.CoordinatorId = userCoordinator.Id;
             user.Coordinator = userCoordinator;
-            user.OtherCoordinatorDetails = viewModel.OtherCoordinatorDetails;
+            user.OtherCoordinatorDetails = viewModel.CoordinatorId == Constants.OTHER_COORDINATOR_ID ? viewModel.OtherCoordinatorDetails : null;
 
             /* UPDATE ADDRESS */
             // Create new address if not exists

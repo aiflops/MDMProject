@@ -7,7 +7,7 @@
     ViewBag.Title = ViewResources.Manage_EditProfile__Title;
 }
 
-<main class="edit-profile">
+<main class="edit-profile" data-other-coordinator-id="@Constants.OTHER_COORDINATOR_ID">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-8 col-12">
@@ -46,14 +46,14 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="input-group mt-1 company-field">
+                                <div class="input-group mt-1 company-field" style="display: @(Model.UserType == UserTypeEnum.Company ? "block": "none")">
                                     @Html.LabelFor(m => m.CompanyName)
                                     @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.CompanyName) })
                                     @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger " })
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="input-group mt-1 company-field">
+                                <div class="input-group mt-1 company-field" style="display: @(Model.UserType == UserTypeEnum.Company ? "block": "none")">
                                     @Html.LabelFor(m => m.ContactPersonName)
                                     @Html.TextBoxFor(m => m.ContactPersonName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.ContactPersonName) })
                                     @Html.ValidationMessageFor(m => m.ContactPersonName, "", new { @class = "text-danger " })
@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="input-group mt-1 individual-field">
+                        <div class="input-group mt-1 individual-field" style="display: @(Model.UserType == UserTypeEnum.Individual ? "block": "none")">
                             @Html.LabelFor(m => m.IndividualName)
                             @Html.TextBoxFor(m => m.IndividualName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.IndividualName) })
                             @Html.ValidationMessageFor(m => m.IndividualName, "", new { @class = "text-danger " })
@@ -90,7 +90,7 @@
                             @Html.ValidationMessageFor(m => m.CoordinatorId, "", new { @class = "text-danger " })
                         </div>
 
-                        <div class="input-group mt-1">
+                        <div class="input-group mt-1 other-coordinator-details" style="display: @(Model.CoordinatorId == Constants.OTHER_COORDINATOR_ID ? "block": "none")">
                             @Html.LabelFor(m => m.OtherCoordinatorDetails)
                             @Html.TextAreaFor(m => m.OtherCoordinatorDetails, new { @class = "form-control mt-1", rows = 3, placeholder = Html.DisplayNameFor(m => m.OtherCoordinatorDetails) })
                             @Html.ValidationMessageFor(m => m.OtherCoordinatorDetails, "", new { @class = "text-danger " })
@@ -180,6 +180,6 @@
             crossorigin=""></script>
     <script src="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.js"></script>
     @Scripts.Render("~/scripts/validation")
-    @Scripts.Render("~/Scripts/custom/profile.js")
+    @Scripts.Render("~/Scripts/custom/userProfile.js")
     @Scripts.Render("~/Scripts/custom/ProfileMap.js")
 }
