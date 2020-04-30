@@ -93,7 +93,7 @@ namespace MDMProject.Mappers
             var collection = coordinatorsList.Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
-                Text = x.FullUserName,
+                Text = x.CoordinatedRegion + " - " + x.FullUserName,
                 Selected = x.Id == selectedId
             }).OrderBy(x => x.Text);
 
