@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace MDMProject.Controllers
 {
     [Authorize(Roles = Constants.ADMIN_ROLE_NAME + "," + Constants.COORDINATOR_ROLE_NAME)]
-    public class AdminController : ControllerBase
+    public class AdminController : AdminControllerBase
     {
         public ActionResult Index()
         {
@@ -29,9 +29,6 @@ namespace MDMProject.Controllers
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
                 ViewBag.ListTitle = "Użytkownicy";
-                ViewBag.ActiveUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy != null);
-                ViewBag.UnverifiedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy == null);
-                ViewBag.UnfinishedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate == null);
 
                 return View("UsersList", viewModelsList);
             }    
@@ -57,9 +54,6 @@ namespace MDMProject.Controllers
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
                 ViewBag.ListTitle = "Zweryfikowani użytkownicy";
-                ViewBag.ActiveUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy != null);
-                ViewBag.UnverifiedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy == null);
-                ViewBag.UnfinishedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate == null);
 
                 return View("UsersList", viewModelsList);
             }
@@ -85,9 +79,6 @@ namespace MDMProject.Controllers
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
                 ViewBag.ListTitle = "Nieukończone profile";
-                ViewBag.ActiveUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy != null);
-                ViewBag.UnverifiedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy == null);
-                ViewBag.UnfinishedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate == null);
 
                 return View("UsersList", viewModelsList);
             }
@@ -113,9 +104,6 @@ namespace MDMProject.Controllers
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
                 ViewBag.ListTitle = "Niezweryfikowani użytkownicy";
-                ViewBag.ActiveUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy != null);
-                ViewBag.UnverifiedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy == null);
-                ViewBag.UnfinishedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate == null);
 
                 return View("UsersList", viewModelsList);
             }
@@ -145,9 +133,6 @@ namespace MDMProject.Controllers
                 var viewModelsList = allCollectionPointUsers.ToCoordinatorListViewModels(allCollectionPointIds, allAdminIds, coordinatedPeopleDict).ToList();
 
                 ViewBag.ListTitle = "Koordynatorzy";
-                ViewBag.ActiveUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy != null);
-                ViewBag.UnverifiedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy == null);
-                ViewBag.UnfinishedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate == null);
 
                 return View("CoordinatorsList", viewModelsList);
             }
@@ -172,9 +157,6 @@ namespace MDMProject.Controllers
                 var viewModelsList = allCollectionPointUsers.ToAdminListViewModels(allCollectionPointIds, allCoordinatorIds).ToList();
 
                 ViewBag.ListTitle = "Administratorzy";
-                ViewBag.ActiveUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy != null);
-                ViewBag.UnverifiedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate != null && x.ApprovedBy == null);
-                ViewBag.UnfinishedUsersCount = db.GetAllCollectionPoints().Count(x => x.ProfileFinishedDate == null);
 
                 return View("AdministratorsList", viewModelsList);
             }

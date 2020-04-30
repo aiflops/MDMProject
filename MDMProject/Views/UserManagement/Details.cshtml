@@ -1,0 +1,139 @@
+﻿@using MDMProject.ViewModels;
+
+@model UserListViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Szczegóły</h5>
+            </div>
+            <div class="card-block">
+                @UserDetails()
+            </div>
+        </div>
+    </div>
+</div>
+
+@helper UserDetails()
+{
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPersonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IndividualName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IndividualName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoordinatorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoordinatorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherCoordinatorDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherCoordinatorDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HouseNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HouseNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlatNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlatNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdditionalComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdditionalComment)
+        </dd>
+    </dl>
+    <p>
+        <a href="@(ViewBag.ReturnUrl ?? Url.Action("Index", "Admin"))" class="btn btn-primary">Wróć do listy</a>
+    </p>
+}

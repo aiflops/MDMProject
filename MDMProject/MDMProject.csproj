@@ -249,6 +249,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Base\AdminControllerBase.cs" />
+    <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Base\ControllerBase.cs" />
     <Compile Include="Controllers\FakeDataController.cs" />
@@ -412,6 +414,7 @@
     <Content Include="Scripts\MvcFoolproofValidation.min.js">
       <DependentUpon>MvcFoolproofValidation.js</DependentUpon>
     </Content>
+    <Content Include="Views\UserManagement\Details.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
