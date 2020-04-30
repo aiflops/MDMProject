@@ -329,6 +329,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin.css" />
+    <Content Include="Scripts\custom\admin.js" />
     <Content Include="Scripts\custom\userProfile.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js">
@@ -414,6 +415,7 @@
     <Content Include="Scripts\MvcFoolproofValidation.min.js">
       <DependentUpon>MvcFoolproofValidation.js</DependentUpon>
     </Content>
+    <Content Include="Views\UserManagement\Delete.cshtml" />
     <Content Include="Views\UserManagement\Details.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -448,6 +450,7 @@
     <Content Include="Views\Admin\UsersList.cshtml" />
     <Content Include="Views\Admin\CoordinatorsList.cshtml" />
     <Content Include="Views\Admin\AdministratorsList.cshtml" />
+    <Content Include="Views\Admin\Modals\_Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

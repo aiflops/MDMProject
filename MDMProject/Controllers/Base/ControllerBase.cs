@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using MDMProject.Resources;
+using Serilog;
 using System;
 using System.Web.Mvc;
 
@@ -21,13 +22,23 @@ namespace MDMProject.Controllers
             var errorId = Guid.NewGuid();
             _logger.Error(filterContext.Exception, "Error occurred ({ErrorId})", errorId);
 
-            ViewResult viewResult = new ViewResult
+            if (filterContext.HttpContext.Request.IsAjaxRequest() && Request.HttpMethod == "POST")
             {
-                ViewName = "~/Views/Shared/Error.cshtml"
-            };
-            viewResult.ViewBag.ErrorId = errorId.ToString();
+                filterContext.Result = new JsonResult { Data = new { success = false, message = ViewResources.Error__ErrorOccuredWhilePerformingRequest + "<br>" + ViewResources.Error__ErrorCode + ": " + errorId } };
+                filterContext.HttpContext.Response.Clear();
+                filterContext.HttpContext.Response.StatusCode = 200;
+                filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+            }
+            else
+            {
+                ViewResult viewResult = new ViewResult
+                {
+                    ViewName = "~/Views/Shared/Error.cshtml"
+                };
+                viewResult.ViewBag.ErrorId = errorId.ToString();
 
-            filterContext.Result = viewResult;
+                filterContext.Result = viewResult;
+            }
         }
 
         protected virtual void LogErrorMessage(string errorMessage)

@@ -19,6 +19,8 @@
     </div>
 </div>
 
+@Html.Partial("Modals/_Modal")
+
 @helper UsersTable()
 {
     <div class="table-responsive">
@@ -94,23 +96,49 @@
                                 }
                             </td>
                             <td>
-                                <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-success">Szczegóły</a>
-                                <a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-primary">Edytuj</a>
-                                <a href="@Url.Action("Delete", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-danger">Usuń</a>
+                                @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>*@
+
+                                <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })"
+                                   class="btn btn-sm btn-outline-success">
+                                    Szczegóły
+                                </a>
+                                <a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
+                                   class="btn btn-sm btn-outline-primary">
+                                    Edytuj
+                                </a>
+                                <a href="#"
+                                   class="btn btn-sm btn-outline-danger"
+                                   data-toggle="modal" 
+                                   data-target="#modal"
+                                   data-title="Usuń użytkownika"
+                                   data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
+                                   data-button-title="Usuń"
+                                   >
+                                    Usuń
+                                </a>
 
                                 @if (item.ApprovedBy == null)
                                 {
-                                    <a href="@Url.Action("Approve", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-warning">Zweryfikuj</a>
+                                    <a href="@Url.Action("Approve", "UserManagement", new { id = item.Id })"
+                                       class="btn btn-sm btn-outline-warning">
+                                        Zweryfikuj
+                                    </a>
                                 }
                                 @if (User.IsInRole(Constants.ADMIN_ROLE_NAME))
                                 {
                                     if (!item.IsCoordinator)
                                     {
-                                        <a href="@Url.Action("AddAsCoordinator", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-info">Koordynator</a>
+                                        <a href="@Url.Action("AddAsCoordinator", "UserManagement", new { id = item.Id })"
+                                           class="btn btn-sm btn-outline-info">
+                                            Koordynator
+                                        </a>
                                     }
                                     if (!item.IsAdmin)
                                     {
-                                        <a href="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-secondary">Administrator</a>
+                                        <a href="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })"
+                                           class="btn btn-sm btn-outline-secondary">
+                                            Administrator
+                                        </a>
                                     }
                                 }
                             </td>
