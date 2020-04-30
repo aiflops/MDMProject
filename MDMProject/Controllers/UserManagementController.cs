@@ -1,8 +1,10 @@
 ﻿using MDMProject.Data;
 using MDMProject.Mappers;
-using MDMProject.Models;
+using MDMProject.Resources;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace MDMProject.Controllers
@@ -66,7 +68,7 @@ namespace MDMProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveDelete(int id)
+        public async Task<ActionResult> SaveDelete(int id)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -75,8 +77,27 @@ namespace MDMProject.Controllers
                 db.Users.Remove(user);
                 db.SaveChanges();
 
+                await SendEmail(user.Email, "Potwierdzenie usunięcia konta", "Twoje konto w serwisie " + GetSiteUrl() + " zostało usunięte!");
+
                 return Json(new { success = true, message = "Usunięto użytkownika!" });
             }
+        }
+
+        private async Task SendEmail(string email, string title, string message)
+        {
+            var emailService = new EmailService();
+            await emailService.SendAsync(new IdentityMessage
+            {
+                Subject = title,
+                Body = message + "<br>Pozdrawiamy, " + EmailResources.EmailFrom,
+                Destination = email
+            });
+        }
+
+        private string GetSiteUrl()
+        {
+            string baseUrl = Request.Url.Authority + Request.ApplicationPath.TrimEnd('/');
+            return baseUrl;
         }
     }
 }
