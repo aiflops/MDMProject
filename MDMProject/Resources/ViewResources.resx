@@ -237,6 +237,9 @@
   <data name="Lockout__Title" xml:space="preserve">
     <value>Konto zablokowane</value>
   </data>
+  <data name="LoginPartial__AdminPanel" xml:space="preserve">
+    <value>Panel administracyjny</value>
+  </data>
   <data name="LoginPartial__EditProfile" xml:space="preserve">
     <value>Edytuj profil</value>
   </data>

@@ -421,6 +421,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Panel administracyjny.
+        /// </summary>
+        public static string LoginPartial__AdminPanel {
+            get {
+                return ResourceManager.GetString("LoginPartial__AdminPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edytuj profil.
         /// </summary>
         public static string LoginPartial__EditProfile {

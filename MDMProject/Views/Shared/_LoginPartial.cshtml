@@ -3,11 +3,15 @@
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.Owin
 
+@{
+    var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+}
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-        var user = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId<int>());
+        var user = userManager.FindById(User.Identity.GetUserId<int>());
 
         @Html.AntiForgeryToken()
 
@@ -19,6 +23,10 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
+                    @if (User.IsInRole(MDMProject.Models.Constants.ADMIN_ROLE_NAME) || User.IsInRole(MDMProject.Models.Constants.COORDINATOR_ROLE_NAME))
+                    {
+                        <li>@Html.ActionLink(ViewResources.LoginPartial__AdminPanel, "Index", "Admin")</li>
+                    }
                     <li>
                         <a href="@Url.Action("EditProfile", "Manage")" title="@ViewResources.LoginPartial__EditProfile">
                             <span>@ViewResources.LoginPartial__EditProfile</span> @DisplayBadgeIfProfileNotActive(user)

@@ -79,6 +79,8 @@ namespace MDMProject.Data
             userToUpdate.CoordinatorId = user.CoordinatorId;
             userToUpdate.OtherCoordinatorDetails = user.OtherCoordinatorDetails;
 
+            userToUpdate.CoordinatedRegion = user.CoordinatedRegion;
+
             userToUpdate.ProfileFinishedDate = user.ProfileFinishedDate;
             userToUpdate.IndividualName = user.IndividualName;
             userToUpdate.Address = user.Address;

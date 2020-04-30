@@ -249,6 +249,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Base\ControllerBase.cs" />
     <Compile Include="Controllers\FakeDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -262,6 +263,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GoogleCaptchaHelper.cs" />
+    <Compile Include="Mappers\AdministratorListMapper.cs" />
+    <Compile Include="Mappers\CoordinatorListMapper.cs" />
+    <Compile Include="Mappers\UserListMapper.cs" />
     <Compile Include="Mappers\EditProfileMapper.cs" />
     <Compile Include="Mappers\CollectionPointMapper.cs" />
     <Compile Include="Models\Constants\Constants.cs" />
@@ -299,6 +303,9 @@
     <Compile Include="Services\Identity\UserIdentityGenerator.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="ViewModels\Admin\AdminListViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CoordinatorListViewModel.cs" />
+    <Compile Include="ViewModels\Admin\UserListViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\EditProfileViewModel.cs" />
     <Compile Include="Models\OfferedHelp.cs" />
@@ -319,6 +326,7 @@
     <Compile Include="WebAPI Controllers\SuppliersController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin.css" />
     <Content Include="Scripts\custom\userProfile.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js">
@@ -373,7 +381,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include=".gitignore" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js">
       <DependentUpon>jquery-3.4.1.js</DependentUpon>
@@ -434,6 +441,10 @@
     </None>
     <Content Include="Views\Manage\ShowProfile.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailSent.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\UsersList.cshtml" />
+    <Content Include="Views\Admin\CoordinatorsList.cshtml" />
+    <Content Include="Views\Admin\AdministratorsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

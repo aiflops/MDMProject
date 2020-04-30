@@ -1,0 +1,102 @@
+﻿@using MDMProject.Models;
+@using MDMProject.ViewModels;
+
+@model IEnumerable<CoordinatorListViewModel>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>@ViewBag.ListTitle</h5>
+            </div>
+            <div class="card-block">
+                @UsersTable()
+            </div>
+        </div>
+    </div>
+</div>
+
+@helper UsersTable()
+{
+    <div class="table-responsive">
+        <table class="coordinators-table table table-hover table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Dane użytkownika</th>
+                    <th>Dane kontaktowe</th>
+                    <th>Koordynowany region</th>
+                    <th>Koordynowanych</th>
+                    <th>Dodatkowe informacje</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="@(item.UserType == UserTypeEnum.Company ? "text-info" : "text-secondary")">
+                                @if (item.UserType == UserTypeEnum.Company)
+                                {
+                                    @Html.DisplayFor(modelItem => item.CompanyName)
+                                    if (!string.IsNullOrWhiteSpace(item.ContactPersonName))
+                                    {
+                                        <br />
+                                        @Html.DisplayFor(modelItem => item.ContactPersonName)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.IndividualName)
+                                }
+                            </td>
+                            <td>
+                                <i class="icon icon-email"></i>
+                                @Html.DisplayFor(modelItem => item.Email)
+                                <br />
+                                <i class="icon icon-phone"></i>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => item.CoordinatedRegion)
+                            </td>
+                            <td class="text-right">
+                                @Html.DisplayFor(x => item.CoordinatedPeopleCount)
+                            </td>
+                            <td>
+                                @Html.Raw(item.AdditionalComment?.Replace("\n", "<br>"))
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-success">Szczegóły</a>
+                                <a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-primary">Edytuj</a>
+                                <a href="@Url.Action("Delete", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-danger">Usuń</a>
+
+                                @if (User.IsInRole(Constants.ADMIN_ROLE_NAME))
+                                {
+                                    <br />
+                                    <a href="@Url.Action("RemoveAsCoordinator", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-info">Nie koordynator</a>
+                                    if (!item.IsAdmin)
+                                    {
+                                        <a href="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-secondary">Administrator</a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <strong>- BRAK -</strong>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

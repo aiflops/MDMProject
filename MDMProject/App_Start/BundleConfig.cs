@@ -30,6 +30,12 @@ namespace MDMProject
                     "~/Content/bootstrap-theme.css",
                     "~/Content/style.css"
                 ));
+
+            bundles.Add(
+                new StyleBundle("~/css/admin")
+                .Include(
+                    "~/Content/admin.css"
+                ));
         }
     }
 }

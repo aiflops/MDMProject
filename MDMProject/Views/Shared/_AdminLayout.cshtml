@@ -1,0 +1,69 @@
+﻿@using MDMProject.Resources
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewResources.Layout__Title @(ViewBag.Title != null ? "- " + ViewBag.Title : "")</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    @Styles.Render("~/css/admin")
+    @RenderSection("styles", required: false)
+</head>
+<body class="main-grid">
+    <div class="logo-container">
+        @Html.ActionLink(ViewResources.Layout__MainPageLink, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    </div>
+    <header></header>
+
+    <aside class="navigation-menu">
+        <header>Panel administracyjny</header>
+        <nav>
+            <ul>
+                <li class="@DisplayActiveClass(
+                           Url.Action("Index","Admin"),
+                           Url.Action("ActiveCollectionPointsList","Admin"),
+                           Url.Action("UnverifiedCollectionPointsList","Admin"),
+                           Url.Action("UnfinishedCollectionPointsList","Admin")
+                           )">
+                    <a href="@Url.Action("Index","Admin")" class="@DisplayActiveClass(Url.Action("Index","Admin"))">Użytkownicy</a>
+                    <ul>
+                        <li><a href="@Url.Action("ActiveCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("ActiveCollectionPointsList","Admin"))">Aktywni <span class="badge badge-light">@ViewBag.ActiveUsersCount</span></a></li>
+                        <li><a href="@Url.Action("UnverifiedCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("UnverifiedCollectionPointsList","Admin"))">Niezweryfikowani<span class="badge badge-warning">@ViewBag.UnverifiedUsersCount</span></a></li>
+                        <li><a href="@Url.Action("UnfinishedCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("UnfinishedCollectionPointsList","Admin"))">Nieukończone profile<span class="badge badge-warning">@ViewBag.UnfinishedUsersCount</span></a></li>
+                    </ul>
+                </li>
+                <li class="@DisplayActiveClass(Url.Action("CoordinatorsList","Admin"))"><a href="@Url.Action("CoordinatorsList","Admin")" class="@DisplayActiveClass(Url.Action("CoordinatorsList","Admin"))">Koordynatorzy</a></li>
+                @if (User.IsInRole(MDMProject.Models.Constants.ADMIN_ROLE_NAME))
+                {
+                    <li class="@DisplayActiveClass(Url.Action("AdministratorsList","Admin"))"><a href="@Url.Action("AdministratorsList","Admin")" class="@DisplayActiveClass(Url.Action("AdministratorsList","Admin"))">Administratorzy</a></li>
+                }
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    @Scripts.Render("~/scripts/main")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+@functions
+{
+    public string DisplayActiveClass(params string[] urlsToCheck)
+    {
+        var currentUrl = Request.Url.AbsolutePath;
+        var isSelected = urlsToCheck.Any(x => x == currentUrl);
+
+        return isSelected ? "active" : "";
+    }
+}

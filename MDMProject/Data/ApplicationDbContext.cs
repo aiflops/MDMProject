@@ -57,5 +57,13 @@ namespace MDMProject.Data
 
             return coordinators;
         }
+
+        public IQueryable<User> GetAllAdministrators()
+        {
+            var coordinatorRole = Roles.First(x => x.Name == Constants.ADMIN_ROLE_NAME);
+            var coordinators = Users.Where(x => x.Roles.Any(role => role.RoleId == coordinatorRole.Id));
+
+            return coordinators;
+        }
     }
 }

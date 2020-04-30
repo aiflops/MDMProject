@@ -1,0 +1,226 @@
+﻿html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    font-size: 13px;
+    font-family: open sans,sans-serif;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-template-rows: 50px 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". ." ". .";
+}
+
+body > * {
+    box-sizing: border-box;
+}
+
+body > .logo-container {
+    background: #263544;
+    box-shadow: 0 4px 4px -4px rgba(0,0,0,.1);
+    z-index: 1;
+}
+
+body > .logo-container a {
+    color: #9d9d9d;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    margin-left: 1rem;
+    padding: 5px 10px;
+    display: block;
+    line-height: 40px;
+    margin: 0;
+    font-size: 16px;
+}
+
+body > .logo-container a:hover {
+    color: white;
+}
+
+body > header {
+    box-shadow: 0 2px 4px 0 rgba(43,43,43,0.1);
+    z-index: 1;
+}
+
+body > main {
+    background: #f2f7fb;
+    color: #333;
+    padding: .6rem 1.5rem;
+    -webkit-transition: all ease-in .3s;
+    transition: all ease-in .3s;
+}
+
+/* Navigation menu */
+.navigation-menu {
+    color: #b7c0cd;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    /*padding: 1.5rem 1.2rem;*/
+    font-size: 14px;
+    background: #263544;
+}
+
+.navigation-menu header {
+    color: #f1f7ff;
+    font-size: 12px;
+    padding: 10px 15px;
+}
+
+.navigation-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.navigation-menu li {
+    color: #b7c0cd;
+}
+
+.navigation-menu li.active {
+    color: #b7c0cd;
+    background-color: rgb(29, 37, 49);
+}
+
+.navigation-menu li a.active {
+    border-color: #42a5f5;
+}
+
+.navigation-menu li i {
+    display: inline-block;
+}
+
+.navigation-menu li a {
+    color: #b7c0cd;
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 10px 15px;
+    border-left: 3px solid #263544;
+    padding-right: 45px;
+}
+
+.navigation-menu li a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.navigation-menu li li a {
+    padding-left: 25px;
+}
+
+.navigation-menu li li a::before {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 9px;
+    content: '>';
+    font-weight: bold;
+}
+
+.navigation-menu .badge {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+}
+
+/* Card component */
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
+    box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.card .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 20px;
+    position: relative;
+}
+
+.card .card-header h5 {
+    margin-bottom: 0;
+    color: #333;
+    font-size: 15px;
+    font-weight: 700;
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 1.1;
+    position: relative;
+}
+
+.card .card-header h5:after {
+    content: "";
+    background-color: #d2d2d2;
+    width: 60px;
+    height: 1px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+}
+
+.card .card-block {
+    padding: 1.25rem;
+}
+
+/* Users view */
+.table th {
+    font-size: 12px;
+}
+
+.table .btn {
+    margin: .1rem;
+    font-size: .7rem;
+    white-space: nowrap;
+}
+
+.users-table th:nth-last-child(n+3),
+.users-table td:nth-last-child(n+3) {
+    width: 15%;
+}
+
+.users-table th:last-child,
+.users-table td:last-child {
+    max-width: 200px;
+}
+
+.users-table .profile-status {
+    cursor: pointer;
+}
+
+.coordinators-table th:not(:last-child),
+.coordinators-table td:not(:last-child) {
+    width: 18%;
+}
+
+.coordinators-table th:nth-child(4),
+.coordinators-table td:nth-child(4) {
+    width: 125px;
+}
+
+.coordinators-table th:last-child,
+.coordinators-table td:last-child {
+    max-width: 200px;
+}
+
+.admins-table th:not(:last-child),
+.admins-table td:not(:last-child) {
+    width: 42%;
+}
+
+.admins-table th:last-child,
+.admins-table td:last-child {
+    max-width: 200px;
+}
