@@ -49,6 +49,8 @@
                     submitButton.text('');
                     submitButton.hide();
                     submitButton.off('click');
+
+                    modal.attr('data-is-form-finished', 'true');
                 }
             });
         });
@@ -65,6 +67,12 @@ $('#modal').on('hide.bs.modal', function (e) {
     submitButton.off('click');
 
     cancelButton.text('Anuluj');
+
+    if (modal.attr('data-is-form-finished') == 'true') {
+        setTimeout(function () {
+            location.reload();
+        }, 500);
+    }
 });
 
 function objectifyForm(formArray) {//serialize data function

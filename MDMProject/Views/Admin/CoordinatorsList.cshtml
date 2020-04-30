@@ -71,17 +71,47 @@
                                 @Html.Raw(item.AdditionalComment?.Replace("\n", "<br>"))
                             </td>
                             <td>
-                                <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-success">Szczegóły</a>
-                                <a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-primary">Edytuj</a>
-                                <a href="@Url.Action("Delete", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-danger">Usuń</a>
+                                <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })"
+                                   class="btn btn-sm btn-outline-success">
+                                    Szczegóły
+                                </a>
+                                @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
+                                       class="btn btn-sm btn-outline-primary">
+                                        Edytuj
+                                    </a>*@
+                                <a href="#"
+                                   class="btn btn-sm btn-outline-danger"
+                                   data-toggle="modal"
+                                   data-target="#modal"
+                                   data-title="Usuń użytkownika"
+                                   data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
+                                   data-button-title="Usuń">
+                                    Usuń
+                                </a>
 
                                 @if (User.IsInRole(Constants.ADMIN_ROLE_NAME))
                                 {
                                     <br />
-                                    <a href="@Url.Action("RemoveAsCoordinator", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-info">Nie koordynator</a>
+                                    <a href="#"
+                                       class="btn btn-sm btn-outline-info"
+                                       data-toggle="modal"
+                                       data-target="#modal"
+                                       data-title="Usuń z grupy koordynatorów"
+                                       data-form-url="@Url.Action("RemoveAsCoordinator", "UserManagement", new { id = item.Id })"
+                                       data-button-title="Usuń z koordynatorów">
+                                        Nie koordynator
+                                    </a>
                                     if (!item.IsAdmin)
                                     {
-                                        <a href="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-secondary">Administrator</a>
+                                        <a href="#"
+                                           class="btn btn-sm btn-outline-secondary"
+                                           data-toggle="modal"
+                                           data-target="#modal"
+                                           data-title="Dodaj administratora"
+                                           data-form-url="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })"
+                                           data-button-title="Dodaj administratora">
+                                            Administrator
+                                        </a>
                                     }
                                 }
                             </td>
@@ -100,3 +130,5 @@
         </table>
     </div>
 }
+
+@Html.Partial("Modals/_Modal")

@@ -60,12 +60,33 @@
                                 @Html.DisplayFor(modelItem => item.PhoneNumber)
                             </td>
                             <td>
-                                <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-success">Szczegóły</a>
-                                <a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-primary">Edytuj</a>
-                                <a href="@Url.Action("Delete", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-danger">Usuń</a>
-
+                                <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })"
+                                   class="btn btn-sm btn-outline-success">
+                                    Szczegóły
+                                </a>
+                                @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
+                                       class="btn btn-sm btn-outline-primary">
+                                        Edytuj
+                                    </a>*@
+                                <a href="#"
+                                   class="btn btn-sm btn-outline-danger"
+                                   data-toggle="modal"
+                                   data-target="#modal"
+                                   data-title="Usuń użytkownika"
+                                   data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
+                                   data-button-title="Usuń">
+                                    Usuń
+                                </a>
                                 <br />
-                                <a href="@Url.Action("RemoveAsAdmin", "UserManagement", new { id = item.Id })" type="button" class="btn btn-sm btn-outline-secondary">Nie Administrator</a>
+                                <a href="#"
+                                   class="btn btn-sm btn-outline-secondary"
+                                   data-toggle="modal"
+                                   data-target="#modal"
+                                   data-title="Usuń administratora"
+                                   data-form-url="@Url.Action("RemoveAsAdmin", "UserManagement", new { id = item.Id })"
+                                   data-button-title="Usuń administratora">
+                                    Nie Administrator
+                                </a>
                             </td>
                         </tr>
                     }
@@ -82,3 +103,5 @@
         </table>
     </div>
 }
+
+@Html.Partial("Modals/_Modal")

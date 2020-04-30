@@ -1,11 +1,11 @@
 ﻿@using MDMProject.ViewModels;
 @model UserListViewModel
 
-<h3>Czy na pewno chcesz usunąć tego użytkownika?</h3>
+<h3>Czy dodajesz tego użytkownika jako Administratora?</h3>
 <div>
     @Html.Partial("_DetailsPartial", Model)
 
-    @using (Html.BeginForm("SaveDelete", "UserManagement"))
+    @using (Html.BeginForm("SaveAddAsAdmin", "UserManagement"))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(x => Model.Id)

@@ -25,7 +25,8 @@ namespace MDMProject.Mappers
             viewModel.IndividualName = user.IndividualName;
             viewModel.CompanyName = user.CompanyName;
             viewModel.ContactPersonName = user.ContactPersonName;
-            
+
+            viewModel.CoordinatorId = user.Coordinator?.Id; // if no coordinator selected
             viewModel.CoordinatorName = user.Coordinator?.FullUserName; // if no coordinator selected
             viewModel.OtherCoordinatorDetails = user.OtherCoordinatorDetails; // if no coordinator selected
             

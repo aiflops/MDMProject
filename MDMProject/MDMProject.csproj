@@ -451,6 +451,12 @@
     <Content Include="Views\Admin\CoordinatorsList.cshtml" />
     <Content Include="Views\Admin\AdministratorsList.cshtml" />
     <Content Include="Views\Admin\Modals\_Modal.cshtml" />
+    <Content Include="Views\UserManagement\_DetailsPartial.cshtml" />
+    <Content Include="Views\UserManagement\Approve.cshtml" />
+    <Content Include="Views\UserManagement\AddAsCoordinator.cshtml" />
+    <Content Include="Views\UserManagement\RemoveAsCoordinator.cshtml" />
+    <Content Include="Views\UserManagement\AddAsAdmin.cshtml" />
+    <Content Include="Views\UserManagement\RemoveAsAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

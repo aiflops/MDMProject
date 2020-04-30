@@ -28,6 +28,8 @@ namespace MDMProject.ViewModels
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_PhoneNumber))]
         public string PhoneNumber { get; set; }
 
+        public int? CoordinatorId { get; set; }
+
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_Coordinator))]
         public string CoordinatorName { get; set; }
 
@@ -55,6 +57,7 @@ namespace MDMProject.ViewModels
         public string AdditionalComment { get; set; }
 
         public DateTime? ProfileFinishedDate { get; set; }
+                
         public string ApprovedBy { get; set; }
         public DateTime? ApprovedDate { get; set; }
         public bool IsCoordinator { get; internal set; }
