@@ -5,6 +5,7 @@ using MDMProject.Resources;
 using MDMProject.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -93,6 +94,55 @@ namespace MDMProject.Controllers
             return actionResult ?? View("Edit", model);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> EditCollectionPoint(int id)
+        {
+            var userViewModel = await GetEditCollectionPointViewModel(id);
+
+            return View("EditCollectionPoint", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveEditCollectionPoint(EditProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int userId = model.Id;
+                try
+                {
+                    using (var db = new ApplicationDbContext())
+                    {
+                        ValidateUserEmail(model, userId, db);
+                        ValidateUserCoordinates(model);
+
+                        if (ModelState.IsValid)
+                        {
+                            // Get user
+                            var user = db.Users.Find(userId);
+                            user.UpdateWith(model, db);
+
+                            await db.SaveChangesAsync();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                    ModelState.AddModelError("", ex.Message);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    TempData["Message"] = string.Format(ViewResources.UserManagement_EditUser__UserEditedSuccessMessage, GetString(model.Email));
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            model.CoordinatorsSelectList = (await GetAllCoordinators()).ToCoordinatorsSelectList(model.CoordinatorId);
+            return View("EditCollectionPoint", model);
+        }
 
         [HttpGet]
         public ActionResult Details(int id)
@@ -378,7 +428,6 @@ namespace MDMProject.Controllers
             return null;
         }
 
-
         private async Task<CreateUserViewModel> GetEditAdminViewModel(int id)
         {
             using (var db = new ApplicationDbContext())
@@ -397,6 +446,18 @@ namespace MDMProject.Controllers
                 var user = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
 
                 var userViewModel = user.ToEditCoordinatorViewModel();
+                return userViewModel;
+            }
+        }
+
+        private async Task<EditProfileViewModel> GetEditCollectionPointViewModel(int id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
+                var allCoordinators = await db.GetAllCoordinators().ToListAsync();
+
+                var userViewModel = user.ToEditProfileViewModel(allCoordinators);
                 return userViewModel;
             }
         }
@@ -483,5 +544,31 @@ namespace MDMProject.Controllers
             var result = value?.Trim();
             return result;
         }
+
+        private async Task<IEnumerable<User>> GetAllCoordinators()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                return await db.GetAllCoordinators().ToListAsync();
+            }
+        }
+
+        private void ValidateUserEmail(EditProfileViewModel model, int userId, ApplicationDbContext db)
+        {
+            var userWithSameMailExists = db.Users.Any(x => x.Id != userId && x.Email.ToLower() == model.Email.ToLower());
+            if (userWithSameMailExists)
+            {
+                ModelState.AddModelError(nameof(EditProfileViewModel.Email), ValidationMessages.EmailAlreadyExists);
+            }
+        }
+
+        private void ValidateUserCoordinates(EditProfileViewModel model)
+        {
+            if (model.PostalCode != null && (model.Latitude == null || model.Longitude == null))
+            {
+                ModelState.AddModelError(nameof(EditProfileViewModel.Latitude), ValidationMessages.LocationNotMarkedOnMap);
+            }
+        }
+
     }
 }

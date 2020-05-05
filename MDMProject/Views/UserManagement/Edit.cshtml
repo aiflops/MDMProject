@@ -6,124 +6,138 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm(Model.IsCoordinator ? "SaveEditCoordinator" : "SaveEditAdmin", "UserManagement"))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>@(Model.IsCoordinator ? ViewResources.Admin_UsersList__EditCoordinator : ViewResources.Admin_UsersList__EditAdmin)</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(x => x.IsCoordinator)
-        @Html.HiddenFor(x => x.IsAdmin)
-        @Html.HiddenFor(x => x.Id)
-
-        <div class="form-group">
-            <div class="col-md-12">
-                <div class="input-group">
-                    <label>@PropertyNames.User_UserType</label>
-                </div>
+<div class="row">
+    <div class="col-md-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>@(Model.IsCoordinator ? ViewResources.Admin_UsersList__EditCoordinator : ViewResources.Admin_UsersList__EditAdmin)</h5>
             </div>
-
-            <div class="col-md-6">
-                <div class="radio">
-                    <label>
-                        @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Company)
-                        @PropertyNames.User_UserType_Company
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="radio">
-                    <label>
-                        @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Individual)
-                        @PropertyNames.User_UserType_IndividualPerson
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="company-field form-group">
-            @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="company-field form-group">
-            @Html.LabelFor(model => model.ContactPersonName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="individual-field form-group">
-            @Html.LabelFor(model => model.IndividualName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IndividualName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IndividualName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @if (Model.IsCoordinator)
-        {
-            <div class="form-group">
-                @Html.LabelFor(model => model.CoordinatedRegion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CoordinatedRegion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CoordinatedRegion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        }
-        else
-        {
-            @Html.HiddenFor(x => x.CoordinatedRegion)
-        }
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AdditionalComment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.AdditionalComment, new { @class = "form-control", rows = 4, cols = "" })
-                @Html.ValidationMessageFor(model => model.AdditionalComment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@ViewResources.Common__Save" class="btn btn-primary" />
-                @if (Model.IsCoordinator)
-                {
-                    <a href="@Url.Action("CoordinatorsList", "Admin")" class="btn btn-secondary">@ViewResources.Common__Cancel</a>
-                }
-                else if (Model.IsAdmin)
-                {
-                    <a href="@Url.Action("AdministratorsList", "Admin")" class="btn btn-secondary">@ViewResources.Common__Cancel</a>
-                }
+            <div class="card-block">
+                @EditUser()
             </div>
         </div>
     </div>
+</div>
+
+@helper EditUser()
+{
+    using (Html.BeginForm(Model.IsCoordinator ? "SaveEditCoordinator" : "SaveEditAdmin", "UserManagement"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.IsCoordinator)
+            @Html.HiddenFor(x => x.IsAdmin)
+            @Html.HiddenFor(x => x.Id)
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <label>@PropertyNames.User_UserType</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Company)
+                            @PropertyNames.User_UserType_Company
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Individual)
+                            @PropertyNames.User_UserType_IndividualPerson
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company-field form-group">
+                @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="company-field form-group">
+                @Html.LabelFor(model => model.ContactPersonName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="individual-field form-group">
+                @Html.LabelFor(model => model.IndividualName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IndividualName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IndividualName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.IsCoordinator)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CoordinatedRegion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CoordinatedRegion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CoordinatedRegion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(x => x.CoordinatedRegion)
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdditionalComment, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.AdditionalComment, new { @class = "form-control", rows = 4, cols = "" })
+                    @Html.ValidationMessageFor(model => model.AdditionalComment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ViewResources.Common__Save" class="btn btn-primary" />
+                    @if (Model.IsCoordinator)
+                    {
+                        <a href="@Url.Action("CoordinatorsList", "Admin")" class="btn btn-secondary">@ViewResources.Common__Cancel</a>
+                    }
+                    else if (Model.IsAdmin)
+                    {
+                        <a href="@Url.Action("AdministratorsList", "Admin")" class="btn btn-secondary">@ViewResources.Common__Cancel</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
 }
 
-@section scripts {
+@section Scripts {
     @Scripts.Render("~/scripts/validation")
     <script src="~/Scripts/custom/createUser.js"></script>
 }

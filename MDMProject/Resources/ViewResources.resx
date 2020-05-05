@@ -282,6 +282,9 @@
   <data name="Admin_UsersList__EditAdmin" xml:space="preserve">
     <value>Edytuj administratora</value>
   </data>
+  <data name="Admin_UsersList__EditCollectionPoint" xml:space="preserve">
+    <value>Edytuj użytkownika</value>
+  </data>
   <data name="Admin_UsersList__EditCoordinator" xml:space="preserve">
     <value>Edytuj koordynatora</value>
   </data>

@@ -9,6 +9,8 @@ namespace MDMProject.ViewModels
 {
     public class EditProfileViewModel
     {
+        public int Id { get; set; }
+
         /* Basic info */
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_UserType))]
         public UserTypeEnum UserType { get; set; }

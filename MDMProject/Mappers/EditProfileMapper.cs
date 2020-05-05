@@ -17,6 +17,7 @@ namespace MDMProject.Mappers
 
             EditProfileViewModel viewModel = new EditProfileViewModel
             {
+                Id = user.Id,
                 UserType = user.UserType,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,

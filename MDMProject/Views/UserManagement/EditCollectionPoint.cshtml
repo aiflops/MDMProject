@@ -1,0 +1,199 @@
+﻿@using MDMProject.Models
+@using MDMProject.Resources
+@model MDMProject.ViewModels.EditProfileViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>@ViewResources.Admin_UsersList__EditCollectionPoint</h5>
+            </div>
+            <div class="card-block">
+                @EditUser()
+            </div>
+        </div>
+    </div>
+</div>
+
+@helper EditUser()
+{
+    using (Html.BeginForm("SaveEditCollectionPoint", "UserManagement"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.Id)
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <label>@PropertyNames.User_UserType</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Company)
+                            @PropertyNames.User_UserType_Company
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Individual)
+                            @PropertyNames.User_UserType_IndividualPerson
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group company-field" style="display: @(Model.UserType == UserTypeEnum.Company ? "block": "none")">
+                @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group company-field" style="display: @(Model.UserType == UserTypeEnum.Company ? "block": "none")">
+                @Html.LabelFor(model => model.ContactPersonName, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group individual-field" style="display: @(Model.UserType == UserTypeEnum.Individual ? "block": "none")">
+                @Html.LabelFor(model => model.IndividualName, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IndividualName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IndividualName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CoordinatorId, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.CoordinatorId, Model.CoordinatorsSelectList, PropertyNames.SelectList_Placeholder, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CoordinatorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group other-coordinator-details" style="display: @(Model.CoordinatorId == Constants.OTHER_COORDINATOR_ID ? "block": "none")">
+                @Html.LabelFor(model => model.OtherCoordinatorDetails, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.OtherCoordinatorDetails, new { @class = "form-control", rows = 3, cols = "" })
+                    @Html.ValidationMessageFor(model => model.OtherCoordinatorDetails, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StreetName, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HouseNumber, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HouseNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HouseNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FlatNumber, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FlatNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FlatNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10 map-container">
+                    <div class="input-group">
+                        <label>@ViewResources.Manage_EditProfile__MarkAddressOnMap</label>
+                        @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger " })
+                        @Html.HiddenFor(m => m.Latitude)
+                        @Html.HiddenFor(m => m.Longitude)
+                        <div id="profileMap"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdditionalComment, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.AdditionalComment, new { @class = "form-control", rows = 4, cols = "" })
+                    @Html.ValidationMessageFor(model => model.AdditionalComment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ViewResources.Common__Save" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">@ViewResources.Common__Cancel</a>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.css" />
+}
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder@latest/dist/Control.Geocoder.js"></script>
+    @Scripts.Render("~/scripts/validation")
+    @Scripts.Render("~/Scripts/custom/userProfile.js")
+    @Scripts.Render("~/Scripts/custom/ProfileMap.js")
+}

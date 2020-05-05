@@ -190,18 +190,6 @@ namespace MDMProject.Controllers
                 return db.GetAllCoordinators().ToList();
             }
         }
-
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
-        }
-
         #endregion
     }
 }

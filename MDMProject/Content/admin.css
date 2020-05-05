@@ -8,7 +8,7 @@ body {
     margin: 0;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
-    font-size: 16px;
+    font-size: 13px;
     font-family: open sans,sans-serif;
 }
 
@@ -236,4 +236,10 @@ body > main {
 
 .radio label {
     cursor: pointer;
+}
+
+#profileMap {
+    height: 400px;
+    width: 100%;
+    border: 1px solid #404040;
 }

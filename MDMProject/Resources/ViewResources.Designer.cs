@@ -502,6 +502,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edytuj użytkownika.
+        /// </summary>
+        public static string Admin_UsersList__EditCollectionPoint {
+            get {
+                return ResourceManager.GetString("Admin_UsersList__EditCollectionPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edytuj koordynatora.
         /// </summary>
         public static string Admin_UsersList__EditCoordinator {
