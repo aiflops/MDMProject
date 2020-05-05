@@ -31,13 +31,13 @@
         </div>
     }
 
-    <a href="@Url.Action("CreateAdmin", "UserManagement")" type="button" class="add-user-btn btn btn-primary">Dodaj</a>
+    <a href="@Url.Action("CreateAdmin", "UserManagement")" type="button" class="add-user-btn btn btn-primary">@ViewResources.Common__Add</a>
     <div class="table-responsive">
         <table class="admins-table table table-hover table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Dane użytkownika</th>
-                    <th>Dane kontaktowe</th>
+                    <th>@ViewResources.UsersList__UserData</th>
+                    <th>@ViewResources.UsersList__ContactData</th>
                     <th></th>
                 </tr>
             </thead>
@@ -76,26 +76,26 @@
                                 </a>
                                 @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
                                        class="btn btn-sm btn-outline-primary">
-                                        Edytuj
+                                        @ViewResources.Common__Edit
                                     </a>*@
                                 <a href="#"
                                    class="btn btn-sm btn-outline-danger"
                                    data-toggle="modal"
                                    data-target="#modal"
-                                   data-title="Usuń użytkownika"
+                                   data-title="@ViewResources.UsersList__DeleteUser"
                                    data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
-                                   data-button-title="Usuń">
-                                    Usuń
+                                   data-button-title="@ViewResources.Common__Delete">
+                                    @ViewResources.Common__Delete
                                 </a>
                                 <br />
                                 <a href="#"
                                    class="btn btn-sm btn-outline-secondary"
                                    data-toggle="modal"
                                    data-target="#modal"
-                                   data-title="Usuń administratora"
+                                   data-title="@ViewResources.UsersList__DeleteAdmin"
                                    data-form-url="@Url.Action("RemoveAsAdmin", "UserManagement", new { id = item.Id })"
-                                   data-button-title="Usuń administratora">
-                                    Nie Administrator
+                                   data-button-title="@ViewResources.UsersList__DeleteAdmin">
+                                    @ViewResources.UsersList__NotAdmin
                                 </a>
                             </td>
                         </tr>

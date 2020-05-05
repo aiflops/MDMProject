@@ -216,6 +216,24 @@
   <data name="AdminLayout__CollectionPoints_Unverified" xml:space="preserve">
     <value>Niezweryfikowani</value>
   </data>
+  <data name="Common__Add" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+  <data name="Common__Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="Common__Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Common__Details" xml:space="preserve">
+    <value>Szczegóły</value>
+  </data>
+  <data name="Common__Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
+  <data name="Common__Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
   <data name="Error__BackToHomePage" xml:space="preserve">
     <value>Wróć do strony głównej</value>
   </data>
@@ -348,10 +366,88 @@
   <data name="Map_Index__Title" xml:space="preserve">
     <value>Mapa</value>
   </data>
+  <data name="Modal__Loading" xml:space="preserve">
+    <value>Ładowanie...</value>
+  </data>
+  <data name="Modal__Title" xml:space="preserve">
+    <value>Tytuł</value>
+  </data>
+  <data name="UsersList__AddAdmin" xml:space="preserve">
+    <value>Dodaj administratora</value>
+  </data>
+  <data name="UsersList__AddCoordinator" xml:space="preserve">
+    <value>Dodaj koordynatora</value>
+  </data>
+  <data name="UsersList__AdditionalInfo" xml:space="preserve">
+    <value>Dodatkowe informacje</value>
+  </data>
+  <data name="UsersList__Address" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="UsersList__Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="UsersList__ContactData" xml:space="preserve">
+    <value>Dane kontaktowe</value>
+  </data>
+  <data name="UsersList__CoordinatedPersons" xml:space="preserve">
+    <value>Koordynowanych</value>
+  </data>
+  <data name="UsersList__CoordinatedRegion" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="UsersList__Coordinator" xml:space="preserve">
+    <value>Koordynator</value>
+  </data>
+  <data name="UsersList__DeleteAdmin" xml:space="preserve">
+    <value>Usuń administratora</value>
+  </data>
+  <data name="UsersList__DeleteFromCoordinators" xml:space="preserve">
+    <value>Usuń z koordynatorów</value>
+  </data>
+  <data name="UsersList__DeleteUser" xml:space="preserve">
+    <value>Usuń użytkownika</value>
+  </data>
   <data name="UsersList__NoData" xml:space="preserve">
     <value>- BRAK -</value>
   </data>
+  <data name="UsersList__NotAdmin" xml:space="preserve">
+    <value>Nie Administrator</value>
+  </data>
+  <data name="UsersList__NotCoordinator" xml:space="preserve">
+    <value>Nie koordynator</value>
+  </data>
+  <data name="UsersList__OtherCoordinator" xml:space="preserve">
+    <value>INNY</value>
+  </data>
+  <data name="UsersList__Status_ApprovedDesc" xml:space="preserve">
+    <value>Zweryfikowany - Profil zaakceptowany przez {0}</value>
+  </data>
+  <data name="UsersList__Status_ApprovedShort" xml:space="preserve">
+    <value>ZW</value>
+  </data>
+  <data name="UsersList__Status_UnfinishedDesc" xml:space="preserve">
+    <value>Nieukończony - Profil nie został ukończony przez użytkownika</value>
+  </data>
+  <data name="UsersList__Status_UnfinishedShort" xml:space="preserve">
+    <value>NU</value>
+  </data>
+  <data name="UsersList__Status_UnverifiedDesc" xml:space="preserve">
+    <value>Niezweryfikowany - Profil nie został zaakceptowany przez koordynatora</value>
+  </data>
+  <data name="UsersList__Status_UnverifiedShort" xml:space="preserve">
+    <value>NZ</value>
+  </data>
   <data name="UsersList__Success" xml:space="preserve">
     <value>Sukces!</value>
+  </data>
+  <data name="UsersList__UserData" xml:space="preserve">
+    <value>Dane użytkownika</value>
+  </data>
+  <data name="UsersList__Verify" xml:space="preserve">
+    <value>Zweryfikuj</value>
+  </data>
+  <data name="UsersList__VerifyUser" xml:space="preserve">
+    <value>Zweryfikuj użytkownika</value>
   </data>
 </root>

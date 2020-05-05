@@ -34,11 +34,11 @@
         <table class="users-table table table-hover table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Dane użytkownika</th>
-                    <th>Dane kontaktowe</th>
-                    <th>Koordynator</th>
-                    <th>Adres</th>
-                    <th>Dodatkowe informacje</th>
+                    <th>@ViewResources.UsersList__UserData</th>
+                    <th>@ViewResources.UsersList__UserData</th>
+                    <th>@ViewResources.UsersList__Coordinator</th>
+                    <th>@ViewResources.UsersList__Address</th>
+                    <th>@ViewResources.UsersList__AdditionalInfo</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -78,7 +78,7 @@
                                 }
                                 else
                                 {
-                                    <strong>INNY</strong><br />
+                                    <strong>@ViewResources.UsersList__OtherCoordinator</strong><br />
                                     @Html.Raw(item.OtherCoordinatorDetails?.Replace("\n", "<br>"))
                                 }
                             </td>
@@ -91,34 +91,40 @@
                             <td>
                                 @if (item.ProfileFinishedDate == null)
                                 {
-                                    <span class="profile-status badge badge-warning" title="Nieukończony - Profil nie został ukończony przez użytkownika">NU</span>
+                                    <span class="profile-status badge badge-warning" title="@ViewResources.UsersList__Status_UnfinishedDesc">
+                                        @ViewResources.UsersList__Status_UnfinishedShort
+                                    </span>
                                 }
                                 else if (item.ApprovedBy == null)
                                 {
-                                    <span class="profile-status badge badge-danger" title="Niezweryfikowany - Profil nie został zaakceptowany przez koordynatora">NZ</span>
+                                    <span class="profile-status badge badge-danger" title="@ViewResources.UsersList__Status_UnverifiedDesc">
+                                        @ViewResources.UsersList__Status_UnverifiedShort
+                                    </span>
                                 }
                                 else
                                 {
-                                    <span class="profile-status badge badge-success" title="Zweryfikowany - Profil zaakceptowany przez @item.ApprovedBy">ZW</span>
+                                    <span class="profile-status badge badge-success" title="@string.Format(ViewResources.UsersList__Status_ApprovedDesc, item.ApprovedBy)">
+                                        @ViewResources.UsersList__Status_ApprovedShort
+                                    </span>
                                 }
                             </td>
                             <td>
                                 <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })"
                                    class="btn btn-sm btn-outline-success">
-                                    Szczegóły
+                                    @ViewResources.Common__Details
                                 </a>
                                 @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
                                        class="btn btn-sm btn-outline-primary">
-                                        Edytuj
+                                        @ViewResources.Common__Edit
                                     </a>*@
                                 <a href="#"
                                    class="btn btn-sm btn-outline-danger"
                                    data-toggle="modal"
                                    data-target="#modal"
-                                   data-title="Usuń użytkownika"
+                                   data-title="@ViewResources.UsersList__DeleteUser"
                                    data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
-                                   data-button-title="Usuń">
-                                    Usuń
+                                   data-button-title="@ViewResources.Common__Delete">
+                                    @ViewResources.Common__Delete
                                 </a>
 
                                 @if (item.ApprovedBy == null)
@@ -132,10 +138,10 @@
                                            class="btn btn-sm btn-outline-warning"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="Zweryfikuj użytkownika"
+                                           data-title="@ViewResources.UsersList__VerifyUser"
                                            data-form-url="@Url.Action("Approve", "UserManagement", new { id = item.Id })"
-                                           data-button-title="Zweryfikuj">
-                                            Zweryfikuj
+                                           data-button-title="@ViewResources.UsersList__Verify">
+                                            @ViewResources.UsersList__Verify
                                         </a>
                                     }
                                 }
@@ -147,10 +153,10 @@
                                            class="btn btn-sm btn-outline-info"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="Dodaj koordynatora"
+                                           data-title="@ViewResources.UsersList__AddCoordinator"
                                            data-form-url="@Url.Action("AddAsCoordinator", "UserManagement", new { id = item.Id })"
-                                           data-button-title="Dodaj koordynatora">
-                                            Koordynator
+                                           data-button-title="@ViewResources.UsersList__AddCoordinator">
+                                            @ViewResources.UsersList__Coordinator
                                         </a>
                                     }
                                     if (!item.IsAdmin)
@@ -159,10 +165,10 @@
                                            class="btn btn-sm btn-outline-secondary"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="Dodaj administratora"
+                                           data-title="@ViewResources.UsersList__AddAdmin"
                                            data-form-url="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })"
-                                           data-button-title="Dodaj administratora">
-                                            Administrator
+                                           data-button-title="@ViewResources.UsersList__AddAdmin">
+                                            @ViewResources.UsersList__Admin
                                         </a>
                                     }
                                 }

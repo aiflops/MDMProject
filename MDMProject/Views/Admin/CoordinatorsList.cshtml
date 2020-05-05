@@ -38,11 +38,11 @@
         <table class="coordinators-table table table-hover table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Dane użytkownika</th>
-                    <th>Dane kontaktowe</th>
-                    <th>Koordynowany region</th>
-                    <th>Koordynowanych</th>
-                    <th>Dodatkowe informacje</th>
+                    <th>@ViewResources.UsersList__UserData</th>
+                    <th>@ViewResources.UsersList__UserData</th>
+                    <th>@ViewResources.UsersList__CoordinatedRegion</th>
+                    <th>@ViewResources.UsersList__CoordinatedPersons</th>
+                    <th>@ViewResources.UsersList__AdditionalInfo</th>
                     <th></th>
                 </tr>
             </thead>
@@ -86,33 +86,33 @@
                             <td>
                                 <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })"
                                    class="btn btn-sm btn-outline-success">
-                                    Szczegóły
+                                    @ViewResources.Common__Details
                                 </a>
                                 @if (User.IsInRole(Constants.ADMIN_ROLE_NAME))
                                 {
-                                @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
-                                       class="btn btn-sm btn-outline-primary">
-                                        Edytuj
-                                    </a>*@
-                                <a href="#"
-                                   class="btn btn-sm btn-outline-danger"
-                                   data-toggle="modal"
-                                   data-target="#modal"
-                                   data-title="Usuń użytkownika"
-                                   data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
-                                   data-button-title="Usuń">
-                                    Usuń
-                                </a>
+                                    @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
+                                           class="btn btn-sm btn-outline-primary">
+                                            @ViewResources.Common__Edit
+                                        </a>*@
+                                    <a href="#"
+                                       class="btn btn-sm btn-outline-danger"
+                                       data-toggle="modal"
+                                       data-target="#modal"
+                                       data-title="@ViewResources.UsersList__DeleteUser"
+                                       data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
+                                       data-button-title="@ViewResources.Common__Delete">
+                                        @ViewResources.Common__Delete
+                                    </a>
 
                                     <br />
                                     <a href="#"
                                        class="btn btn-sm btn-outline-info"
                                        data-toggle="modal"
                                        data-target="#modal"
-                                       data-title="Usuń z grupy koordynatorów"
+                                       data-title="@ViewResources.UsersList__DeleteFromCoordinators"
                                        data-form-url="@Url.Action("RemoveAsCoordinator", "UserManagement", new { id = item.Id })"
-                                       data-button-title="Usuń z koordynatorów">
-                                        Nie koordynator
+                                       data-button-title="@ViewResources.UsersList__DeleteFromCoordinators">
+                                        @ViewResources.UsersList__NotCoordinator
                                     </a>
                                     if (!item.IsAdmin)
                                     {
@@ -120,10 +120,10 @@
                                            class="btn btn-sm btn-outline-secondary"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="Dodaj administratora"
+                                           data-title="@ViewResources.UsersList__AddAdmin"
                                            data-form-url="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })"
-                                           data-button-title="Dodaj administratora">
-                                            Administrator
+                                           data-button-title="@ViewResources.UsersList__AddAdmin">
+                                            @ViewResources.UsersList__Admin
                                         </a>
                                     }
                                 }

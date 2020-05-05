@@ -358,6 +358,60 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj.
+        /// </summary>
+        public static string Common__Add {
+            get {
+                return ResourceManager.GetString("Common__Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anuluj.
+        /// </summary>
+        public static string Common__Cancel {
+            get {
+                return ResourceManager.GetString("Common__Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuń.
+        /// </summary>
+        public static string Common__Delete {
+            get {
+                return ResourceManager.GetString("Common__Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Szczegóły.
+        /// </summary>
+        public static string Common__Details {
+            get {
+                return ResourceManager.GetString("Common__Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edytuj.
+        /// </summary>
+        public static string Common__Edit {
+            get {
+                return ResourceManager.GetString("Common__Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisz.
+        /// </summary>
+        public static string Common__Save {
+            get {
+                return ResourceManager.GetString("Common__Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wróć do strony głównej.
         /// </summary>
         public static string Error__BackToHomePage {
@@ -754,6 +808,132 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ładowanie....
+        /// </summary>
+        public static string Modal__Loading {
+            get {
+                return ResourceManager.GetString("Modal__Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tytuł.
+        /// </summary>
+        public static string Modal__Title {
+            get {
+                return ResourceManager.GetString("Modal__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj administratora.
+        /// </summary>
+        public static string UsersList__AddAdmin {
+            get {
+                return ResourceManager.GetString("UsersList__AddAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj koordynatora.
+        /// </summary>
+        public static string UsersList__AddCoordinator {
+            get {
+                return ResourceManager.GetString("UsersList__AddCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodatkowe informacje.
+        /// </summary>
+        public static string UsersList__AdditionalInfo {
+            get {
+                return ResourceManager.GetString("UsersList__AdditionalInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adres.
+        /// </summary>
+        public static string UsersList__Address {
+            get {
+                return ResourceManager.GetString("UsersList__Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administrator.
+        /// </summary>
+        public static string UsersList__Admin {
+            get {
+                return ResourceManager.GetString("UsersList__Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dane kontaktowe.
+        /// </summary>
+        public static string UsersList__ContactData {
+            get {
+                return ResourceManager.GetString("UsersList__ContactData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordynowanych.
+        /// </summary>
+        public static string UsersList__CoordinatedPersons {
+            get {
+                return ResourceManager.GetString("UsersList__CoordinatedPersons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Region.
+        /// </summary>
+        public static string UsersList__CoordinatedRegion {
+            get {
+                return ResourceManager.GetString("UsersList__CoordinatedRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordynator.
+        /// </summary>
+        public static string UsersList__Coordinator {
+            get {
+                return ResourceManager.GetString("UsersList__Coordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuń administratora.
+        /// </summary>
+        public static string UsersList__DeleteAdmin {
+            get {
+                return ResourceManager.GetString("UsersList__DeleteAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuń z koordynatorów.
+        /// </summary>
+        public static string UsersList__DeleteFromCoordinators {
+            get {
+                return ResourceManager.GetString("UsersList__DeleteFromCoordinators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuń użytkownika.
+        /// </summary>
+        public static string UsersList__DeleteUser {
+            get {
+                return ResourceManager.GetString("UsersList__DeleteUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - BRAK -.
         /// </summary>
         public static string UsersList__NoData {
@@ -763,11 +943,119 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie Administrator.
+        /// </summary>
+        public static string UsersList__NotAdmin {
+            get {
+                return ResourceManager.GetString("UsersList__NotAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie koordynator.
+        /// </summary>
+        public static string UsersList__NotCoordinator {
+            get {
+                return ResourceManager.GetString("UsersList__NotCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INNY.
+        /// </summary>
+        public static string UsersList__OtherCoordinator {
+            get {
+                return ResourceManager.GetString("UsersList__OtherCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zweryfikowany - Profil zaakceptowany przez {0}.
+        /// </summary>
+        public static string UsersList__Status_ApprovedDesc {
+            get {
+                return ResourceManager.GetString("UsersList__Status_ApprovedDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZW.
+        /// </summary>
+        public static string UsersList__Status_ApprovedShort {
+            get {
+                return ResourceManager.GetString("UsersList__Status_ApprovedShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieukończony - Profil nie został ukończony przez użytkownika.
+        /// </summary>
+        public static string UsersList__Status_UnfinishedDesc {
+            get {
+                return ResourceManager.GetString("UsersList__Status_UnfinishedDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NU.
+        /// </summary>
+        public static string UsersList__Status_UnfinishedShort {
+            get {
+                return ResourceManager.GetString("UsersList__Status_UnfinishedShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niezweryfikowany - Profil nie został zaakceptowany przez koordynatora.
+        /// </summary>
+        public static string UsersList__Status_UnverifiedDesc {
+            get {
+                return ResourceManager.GetString("UsersList__Status_UnverifiedDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NZ.
+        /// </summary>
+        public static string UsersList__Status_UnverifiedShort {
+            get {
+                return ResourceManager.GetString("UsersList__Status_UnverifiedShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sukces!.
         /// </summary>
         public static string UsersList__Success {
             get {
                 return ResourceManager.GetString("UsersList__Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dane użytkownika.
+        /// </summary>
+        public static string UsersList__UserData {
+            get {
+                return ResourceManager.GetString("UsersList__UserData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zweryfikuj.
+        /// </summary>
+        public static string UsersList__Verify {
+            get {
+                return ResourceManager.GetString("UsersList__Verify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zweryfikuj użytkownika.
+        /// </summary>
+        public static string UsersList__VerifyUser {
+            get {
+                return ResourceManager.GetString("UsersList__VerifyUser", resourceCulture);
             }
         }
     }
