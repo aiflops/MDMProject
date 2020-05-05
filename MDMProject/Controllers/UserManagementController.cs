@@ -118,14 +118,14 @@ namespace MDMProject.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var userViewModel = GetUserViewModelById(id);
+            var userViewModel = GetUserDetailsViewModelById(id);
             return View("Details", userViewModel);
         }
 
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var userViewModel = GetUserViewModelById(id);
+            var userViewModel = GetUserDetailsViewModelById(id);
             return PartialView("Delete", userViewModel);
         }
 
@@ -149,7 +149,7 @@ namespace MDMProject.Controllers
         [HttpGet]
         public ActionResult Approve(int id)
         {
-            var userViewModel = GetUserViewModelById(id);
+            var userViewModel = GetUserDetailsViewModelById(id);
             return PartialView("Approve", userViewModel);
         }
 
@@ -177,7 +177,7 @@ namespace MDMProject.Controllers
         [Authorize(Roles = Constants.ADMIN_ROLE_NAME)]
         public ActionResult AddAsCoordinator(int id)
         {
-            var userViewModel = GetUserViewModelById(id);
+            var userViewModel = GetUserDetailsViewModelById(id);
             return PartialView("AddAsCoordinator", userViewModel);
         }
 
@@ -215,7 +215,7 @@ namespace MDMProject.Controllers
         [Authorize(Roles = Constants.ADMIN_ROLE_NAME)]
         public ActionResult RemoveAsCoordinator(int id)
         {
-            var userViewModel = GetUserViewModelById(id);
+            var userViewModel = GetUserDetailsViewModelById(id);
             return PartialView("RemoveAsCoordinator", userViewModel);
         }
 
@@ -249,7 +249,7 @@ namespace MDMProject.Controllers
         [Authorize(Roles = Constants.ADMIN_ROLE_NAME)]
         public ActionResult AddAsAdmin(int id)
         {
-            var userViewModel = GetUserViewModelById(id);
+            var userViewModel = GetUserDetailsViewModelById(id);
             return PartialView("AddAsAdmin", userViewModel);
         }
 
@@ -274,7 +274,7 @@ namespace MDMProject.Controllers
         [Authorize(Roles = Constants.ADMIN_ROLE_NAME)]
         public ActionResult RemoveAsAdmin(int id)
         {
-            var userViewModel = GetUserViewModelById(id);
+            var userViewModel = GetUserDetailsViewModelById(id);
             return PartialView("RemoveAsAdmin", userViewModel);
         }
 
@@ -305,7 +305,7 @@ namespace MDMProject.Controllers
             }
         }
 
-        private UserListViewModel GetUserViewModelById(int id)
+        private UserDetailsViewModel GetUserDetailsViewModelById(int id)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -314,10 +314,11 @@ namespace MDMProject.Controllers
                                 .Include(x => x.ApprovedBy)
                                 .Include(x => x.Coordinator).FirstOrDefault();
 
+                var allCollectionPointIds = db.GetAllCollectionPoints().Select(x => x.Id).ToHashSet();
                 var allCoordinatorIds = db.GetAllCoordinators().Select(x => x.Id).ToHashSet();
                 var allAdminIds = db.GetAllAdministrators().Select(x => x.Id).ToHashSet();
 
-                var userViewModel = user.ToUserListViewModel(allCoordinatorIds, allAdminIds);
+                var userViewModel = user.ToUserDetailsViewModel(allCoordinatorIds, allAdminIds, allCollectionPointIds);
                 return userViewModel;
             }
         }

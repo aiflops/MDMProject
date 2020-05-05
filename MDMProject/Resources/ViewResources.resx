@@ -321,6 +321,9 @@
   <data name="Admin_UsersList__VerifyUser" xml:space="preserve">
     <value>Zweryfikuj użytkownika</value>
   </data>
+  <data name="Common_NotAvailable" xml:space="preserve">
+    <value>- Brak -</value>
+  </data>
   <data name="Common__Add" xml:space="preserve">
     <value>Dodaj</value>
   </data>
@@ -498,6 +501,9 @@
   <data name="UserManagement_Delete__Title" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć tego użytkownika?</value>
   </data>
+  <data name="UserManagement_Details__UserRoles" xml:space="preserve">
+    <value>Role użytkownika</value>
+  </data>
   <data name="UserManagement_RemoveAsAdmin__Title" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć tego użytkownika z Administratorów?</value>
   </data>
@@ -545,5 +551,14 @@
   </data>
   <data name="UserManagement_SendEmail__KindRegards" xml:space="preserve">
     <value>Pozdrawiamy</value>
+  </data>
+  <data name="UserRoles__Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="UserRoles__CollectionPoint" xml:space="preserve">
+    <value>Punkt zbiórki</value>
+  </data>
+  <data name="UserRoles__Coordinator" xml:space="preserve">
+    <value>Koordynator</value>
   </data>
 </root>

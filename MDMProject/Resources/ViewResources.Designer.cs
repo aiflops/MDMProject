@@ -727,6 +727,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to - Brak -.
+        /// </summary>
+        public static string Common_NotAvailable {
+            get {
+                return ResourceManager.GetString("Common_NotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wróć do strony głównej.
         /// </summary>
         public static string Error__BackToHomePage {
@@ -1204,6 +1213,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Role użytkownika.
+        /// </summary>
+        public static string UserManagement_Details__UserRoles {
+            get {
+                return ResourceManager.GetString("UserManagement_Details__UserRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Czy na pewno chcesz usunąć tego użytkownika z Administratorów?.
         /// </summary>
         public static string UserManagement_RemoveAsAdmin__Title {
@@ -1345,6 +1363,33 @@ namespace MDMProject.Resources {
         public static string UserManagement_SendEmail__KindRegards {
             get {
                 return ResourceManager.GetString("UserManagement_SendEmail__KindRegards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administrator.
+        /// </summary>
+        public static string UserRoles__Admin {
+            get {
+                return ResourceManager.GetString("UserRoles__Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Punkt zbiórki.
+        /// </summary>
+        public static string UserRoles__CollectionPoint {
+            get {
+                return ResourceManager.GetString("UserRoles__CollectionPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordynator.
+        /// </summary>
+        public static string UserRoles__Coordinator {
+            get {
+                return ResourceManager.GetString("UserRoles__Coordinator", resourceCulture);
             }
         }
     }

@@ -310,6 +310,7 @@
     <Compile Include="ViewModels\Admin\AdminListViewModel.cs" />
     <Compile Include="ViewModels\Admin\CoordinatorListViewModel.cs" />
     <Compile Include="ViewModels\Admin\CreateUserViewModel.cs" />
+    <Compile Include="ViewModels\Admin\UserDetailsViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserListViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\EditProfileViewModel.cs" />
