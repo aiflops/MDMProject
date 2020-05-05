@@ -304,6 +304,42 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zweryfikowani użytkownicy.
+        /// </summary>
+        public static string Admin_ActiveCollectionPointsList__Title {
+            get {
+                return ResourceManager.GetString("Admin_ActiveCollectionPointsList__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administratorzy.
+        /// </summary>
+        public static string Admin_AdministratorsList__Title {
+            get {
+                return ResourceManager.GetString("Admin_AdministratorsList__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Użytkownicy.
+        /// </summary>
+        public static string Admin_CollectionPointsList__Title {
+            get {
+                return ResourceManager.GetString("Admin_CollectionPointsList__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordynatorzy.
+        /// </summary>
+        public static string Admin_CoordinatorsList__Title {
+            get {
+                return ResourceManager.GetString("Admin_CoordinatorsList__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ładowanie....
         /// </summary>
         public static string Admin_Modal__Loading {
@@ -318,6 +354,24 @@ namespace MDMProject.Resources {
         public static string Admin_Modal__Title {
             get {
                 return ResourceManager.GetString("Admin_Modal__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieukończone profile.
+        /// </summary>
+        public static string Admin_UnfinishedCollectionPointsList__Title {
+            get {
+                return ResourceManager.GetString("Admin_UnfinishedCollectionPointsList__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niezweryfikowani użytkownicy.
+        /// </summary>
+        public static string Admin_UnverifiedCollectionPointsList__Title {
+            get {
+                return ResourceManager.GetString("Admin_UnverifiedCollectionPointsList__Title", resourceCulture);
             }
         }
         
@@ -1114,6 +1168,33 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Twoje konto w serwisie {0} zostało utworzone przez administratora!&lt;br&gt;Po zalogowaniu się zostaniesz poproszony o zmianę hasła.&lt;br&gt;Twoje tymczasowe hasło: &lt;strong&gt;{1}&lt;/strong&gt;&lt;br&gt;&lt;br&gt;Przejdź do strony logowania: &lt;a href=&quot;{2}&quot;&gt;ZALOGUJ SIĘ&lt;/a&gt;.
+        /// </summary>
+        public static string UserManagement_CreateUser__UserCreatedEmail_Body {
+            get {
+                return ResourceManager.GetString("UserManagement_CreateUser__UserCreatedEmail_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konto utworzone przez administratora.
+        /// </summary>
+        public static string UserManagement_CreateUser__UserCreatedEmail_Title {
+            get {
+                return ResourceManager.GetString("UserManagement_CreateUser__UserCreatedEmail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konto użytkownika dla {0} zostało utworzone..
+        /// </summary>
+        public static string UserManagement_CreateUser__UserCreatedSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_CreateUser__UserCreatedSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Czy na pewno chcesz usunąć tego użytkownika?.
         /// </summary>
         public static string UserManagement_Delete__Title {
@@ -1137,6 +1218,133 @@ namespace MDMProject.Resources {
         public static string UserManagement_RemoveAsCoordinator__Title {
             get {
                 return ResourceManager.GetString("UserManagement_RemoveAsCoordinator__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodano użytkownika do Administratorów!.
+        /// </summary>
+        public static string UserManagement_SaveAddAsAdmin__UserAddedToAdminsSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveAddAsAdmin__UserAddedToAdminsSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd! Pole koordynowany region nie zostało uzupełnione!.
+        /// </summary>
+        public static string UserManagement_SaveAddAsCoordinator__ErrorCoordinatorIsNull {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveAddAsCoordinator__ErrorCoordinatorIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodano użytkownika do Koordynatorów!.
+        /// </summary>
+        public static string UserManagement_SaveAddAsCoordinator__UserAddedToCoordinatorsSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveAddAsCoordinator__UserAddedToCoordinatorsSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje konto w serwisie {0} zostało zweryfikowane!&lt;br&gt;Twój profil będzie teraz widoczny na mapie..
+        /// </summary>
+        public static string UserManagement_SaveApprove__UserApprovedEmail_Body {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveApprove__UserApprovedEmail_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje konto zostało zweryfikowane.
+        /// </summary>
+        public static string UserManagement_SaveApprove__UserApprovedEmail_Title {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveApprove__UserApprovedEmail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zweryfikowano użytkownika!.
+        /// </summary>
+        public static string UserManagement_SaveApprove__UserApprovedSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveApprove__UserApprovedSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje konto w serwisie {0} zostało usunięte!.
+        /// </summary>
+        public static string UserManagement_SaveDelete__UserDeletedEmail_Body {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveDelete__UserDeletedEmail_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdzenie usunięcia konta.
+        /// </summary>
+        public static string UserManagement_SaveDelete__UserDeletedEmail_Title {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveDelete__UserDeletedEmail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usunięto użytkownika!.
+        /// </summary>
+        public static string UserManagement_SaveDelete__UserDeletedSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveDelete__UserDeletedSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie można usunąć z roli, ponieważ w systemie musi pozostać chociaż 1 administrator..
+        /// </summary>
+        public static string UserManagement_SaveRemoveAsAdmin__ErrorCannotRemoveMustBeAtLeastOneAdmin {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveRemoveAsAdmin__ErrorCannotRemoveMustBeAtLeastOneAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usunięto użytkownika z Administratorów!.
+        /// </summary>
+        public static string UserManagement_SaveRemoveAsAdmin__UserRemovedFromAdminsSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveRemoveAsAdmin__UserRemovedFromAdminsSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie można usunąć z roli, ponieważ ma koordynowane osoby. &lt;br&gt;Zmień kordynatora dla koordynowanych osób i spróbuj ponownie..
+        /// </summary>
+        public static string UserManagement_SaveRemoveAsCoordinator__ErrorCannotRemoveHasCoordinaterPersons {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveRemoveAsCoordinator__ErrorCannotRemoveHasCoordinaterPersons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usunięto użytkownika z Koordynatorów!.
+        /// </summary>
+        public static string UserManagement_SaveRemoveAsCoordinator__UserRemovedFromCoordinatorsSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_SaveRemoveAsCoordinator__UserRemovedFromCoordinatorsSuccessMessage" +
+                        "", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozdrawiamy.
+        /// </summary>
+        public static string UserManagement_SendEmail__KindRegards {
+            get {
+                return ResourceManager.GetString("UserManagement_SendEmail__KindRegards", resourceCulture);
             }
         }
     }

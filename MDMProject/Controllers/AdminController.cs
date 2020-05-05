@@ -4,6 +4,7 @@ using MDMProject.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using MDMProject.Resources;
 
 namespace MDMProject.Controllers
 {
@@ -28,7 +29,7 @@ namespace MDMProject.Controllers
 
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
-                ViewBag.ListTitle = "Użytkownicy";
+                ViewBag.ListTitle = ViewResources.Admin_CollectionPointsList__Title;
 
                 return View("CollectionPointsList", viewModelsList);
             }    
@@ -53,7 +54,7 @@ namespace MDMProject.Controllers
 
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
-                ViewBag.ListTitle = "Zweryfikowani użytkownicy";
+                ViewBag.ListTitle = ViewResources.Admin_ActiveCollectionPointsList__Title;
 
                 return View("CollectionPointsList", viewModelsList);
             }
@@ -78,7 +79,7 @@ namespace MDMProject.Controllers
 
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
-                ViewBag.ListTitle = "Nieukończone profile";
+                ViewBag.ListTitle = ViewResources.Admin_UnfinishedCollectionPointsList__Title;
 
                 return View("CollectionPointsList", viewModelsList);
             }
@@ -103,7 +104,7 @@ namespace MDMProject.Controllers
 
                 var viewModelsList = allCollectionPointUsers.ToUserListViewModels(allCoordinatorIds, allAdminIds).ToList();
 
-                ViewBag.ListTitle = "Niezweryfikowani użytkownicy";
+                ViewBag.ListTitle = ViewResources.Admin_UnfinishedCollectionPointsList__Title;
 
                 return View("CollectionPointsList", viewModelsList);
             }
@@ -132,7 +133,7 @@ namespace MDMProject.Controllers
 
                 var viewModelsList = allCollectionPointUsers.ToCoordinatorListViewModels(allCollectionPointIds, allAdminIds, coordinatedPeopleDict).ToList();
 
-                ViewBag.ListTitle = "Koordynatorzy";
+                ViewBag.ListTitle = ViewResources.Admin_CoordinatorsList__Title;
 
                 return View("CoordinatorsList", viewModelsList);
             }
@@ -156,7 +157,7 @@ namespace MDMProject.Controllers
 
                 var viewModelsList = allCollectionPointUsers.ToAdminListViewModels(allCollectionPointIds, allCoordinatorIds).ToList();
 
-                ViewBag.ListTitle = "Administratorzy";
+                ViewBag.ListTitle = ViewResources.Admin_AdministratorsList__Title;
 
                 return View("AdministratorsList", viewModelsList);
             }

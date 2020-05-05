@@ -216,11 +216,29 @@
   <data name="AdminLayout__CollectionPoints_Unverified" xml:space="preserve">
     <value>Niezweryfikowani</value>
   </data>
+  <data name="Admin_ActiveCollectionPointsList__Title" xml:space="preserve">
+    <value>Zweryfikowani użytkownicy</value>
+  </data>
+  <data name="Admin_AdministratorsList__Title" xml:space="preserve">
+    <value>Administratorzy</value>
+  </data>
+  <data name="Admin_CollectionPointsList__Title" xml:space="preserve">
+    <value>Użytkownicy</value>
+  </data>
+  <data name="Admin_CoordinatorsList__Title" xml:space="preserve">
+    <value>Koordynatorzy</value>
+  </data>
   <data name="Admin_Modal__Loading" xml:space="preserve">
     <value>Ładowanie...</value>
   </data>
   <data name="Admin_Modal__Title" xml:space="preserve">
     <value>Tytuł</value>
+  </data>
+  <data name="Admin_UnfinishedCollectionPointsList__Title" xml:space="preserve">
+    <value>Nieukończone profile</value>
+  </data>
+  <data name="Admin_UnverifiedCollectionPointsList__Title" xml:space="preserve">
+    <value>Niezweryfikowani użytkownicy</value>
   </data>
   <data name="Admin_UsersList__AddAdmin" xml:space="preserve">
     <value>Dodaj administratora</value>
@@ -468,6 +486,15 @@
   <data name="UserManagement_Approve__Title" xml:space="preserve">
     <value>Czy na pewno potwierdzasz tożsamość tego użytkownika?</value>
   </data>
+  <data name="UserManagement_CreateUser__UserCreatedEmail_Body" xml:space="preserve">
+    <value>Twoje konto w serwisie {0} zostało utworzone przez administratora!&lt;br&gt;Po zalogowaniu się zostaniesz poproszony o zmianę hasła.&lt;br&gt;Twoje tymczasowe hasło: &lt;strong&gt;{1}&lt;/strong&gt;&lt;br&gt;&lt;br&gt;Przejdź do strony logowania: &lt;a href="{2}"&gt;ZALOGUJ SIĘ&lt;/a&gt;</value>
+  </data>
+  <data name="UserManagement_CreateUser__UserCreatedEmail_Title" xml:space="preserve">
+    <value>Konto utworzone przez administratora</value>
+  </data>
+  <data name="UserManagement_CreateUser__UserCreatedSuccessMessage" xml:space="preserve">
+    <value>Konto użytkownika dla {0} zostało utworzone.</value>
+  </data>
   <data name="UserManagement_Delete__Title" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć tego użytkownika?</value>
   </data>
@@ -476,5 +503,47 @@
   </data>
   <data name="UserManagement_RemoveAsCoordinator__Title" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć tego użytkownika z Koordynatorów?</value>
+  </data>
+  <data name="UserManagement_SaveAddAsAdmin__UserAddedToAdminsSuccessMessage" xml:space="preserve">
+    <value>Dodano użytkownika do Administratorów!</value>
+  </data>
+  <data name="UserManagement_SaveAddAsCoordinator__ErrorCoordinatorIsNull" xml:space="preserve">
+    <value>Błąd! Pole koordynowany region nie zostało uzupełnione!</value>
+  </data>
+  <data name="UserManagement_SaveAddAsCoordinator__UserAddedToCoordinatorsSuccessMessage" xml:space="preserve">
+    <value>Dodano użytkownika do Koordynatorów!</value>
+  </data>
+  <data name="UserManagement_SaveApprove__UserApprovedEmail_Body" xml:space="preserve">
+    <value>Twoje konto w serwisie {0} zostało zweryfikowane!&lt;br&gt;Twój profil będzie teraz widoczny na mapie.</value>
+  </data>
+  <data name="UserManagement_SaveApprove__UserApprovedEmail_Title" xml:space="preserve">
+    <value>Twoje konto zostało zweryfikowane</value>
+  </data>
+  <data name="UserManagement_SaveApprove__UserApprovedSuccessMessage" xml:space="preserve">
+    <value>Zweryfikowano użytkownika!</value>
+  </data>
+  <data name="UserManagement_SaveDelete__UserDeletedEmail_Body" xml:space="preserve">
+    <value>Twoje konto w serwisie {0} zostało usunięte!</value>
+  </data>
+  <data name="UserManagement_SaveDelete__UserDeletedEmail_Title" xml:space="preserve">
+    <value>Potwierdzenie usunięcia konta</value>
+  </data>
+  <data name="UserManagement_SaveDelete__UserDeletedSuccessMessage" xml:space="preserve">
+    <value>Usunięto użytkownika!</value>
+  </data>
+  <data name="UserManagement_SaveRemoveAsAdmin__ErrorCannotRemoveMustBeAtLeastOneAdmin" xml:space="preserve">
+    <value>Nie można usunąć z roli, ponieważ w systemie musi pozostać chociaż 1 administrator.</value>
+  </data>
+  <data name="UserManagement_SaveRemoveAsAdmin__UserRemovedFromAdminsSuccessMessage" xml:space="preserve">
+    <value>Usunięto użytkownika z Administratorów!</value>
+  </data>
+  <data name="UserManagement_SaveRemoveAsCoordinator__ErrorCannotRemoveHasCoordinaterPersons" xml:space="preserve">
+    <value>Nie można usunąć z roli, ponieważ ma koordynowane osoby. &lt;br&gt;Zmień kordynatora dla koordynowanych osób i spróbuj ponownie.</value>
+  </data>
+  <data name="UserManagement_SaveRemoveAsCoordinator__UserRemovedFromCoordinatorsSuccessMessage" xml:space="preserve">
+    <value>Usunięto użytkownika z Koordynatorów!</value>
+  </data>
+  <data name="UserManagement_SendEmail__KindRegards" xml:space="preserve">
+    <value>Pozdrawiamy</value>
   </data>
 </root>

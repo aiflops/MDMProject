@@ -75,14 +75,13 @@ namespace MDMProject.Controllers
                         await db.SaveChangesAsync();
                     }
 
-                    await SendEmail(model.Email, "Konto utworzone przez administratora",
-                        "Twoje konto w serwisie " + GetSiteUrl() + " zostało utworzone przez administratora!<br>" +
-                        "Po zalogowaniu się zostaniesz poproszony o zmianę hasła.<br>" +
-                        "Twoje tymczasowe hasło: <strong>" + tempPassword + "</strong><br><br>" +
-                        $"Przejdź do strony logowania: <a href=\"{Url.AbsoluteAction("Login", "Account")}\">ZALOGUJ SIĘ</a>"
+                    await SendEmail(
+                        model.Email,
+                        ViewResources.UserManagement_CreateUser__UserCreatedEmail_Title,
+                        string.Format(ViewResources.UserManagement_CreateUser__UserCreatedEmail_Body, GetSiteUrl(), tempPassword, Url.AbsoluteAction("Login", "Account"))
                         );
 
-                    TempData["Message"] = $"Konto użytkownika dla {model.Email} zostało utworzone.";
+                    TempData["Message"] = ViewResources.UserManagement_CreateUser__UserCreatedSuccessMessage;
                     if (model.IsCoordinator)
                     {
                         return RedirectToAction("CoordinatorsList", "Admin");
@@ -141,9 +140,9 @@ namespace MDMProject.Controllers
                 db.Users.Remove(user);
                 db.SaveChanges();
 
-                await SendEmail(user.Email, "Potwierdzenie usunięcia konta", "Twoje konto w serwisie " + GetSiteUrl() + " zostało usunięte!");
+                await SendEmail(user.Email, ViewResources.UserManagement_SaveDelete__UserDeletedEmail_Title, string.Format(ViewResources.UserManagement_SaveDelete__UserDeletedEmail_Body, GetSiteUrl()));
 
-                return Json(new { success = true, message = "Usunięto użytkownika!" });
+                return Json(new { success = true, message = ViewResources.UserManagement_SaveDelete__UserDeletedSuccessMessage });
             }
         }
 
@@ -168,9 +167,9 @@ namespace MDMProject.Controllers
 
                 db.SaveChanges();
 
-                await SendEmail(user.Email, "Twoje konto zostało zweryfikowane", "Twoje konto w serwisie " + GetSiteUrl() + " zostało zweryfikowane!<br>Twój profil będzie teraz widoczny na mapie.");
+                await SendEmail(user.Email, ViewResources.UserManagement_SaveApprove__UserApprovedEmail_Title, string.Format(ViewResources.UserManagement_SaveApprove__UserApprovedEmail_Body, GetSiteUrl()));
 
-                return Json(new { success = true, message = "Zweryfikowano użytkownika!" });
+                return Json(new { success = true, message = ViewResources.UserManagement_SaveApprove__UserApprovedSuccessMessage });
             }
         }
 
@@ -202,14 +201,14 @@ namespace MDMProject.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Json(new { success = true, message = "Dodano użytkownika do Koordynatorów!" });
+                    return Json(new { success = true, message = ViewResources.UserManagement_SaveAddAsCoordinator__UserAddedToCoordinatorsSuccessMessage });
                 }
                 else
                 {
                     return Json(new { success = false, message = string.Join("<br>", result.Errors) });
                 }
             }
-            return Json(new { success = false, message = "Błąd! Pole koordynowany region nie zostało uzupełnione!" });
+            return Json(new { success = false, message = ViewResources.UserManagement_SaveAddAsCoordinator__ErrorCoordinatorIsNull });
         }
 
         [HttpGet]
@@ -232,13 +231,13 @@ namespace MDMProject.Controllers
                     .Count(x => x.CoordinatorId == id);
 
                 if (coordinatedPeopleCount > 0)
-                    return Json(new { success = false, message = "Nie można usunąć z roli, ponieważ ma koordynowane osoby. <br>Zmień kordynatora dla koordynowanych osób i spróbuj ponownie." });
+                    return Json(new { success = false, message = ViewResources.UserManagement_SaveRemoveAsCoordinator__ErrorCannotRemoveHasCoordinaterPersons });
             }
 
             var result = UserManager.RemoveFromRole(id, Constants.COORDINATOR_ROLE_NAME);
             if (result.Succeeded)
             {
-                return Json(new { success = true, message = "Usunięto użytkownika z Koordynatorów!" });
+                return Json(new { success = true, message = ViewResources.UserManagement_SaveRemoveAsCoordinator__UserRemovedFromCoordinatorsSuccessMessage });
             }
             else
             {
@@ -263,7 +262,7 @@ namespace MDMProject.Controllers
 
             if (result.Succeeded)
             {
-                return Json(new { success = true, message = "Dodano użytkownika do Administratorów!" });
+                return Json(new { success = true, message = ViewResources.UserManagement_SaveAddAsAdmin__UserAddedToAdminsSuccessMessage });
             }
             else
             {
@@ -291,14 +290,14 @@ namespace MDMProject.Controllers
                     .Count(x => x.Id != id);
 
                 if (otherAdministratorsCount == 0)
-                    return Json(new { success = false, message = "Nie można usunąć z roli, ponieważ w systemie musi pozostać chociaż 1 administrator." });
+                    return Json(new { success = false, message = ViewResources.UserManagement_SaveRemoveAsAdmin__ErrorCannotRemoveMustBeAtLeastOneAdmin });
             }
 
             var result = UserManager.RemoveFromRole(id, Constants.ADMIN_ROLE_NAME);
 
             if (result.Succeeded)
             {
-                return Json(new { success = true, message = "Usunięto użytkownika z Administratorów!" });
+                return Json(new { success = true, message = ViewResources.UserManagement_SaveRemoveAsAdmin__UserRemovedFromAdminsSuccessMessage });
             }
             else
             {
@@ -334,7 +333,7 @@ namespace MDMProject.Controllers
             await emailService.SendAsync(new IdentityMessage
             {
                 Subject = title,
-                Body = message + "<br><br>Pozdrawiamy, <br>" + EmailResources.EmailFrom,
+                Body = message + "<br><br>" + ViewResources.UserManagement_SendEmail__KindRegards + ", <br>" + EmailResources.EmailFrom,
                 Destination = email
             });
         }
