@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>@(Model.IsCoordinator ? "Dodaj koordynatora" : "Dodaj administratora")</h4>
+        <h4>@(Model.IsCoordinator ? ViewResources.Admin_UsersList__AddCoordinator : ViewResources.Admin_UsersList__AddAdmin)</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(x => x.IsCoordinator)
@@ -82,7 +82,7 @@
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         @if (Model.IsCoordinator)
         {
             <div class="form-group">
@@ -108,14 +108,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Dodaj" class="btn btn-primary" />
+                <input type="submit" value="@ViewResources.Common__Add" class="btn btn-primary" />
                 @if (Model.IsCoordinator)
                 {
-                    <a href="@Url.Action("CoordinatorsList", "Admin")" class="btn btn-secondary">Anuluj</a>
+                    <a href="@Url.Action("CoordinatorsList", "Admin")" class="btn btn-secondary">@ViewResources.Common__Cancel</a>
                 }
                 else if (Model.IsAdmin)
                 {
-                    <a href="@Url.Action("AdministratorsList", "Admin")" class="btn btn-secondary">Anuluj</a>
+                    <a href="@Url.Action("AdministratorsList", "Admin")" class="btn btn-secondary">@ViewResources.Common__Cancel</a>
                 }
             </div>
         </div>

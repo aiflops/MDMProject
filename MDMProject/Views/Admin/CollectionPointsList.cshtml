@@ -25,7 +25,7 @@
     if (TempData["Message"] != null)
     {
         <div class="alert alert-success" role="alert">
-            <strong>@ViewResources.UsersList__Success</strong>
+            <strong>@ViewResources.Admin_UsersList__Success</strong>
             <p>@TempData["Message"]</p>
         </div>
     }
@@ -34,11 +34,11 @@
         <table class="users-table table table-hover table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>@ViewResources.UsersList__UserData</th>
-                    <th>@ViewResources.UsersList__UserData</th>
-                    <th>@ViewResources.UsersList__Coordinator</th>
-                    <th>@ViewResources.UsersList__Address</th>
-                    <th>@ViewResources.UsersList__AdditionalInfo</th>
+                    <th>@ViewResources.Admin_UsersList__UserData</th>
+                    <th>@ViewResources.Admin_UsersList__UserData</th>
+                    <th>@ViewResources.Admin_UsersList__Coordinator</th>
+                    <th>@ViewResources.Admin_UsersList__Address</th>
+                    <th>@ViewResources.Admin_UsersList__AdditionalInfo</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -78,7 +78,7 @@
                                 }
                                 else
                                 {
-                                    <strong>@ViewResources.UsersList__OtherCoordinator</strong><br />
+                                    <strong>@ViewResources.Admin_UsersList__OtherCoordinator</strong><br />
                                     @Html.Raw(item.OtherCoordinatorDetails?.Replace("\n", "<br>"))
                                 }
                             </td>
@@ -91,20 +91,20 @@
                             <td>
                                 @if (item.ProfileFinishedDate == null)
                                 {
-                                    <span class="profile-status badge badge-warning" title="@ViewResources.UsersList__Status_UnfinishedDesc">
-                                        @ViewResources.UsersList__Status_UnfinishedShort
+                                    <span class="profile-status badge badge-warning" title="@ViewResources.Admin_UsersList__Status_UnfinishedDesc">
+                                        @ViewResources.Admin_UsersList__Status_UnfinishedShort
                                     </span>
                                 }
                                 else if (item.ApprovedBy == null)
                                 {
-                                    <span class="profile-status badge badge-danger" title="@ViewResources.UsersList__Status_UnverifiedDesc">
-                                        @ViewResources.UsersList__Status_UnverifiedShort
+                                    <span class="profile-status badge badge-danger" title="@ViewResources.Admin_UsersList__Status_UnverifiedDesc">
+                                        @ViewResources.Admin_UsersList__Status_UnverifiedShort
                                     </span>
                                 }
                                 else
                                 {
-                                    <span class="profile-status badge badge-success" title="@string.Format(ViewResources.UsersList__Status_ApprovedDesc, item.ApprovedBy)">
-                                        @ViewResources.UsersList__Status_ApprovedShort
+                                    <span class="profile-status badge badge-success" title="@string.Format(ViewResources.Admin_UsersList__Status_ApprovedDesc, item.ApprovedBy)">
+                                        @ViewResources.Admin_UsersList__Status_ApprovedShort
                                     </span>
                                 }
                             </td>
@@ -121,7 +121,7 @@
                                    class="btn btn-sm btn-outline-danger"
                                    data-toggle="modal"
                                    data-target="#modal"
-                                   data-title="@ViewResources.UsersList__DeleteUser"
+                                   data-title="@ViewResources.Admin_UsersList__DeleteUser"
                                    data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
                                    data-button-title="@ViewResources.Common__Delete">
                                     @ViewResources.Common__Delete
@@ -138,10 +138,10 @@
                                            class="btn btn-sm btn-outline-warning"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="@ViewResources.UsersList__VerifyUser"
+                                           data-title="@ViewResources.Admin_UsersList__VerifyUser"
                                            data-form-url="@Url.Action("Approve", "UserManagement", new { id = item.Id })"
-                                           data-button-title="@ViewResources.UsersList__Verify">
-                                            @ViewResources.UsersList__Verify
+                                           data-button-title="@ViewResources.Admin_UsersList__Verify">
+                                            @ViewResources.Admin_UsersList__Verify
                                         </a>
                                     }
                                 }
@@ -153,10 +153,10 @@
                                            class="btn btn-sm btn-outline-info"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="@ViewResources.UsersList__AddCoordinator"
+                                           data-title="@ViewResources.Admin_UsersList__AddCoordinator"
                                            data-form-url="@Url.Action("AddAsCoordinator", "UserManagement", new { id = item.Id })"
-                                           data-button-title="@ViewResources.UsersList__AddCoordinator">
-                                            @ViewResources.UsersList__Coordinator
+                                           data-button-title="@ViewResources.Admin_UsersList__AddCoordinator">
+                                            @ViewResources.Admin_UsersList__Coordinator
                                         </a>
                                     }
                                     if (!item.IsAdmin)
@@ -165,10 +165,10 @@
                                            class="btn btn-sm btn-outline-secondary"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="@ViewResources.UsersList__AddAdmin"
+                                           data-title="@ViewResources.Admin_UsersList__AddAdmin"
                                            data-form-url="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })"
-                                           data-button-title="@ViewResources.UsersList__AddAdmin">
-                                            @ViewResources.UsersList__Admin
+                                           data-button-title="@ViewResources.Admin_UsersList__AddAdmin">
+                                            @ViewResources.Admin_UsersList__Admin
                                         </a>
                                     }
                                 }
@@ -180,7 +180,7 @@
                 {
                     <tr>
                         <td colspan="7" class="text-center">
-                            <strong>@ViewResources.UsersList__NoData</strong>
+                            <strong>@ViewResources.Admin_UsersList__NoData</strong>
                         </td>
                     </tr>
                 }

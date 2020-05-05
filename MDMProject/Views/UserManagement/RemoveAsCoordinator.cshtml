@@ -1,7 +1,8 @@
-﻿@using MDMProject.ViewModels;
+﻿@using MDMProject.Resources
+@using MDMProject.ViewModels;
 @model UserListViewModel
 
-<h3>Czy na pewno chcesz usunąć tego użytkownika z Koordynatorów?</h3>
+<h3>@ViewResources.UserManagement_RemoveAsCoordinator__Title</h3>
 <div>
     @Html.Partial("_DetailsPartial", Model)
 

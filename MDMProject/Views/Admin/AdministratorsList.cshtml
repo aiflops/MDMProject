@@ -26,7 +26,7 @@
     if (TempData["Message"] != null)
     {
         <div class="alert alert-success" role="alert">
-            <strong>@ViewResources.UsersList__Success</strong>
+            <strong>@ViewResources.Admin_UsersList__Success</strong>
             <p>@TempData["Message"]</p>
         </div>
     }
@@ -36,8 +36,8 @@
         <table class="admins-table table table-hover table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>@ViewResources.UsersList__UserData</th>
-                    <th>@ViewResources.UsersList__ContactData</th>
+                    <th>@ViewResources.Admin_UsersList__UserData</th>
+                    <th>@ViewResources.Admin_UsersList__ContactData</th>
                     <th></th>
                 </tr>
             </thead>
@@ -82,7 +82,7 @@
                                    class="btn btn-sm btn-outline-danger"
                                    data-toggle="modal"
                                    data-target="#modal"
-                                   data-title="@ViewResources.UsersList__DeleteUser"
+                                   data-title="@ViewResources.Admin_UsersList__DeleteUser"
                                    data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
                                    data-button-title="@ViewResources.Common__Delete">
                                     @ViewResources.Common__Delete
@@ -92,10 +92,10 @@
                                    class="btn btn-sm btn-outline-secondary"
                                    data-toggle="modal"
                                    data-target="#modal"
-                                   data-title="@ViewResources.UsersList__DeleteAdmin"
+                                   data-title="@ViewResources.Admin_UsersList__DeleteAdmin"
                                    data-form-url="@Url.Action("RemoveAsAdmin", "UserManagement", new { id = item.Id })"
-                                   data-button-title="@ViewResources.UsersList__DeleteAdmin">
-                                    @ViewResources.UsersList__NotAdmin
+                                   data-button-title="@ViewResources.Admin_UsersList__DeleteAdmin">
+                                    @ViewResources.Admin_UsersList__NotAdmin
                                 </a>
                             </td>
                         </tr>
@@ -105,7 +105,7 @@
                 {
                     <tr>
                         <td colspan="3" class="text-center">
-                            <strong>@ViewResources.UsersList__NoData</strong>
+                            <strong>@ViewResources.Admin_UsersList__NoData</strong>
                         </td>
                     </tr>
                 }

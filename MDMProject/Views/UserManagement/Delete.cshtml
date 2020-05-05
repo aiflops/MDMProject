@@ -1,7 +1,8 @@
-﻿@using MDMProject.ViewModels;
+﻿@using MDMProject.Resources
+@using MDMProject.ViewModels;
 @model UserListViewModel
 
-<h3>Czy na pewno chcesz usunąć tego użytkownika?</h3>
+<h3>@ViewResources.UserManagement_Delete__Title</h3>
 <div>
     @Html.Partial("_DetailsPartial", Model)
 

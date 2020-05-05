@@ -1,13 +1,14 @@
-﻿@using MDMProject.ViewModels;
+﻿@using MDMProject.Resources
+@using MDMProject.ViewModels;
 @model UserListViewModel
 
-<h3>Czy dodajesz tego użytkownika jako Koordynatora?</h3>
+<h3>@ViewResources.UserManagement_AddAsCoordinator__Title</h3>
 <div>
     @using (Html.BeginForm("SaveAddAsCoordinator", "UserManagement"))
     {
-        <label for="CoordinatedRegion"><strong>Koordynowany region</strong></label>
+        <label for="CoordinatedRegion"><strong>@ViewResources.UserManagement_AddAsCoordinator__CoordinatedRegion</strong></label>
         <br />
-        <input id="CoordinatedRegion" name="CoordinatedRegion" type="text" value="" placeholder="Koordynowany region..." class="form-control" />
+        <input id="CoordinatedRegion" name="CoordinatedRegion" type="text" value="" placeholder="@ViewResources.UserManagement_AddAsCoordinator__CoordinatedRegionPlaceholder" class="form-control" />
         <br /><br />
 
         @Html.AntiForgeryToken()

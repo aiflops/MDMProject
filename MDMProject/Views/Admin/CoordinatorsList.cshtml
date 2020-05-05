@@ -25,7 +25,7 @@
     if (TempData["Message"] != null)
     {
         <div class="alert alert-success" role="alert">
-            <strong>@ViewResources.UsersList__Success</strong>
+            <strong>@ViewResources.Admin_UsersList__Success</strong>
             <p>@TempData["Message"]</p>
         </div>
     }
@@ -38,11 +38,11 @@
         <table class="coordinators-table table table-hover table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>@ViewResources.UsersList__UserData</th>
-                    <th>@ViewResources.UsersList__UserData</th>
-                    <th>@ViewResources.UsersList__CoordinatedRegion</th>
-                    <th>@ViewResources.UsersList__CoordinatedPersons</th>
-                    <th>@ViewResources.UsersList__AdditionalInfo</th>
+                    <th>@ViewResources.Admin_UsersList__UserData</th>
+                    <th>@ViewResources.Admin_UsersList__UserData</th>
+                    <th>@ViewResources.Admin_UsersList__CoordinatedRegion</th>
+                    <th>@ViewResources.Admin_UsersList__CoordinatedPersons</th>
+                    <th>@ViewResources.Admin_UsersList__AdditionalInfo</th>
                     <th></th>
                 </tr>
             </thead>
@@ -98,7 +98,7 @@
                                        class="btn btn-sm btn-outline-danger"
                                        data-toggle="modal"
                                        data-target="#modal"
-                                       data-title="@ViewResources.UsersList__DeleteUser"
+                                       data-title="@ViewResources.Admin_UsersList__DeleteUser"
                                        data-form-url="@Url.Action("Delete", "UserManagement", new { id = item.Id })"
                                        data-button-title="@ViewResources.Common__Delete">
                                         @ViewResources.Common__Delete
@@ -109,10 +109,10 @@
                                        class="btn btn-sm btn-outline-info"
                                        data-toggle="modal"
                                        data-target="#modal"
-                                       data-title="@ViewResources.UsersList__DeleteFromCoordinators"
+                                       data-title="@ViewResources.Admin_UsersList__DeleteFromCoordinators"
                                        data-form-url="@Url.Action("RemoveAsCoordinator", "UserManagement", new { id = item.Id })"
-                                       data-button-title="@ViewResources.UsersList__DeleteFromCoordinators">
-                                        @ViewResources.UsersList__NotCoordinator
+                                       data-button-title="@ViewResources.Admin_UsersList__DeleteFromCoordinators">
+                                        @ViewResources.Admin_UsersList__NotCoordinator
                                     </a>
                                     if (!item.IsAdmin)
                                     {
@@ -120,10 +120,10 @@
                                            class="btn btn-sm btn-outline-secondary"
                                            data-toggle="modal"
                                            data-target="#modal"
-                                           data-title="@ViewResources.UsersList__AddAdmin"
+                                           data-title="@ViewResources.Admin_UsersList__AddAdmin"
                                            data-form-url="@Url.Action("AddAsAdmin", "UserManagement", new { id = item.Id })"
-                                           data-button-title="@ViewResources.UsersList__AddAdmin">
-                                            @ViewResources.UsersList__Admin
+                                           data-button-title="@ViewResources.Admin_UsersList__AddAdmin">
+                                            @ViewResources.Admin_UsersList__Admin
                                         </a>
                                     }
                                 }
@@ -135,7 +135,7 @@
                 {
                     <tr>
                         <td colspan="7" class="text-center">
-                            <strong>@ViewResources.UsersList__NoData</strong>
+                            <strong>@ViewResources.Admin_UsersList__NoData</strong>
                         </td>
                     </tr>
                 }
