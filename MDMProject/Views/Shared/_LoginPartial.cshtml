@@ -2,6 +2,7 @@
 @using MDMProject.Resources
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.Owin
+@using Constants = MDMProject.Models.Constants
 
 @{
     var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -23,13 +24,32 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @if (User.IsInRole(MDMProject.Models.Constants.ADMIN_ROLE_NAME) || User.IsInRole(MDMProject.Models.Constants.COORDINATOR_ROLE_NAME))
+                    @if (User.IsInRole(Constants.ADMIN_ROLE_NAME) || User.IsInRole(Constants.COORDINATOR_ROLE_NAME))
                     {
                         <li>@Html.ActionLink(ViewResources.LoginPartial__AdminPanel, "Index", "Admin")</li>
                     }
+                    @if (User.IsInRole(Constants.COLLECTION_POINT_ROLE_NAME))
+                    {
+                        if (!user.IsProfileFinished)
+                        {
+                            <li>
+                                <a href="@Url.Action("EditProfile", "Manage")" title="@ViewResources.LoginPartial__EditProfile">
+                                    <span>@ViewResources.LoginPartial__EditProfile</span> @DisplayBadgeIfProfileNotActive(user)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("ShowProfile", "Manage")" title="@ViewResources.LoginPartial__ShowProfile">
+                                    <span>@ViewResources.LoginPartial__ShowProfile</span>
+                                </a>
+                            </li>
+                        }
+                    }
                     <li>
-                        <a href="@Url.Action("EditProfile", "Manage")" title="@ViewResources.LoginPartial__EditProfile">
-                            <span>@ViewResources.LoginPartial__EditProfile</span> @DisplayBadgeIfProfileNotActive(user)
+                        <a href="@Url.Action("ChangePassword", "Manage")" title="@ViewResources.LoginPartial__ChangePassword">
+                            <span>@ViewResources.LoginPartial__ChangePassword</span>
                         </a>
                     </li>
                     <li role="separator" class="divider"></li>

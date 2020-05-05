@@ -132,7 +132,8 @@ namespace MDMProject.Data
             var adminUser = new User
             {
                 UserType = UserTypeEnum.Individual,
-                Email = "admin@admin.com"
+                Email = "admin@admin.com",
+                ProfileFinishedDate = DateTime.Now
             }.WithRole(admin);
             data.Add(adminUser);
 
@@ -144,6 +145,8 @@ namespace MDMProject.Data
                 ContactPersonName = "Karol Kontaktowy",
                 Email = "coordinator@coordinator.com",
                 CoordinatedRegion = "Wrocław Krzyki",
+                ProfileFinishedDate = DateTime.Now,
+                UserAccountState = UserAccountState.UsingTempPassword
             }.WithRole(coordinator);
             data.Add(koordynatorWroclaw);
 

@@ -265,6 +265,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GoogleCaptchaHelper.cs" />
+    <Compile Include="Helpers\UrlHelpers.cs" />
     <Compile Include="Mappers\AdministratorListMapper.cs" />
     <Compile Include="Mappers\CoordinatorListMapper.cs" />
     <Compile Include="Mappers\UserListMapper.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Models\Identity\UserLogin.cs" />
     <Compile Include="Models\Identity\UserRole.cs" />
     <Compile Include="Models\Constants\ValidationConstants.cs" />
+    <Compile Include="Models\Identity\UserAccountState.cs" />
     <Compile Include="Models\UserTypeEnum.cs" />
     <Compile Include="Resources\EmailResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -307,6 +309,7 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="ViewModels\Admin\AdminListViewModel.cs" />
     <Compile Include="ViewModels\Admin\CoordinatorListViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserListViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\EditProfileViewModel.cs" />
@@ -322,7 +325,6 @@
     <Compile Include="ViewModels\API\CollectionPointViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="WebAPI Controllers\LogController.cs" />
     <Compile Include="ViewModels\API\LogViewModel.cs" />
     <Compile Include="WebAPI Controllers\SuppliersController.cs" />
@@ -330,6 +332,7 @@
   <ItemGroup>
     <Content Include="Content\admin.css" />
     <Content Include="Scripts\custom\admin.js" />
+    <Content Include="Scripts\custom\createUser.js" />
     <Content Include="Scripts\custom\userProfile.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js">
@@ -447,7 +450,7 @@
     <Content Include="Views\Manage\ShowProfile.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailSent.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Admin\UsersList.cshtml" />
+    <Content Include="Views\Admin\CollectionPointsList.cshtml" />
     <Content Include="Views\Admin\CoordinatorsList.cshtml" />
     <Content Include="Views\Admin\AdministratorsList.cshtml" />
     <Content Include="Views\Admin\Modals\_Modal.cshtml" />
@@ -457,6 +460,8 @@
     <Content Include="Views\UserManagement\RemoveAsCoordinator.cshtml" />
     <Content Include="Views\UserManagement\AddAsAdmin.cshtml" />
     <Content Include="Views\UserManagement\RemoveAsAdmin.cshtml" />
+    <Content Include="Views\UserManagement\Create.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

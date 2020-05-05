@@ -120,7 +120,7 @@
   <data name="ChangePasswordViewModel_OldPassword" xml:space="preserve">
     <value>Aktualne hasło</value>
   </data>
-  <data name="Common_ConfirmNewPassword" xml:space="preserve">
+  <data name="ChangePasswordViewModel_ConfirmNewPassword" xml:space="preserve">
     <value>Potwierdź nowe hasło</value>
   </data>
   <data name="Common_ConfirmPassword" xml:space="preserve">
@@ -129,73 +129,64 @@
   <data name="Common_Email" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="Common_NewPassword" xml:space="preserve">
+  <data name="ChangePasswordViewModel_NewPassword" xml:space="preserve">
     <value>Nowe hasło</value>
   </data>
-  <data name="Common_Password" xml:space="preserve">
+  <data name="User_Password" xml:space="preserve">
     <value>Hasło</value>
   </data>
-  <data name="EditProfileViewModel_AdditionalComment" xml:space="preserve">
+  <data name="User_AdditionalComment" xml:space="preserve">
     <value>Dodatkowe informacje</value>
   </data>
-  <data name="EditProfileViewModel_City" xml:space="preserve">
+  <data name="Address_City" xml:space="preserve">
     <value>Miasto</value>
   </data>
-  <data name="EditProfileViewModel_CompanyName" xml:space="preserve">
+  <data name="User_CompanyName" xml:space="preserve">
     <value>Nazwa</value>
   </data>
-  <data name="EditProfileViewModel_ContactName" xml:space="preserve">
+  <data name="User_ContactName" xml:space="preserve">
     <value>Osoba kontaktowa</value>
   </data>
-  <data name="EditProfileViewModel_Coordinator" xml:space="preserve">
+  <data name="CollectionPoint_Coordinator" xml:space="preserve">
     <value>Koordynator</value>
   </data>
-  <data name="EditProfileViewModel_CoordinatorId_Placeholder" xml:space="preserve">
+  <data name="SelectList_Placeholder" xml:space="preserve">
     <value>- wybierz -</value>
   </data>
-  <data name="EditProfileViewModel_FlatNumber" xml:space="preserve">
+  <data name="Address_FlatNumber" xml:space="preserve">
     <value>Nr mieszkania</value>
   </data>
-  <data name="EditProfileViewModel_HasAdapterAvailable" xml:space="preserve">
-    <value>Adapter</value>
-  </data>
-  <data name="EditProfileViewModel_HasMaskAvailable" xml:space="preserve">
-    <value>Maska</value>
-  </data>
-  <data name="EditProfileViewModel_HasMaskCollectionPoint" xml:space="preserve">
-    <value>Punkt zbioru masek</value>
-  </data>
-  <data name="EditProfileViewModel_HouseNumber" xml:space="preserve">
+  <data name="Address_HouseNumber" xml:space="preserve">
     <value>Nr domu</value>
   </data>
-  <data name="EditProfileViewModel_Name" xml:space="preserve">
+  <data name="User_IndividualName" xml:space="preserve">
     <value>Imię i nazwisko</value>
   </data>
-  <data name="EditProfileViewModel_OtherCoordinator" xml:space="preserve">
+  <data name="CollectionPoint_OtherCoordinator" xml:space="preserve">
     <value>Inny koordynator...</value>
   </data>
-  <data name="EditProfileViewModel_OtherCoordinatorDetails" xml:space="preserve">
+  <data name="CollectionPoint_OtherCoordinatorDetails" xml:space="preserve">
     <value>Dane koordynatora (imię, nazwisko, dane kontaktowe)</value>
   </data>
-  <data name="EditProfileViewModel_PhoneNumber" xml:space="preserve">
+  <data name="User_PhoneNumber" xml:space="preserve">
     <value>Telefon</value>
   </data>
-  <data name="EditProfileViewModel_PostalCode" xml:space="preserve">
+  <data name="Address_PostalCode" xml:space="preserve">
     <value>Kod pocztowy</value>
   </data>
-  <data name="EditProfileViewModel_StreetName" xml:space="preserve">
+  <data name="Address_StreetName" xml:space="preserve">
     <value>Ulica</value>
   </data>
-  <data name="EditProfileViewModel_UserName" xml:space="preserve">
+  <data name="User_UserName" xml:space="preserve">
     <value>Imię i nazwisko</value>
   </data>
-  <data name="EditProfileViewModel_UserType" xml:space="preserve">
+  <data name="User_UserType" xml:space="preserve">
     <value>Typ użytkownika</value>
   </data>
-  <data name="EditProfileViewModel_UserType_Company" xml:space="preserve">
+  <data name="User_UserType_Company" xml:space="preserve">
     <value>Firma</value>
   </data>
-  <data name="EditProfileViewModel_UserType_IndividualPerson" xml:space="preserve">
+  <data name="User_UserType_IndividualPerson" xml:space="preserve">
     <value>Osoba fizyczna</value>
   </data>
   <data name="LoginViewModel_RememberMe" xml:space="preserve">
@@ -203,5 +194,11 @@
   </data>
   <data name="RegisterViewModel_AcceptTerms" xml:space="preserve">
     <value>Przeczytałem i akceptuję regulamin</value>
+  </data>
+  <data name="Coordinator_CoordinatedPeopleCount" xml:space="preserve">
+    <value>Koordynowanych</value>
+  </data>
+  <data name="Coordinator_CoordinatedRegion" xml:space="preserve">
+    <value>Koordynowany region</value>
   </data>
 </root>

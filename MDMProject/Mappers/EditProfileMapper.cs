@@ -85,7 +85,7 @@ namespace MDMProject.Mappers
             coordinatorsSelectList.Add(new SelectListItem
             {
                 Value = Constants.OTHER_COORDINATOR_ID.ToString(),
-                Text = PropertyNames.EditProfileViewModel_OtherCoordinator,
+                Text = PropertyNames.CollectionPoint_OtherCoordinator,
                 Selected = selectedId == Constants.OTHER_COORDINATOR_ID
             });
 
@@ -93,7 +93,7 @@ namespace MDMProject.Mappers
             var collection = coordinatorsList.Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
-                Text = x.CoordinatedRegion + " - " + x.FullUserName,
+                Text = $"{x.CoordinatedRegion} - {x.FullUserName}",
                 Selected = x.Id == selectedId
             }).OrderBy(x => x.Text);
 

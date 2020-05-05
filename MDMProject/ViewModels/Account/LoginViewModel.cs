@@ -11,7 +11,7 @@ namespace MDMProject.ViewModels
         [EmailAddress(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.EmailIsIncorrect))]
         public string Email { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Password))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_Password))]
         [DataType(DataType.Password)]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
         public string Password { get; set; }

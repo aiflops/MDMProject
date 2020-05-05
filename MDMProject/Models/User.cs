@@ -12,7 +12,7 @@ namespace MDMProject.Models
         // General details
         public UserTypeEnum UserType { get; set; }
 
-        public DateTime? CreatedDate { get; set; } // TODO: fill during registration
+        public DateTime? CreatedDate { get; set; }
 
         public DateTime? ProfileFinishedDate { get; set; }
 
@@ -29,7 +29,7 @@ namespace MDMProject.Models
         [StringLength(ValidationConstants.User.MAX_COMPANY_NAME_LENGTH)]
         public string CompanyName { get; set; }
 
-        // // TODO: NOT!!! Required if userType == Company
+        // TODO: NOT!!! Required if userType == Company
         [StringLength(ValidationConstants.User.MAX_CONTACT_NAME_LENGTH)]
         public string ContactPersonName { get; set; }
 
@@ -39,8 +39,6 @@ namespace MDMProject.Models
 
         public virtual Address Address { get; set; }
 
-        // Coordinator details (when user is Collection Point)
-        //[ForeignKey(nameof(Coordinator))]
         public int? CoordinatorId { get; set; }
 
         public virtual User Coordinator { get; set; }
@@ -61,6 +59,8 @@ namespace MDMProject.Models
         public virtual ICollection<ProtectiveEquipment> OfferedEquipment { get; set; }
 
         public virtual ICollection<OfferedHelp> OfferedHelp { get; set; }
+
+        public UserAccountState UserAccountState { get; set; }
 
         [NotMapped]
         public bool IsProfileFinished => ProfileFinishedDate != null;

@@ -1,4 +1,5 @@
 ﻿@using MDMProject.Models;
+@using MDMProject.Resources
 @using MDMProject.ViewModels;
 
 @model IEnumerable<UserListViewModel>
@@ -21,6 +22,14 @@
 
 @helper UsersTable()
 {
+    if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <strong>@ViewResources.UsersList__Success</strong>
+            <p>@TempData["Message"]</p>
+        </div>
+    }
+
     <div class="table-responsive">
         <table class="users-table table table-hover table-bordered table-sm">
             <thead>
@@ -165,7 +174,7 @@
                 {
                     <tr>
                         <td colspan="7" class="text-center">
-                            <strong>- BRAK -</strong>
+                            <strong>@ViewResources.UsersList__NoData</strong>
                         </td>
                     </tr>
                 }
@@ -174,7 +183,7 @@
     </div>
 }
 
-@helper DisplayAddress(MDMProject.ViewModels.UserListViewModel item)
+@helper DisplayAddress(UserListViewModel item)
 {
     var streetPart = $"{item.StreetName} {item.HouseNumber}";
     if (item.FlatNumber != null)

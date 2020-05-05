@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    <label>@PropertyNames.EditProfileViewModel_UserType</label>
+                                    <label>@PropertyNames.User_UserType</label>
                                 </div>
                             </div>
 
@@ -29,7 +29,7 @@
                                 <div class="radio">
                                     <label>
                                         @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Company)
-                                        @PropertyNames.EditProfileViewModel_UserType_Company
+                                        @PropertyNames.User_UserType_Company
                                     </label>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                 <div class="radio">
                                     <label>
                                         @Html.RadioButtonFor(x => x.UserType, UserTypeEnum.Individual)
-                                        @PropertyNames.EditProfileViewModel_UserType_IndividualPerson
+                                        @PropertyNames.User_UserType_IndividualPerson
                                     </label>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
 
                         <div class="input-group mt-1">
                             @Html.LabelFor(m => m.CoordinatorId)
-                            @Html.DropDownListFor(m => m.CoordinatorId, Model.CoordinatorsSelectList, PropertyNames.EditProfileViewModel_CoordinatorId_Placeholder, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.CoordinatorId, Model.CoordinatorsSelectList, PropertyNames.SelectList_Placeholder, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.CoordinatorId, "", new { @class = "text-danger " })
                         </div>
 

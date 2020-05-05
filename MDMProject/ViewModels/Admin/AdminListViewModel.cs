@@ -9,22 +9,22 @@ namespace MDMProject.ViewModels
         public int Id { get; set; }
 
         /* Basic info */
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_UserType))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_UserType))]
         public UserTypeEnum UserType { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_CompanyName))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_CompanyName))]
         public string CompanyName { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_ContactName))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_ContactName))]
         public string ContactPersonName { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_UserName))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_IndividualName))]
         public string IndividualName { get; set; }
 
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Email))]
         public string Email { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_PhoneNumber))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_PhoneNumber))]
         public string PhoneNumber { get; set; }
 
         public bool IsCollectionPoint { get; set; }

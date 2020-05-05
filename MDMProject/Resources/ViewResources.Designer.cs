@@ -61,6 +61,24 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zapisz.
+        /// </summary>
+        public static string Account_ChangePassword__Save {
+            get {
+                return ResourceManager.GetString("Account_ChangePassword__Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zmień hasło.
+        /// </summary>
+        public static string Account_ChangePassword__Title {
+            get {
+                return ResourceManager.GetString("Account_ChangePassword__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aktywuj konto, aby móc korzystać z serwisu..
         /// </summary>
         public static string Account_ConfirmationEmailSent__ActivateAccountToUseService {
@@ -286,6 +304,60 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aktywni.
+        /// </summary>
+        public static string AdminLayout__CollectionPoints_Active {
+            get {
+                return ResourceManager.GetString("AdminLayout__CollectionPoints_Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administratorzy.
+        /// </summary>
+        public static string AdminLayout__CollectionPoints_Admins {
+            get {
+                return ResourceManager.GetString("AdminLayout__CollectionPoints_Admins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Punkty zbiórki.
+        /// </summary>
+        public static string AdminLayout__CollectionPoints_All {
+            get {
+                return ResourceManager.GetString("AdminLayout__CollectionPoints_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordynatorzy.
+        /// </summary>
+        public static string AdminLayout__CollectionPoints_Coordinators {
+            get {
+                return ResourceManager.GetString("AdminLayout__CollectionPoints_Coordinators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieukończone profile.
+        /// </summary>
+        public static string AdminLayout__CollectionPoints_Unfinished {
+            get {
+                return ResourceManager.GetString("AdminLayout__CollectionPoints_Unfinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niezweryfikowani.
+        /// </summary>
+        public static string AdminLayout__CollectionPoints_Unverified {
+            get {
+                return ResourceManager.GetString("AdminLayout__CollectionPoints_Unverified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wróć do strony głównej.
         /// </summary>
         public static string Error__BackToHomePage {
@@ -430,6 +502,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zmień hasło.
+        /// </summary>
+        public static string LoginPartial__ChangePassword {
+            get {
+                return ResourceManager.GetString("LoginPartial__ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edytuj profil.
         /// </summary>
         public static string LoginPartial__EditProfile {
@@ -471,6 +552,15 @@ namespace MDMProject.Resources {
         public static string LoginPartial__Register {
             get {
                 return ResourceManager.GetString("LoginPartial__Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pokaż profil.
+        /// </summary>
+        public static string LoginPartial__ShowProfile {
+            get {
+                return ResourceManager.GetString("LoginPartial__ShowProfile", resourceCulture);
             }
         }
         
@@ -660,6 +750,24 @@ namespace MDMProject.Resources {
         public static string Map_Index__Title {
             get {
                 return ResourceManager.GetString("Map_Index__Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - BRAK -.
+        /// </summary>
+        public static string UsersList__NoData {
+            get {
+                return ResourceManager.GetString("UsersList__NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sukces!.
+        /// </summary>
+        public static string UsersList__Success {
+            get {
+                return ResourceManager.GetString("UsersList__Success", resourceCulture);
             }
         }
     }

@@ -90,7 +90,9 @@ namespace MDMProject.Controllers
             {
                 case SignInStatus.Success:
                     var user = await UserManager.FindByNameAsync(model.Email);
-                    if (!user.IsProfileFinished)
+                    if (user.UserAccountState == UserAccountState.UsingTempPassword)
+                        return RedirectToAction("ChangePassword", "Manage");
+                    else if (!user.IsProfileFinished)
                         return RedirectToAction("EditProfile", "Manage");
                     else
                         return RedirectToAction("Index", "Home");

@@ -61,6 +61,69 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Miasto.
+        /// </summary>
+        public static string Address_City {
+            get {
+                return ResourceManager.GetString("Address_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr mieszkania.
+        /// </summary>
+        public static string Address_FlatNumber {
+            get {
+                return ResourceManager.GetString("Address_FlatNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr domu.
+        /// </summary>
+        public static string Address_HouseNumber {
+            get {
+                return ResourceManager.GetString("Address_HouseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kod pocztowy.
+        /// </summary>
+        public static string Address_PostalCode {
+            get {
+                return ResourceManager.GetString("Address_PostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ulica.
+        /// </summary>
+        public static string Address_StreetName {
+            get {
+                return ResourceManager.GetString("Address_StreetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdź nowe hasło.
+        /// </summary>
+        public static string ChangePasswordViewModel_ConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("ChangePasswordViewModel_ConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nowe hasło.
+        /// </summary>
+        public static string ChangePasswordViewModel_NewPassword {
+            get {
+                return ResourceManager.GetString("ChangePasswordViewModel_NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aktualne hasło.
         /// </summary>
         public static string ChangePasswordViewModel_OldPassword {
@@ -70,11 +133,29 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Potwierdź nowe hasło.
+        ///   Looks up a localized string similar to Koordynator.
         /// </summary>
-        public static string Common_ConfirmNewPassword {
+        public static string CollectionPoint_Coordinator {
             get {
-                return ResourceManager.GetString("Common_ConfirmNewPassword", resourceCulture);
+                return ResourceManager.GetString("CollectionPoint_Coordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inny koordynator....
+        /// </summary>
+        public static string CollectionPoint_OtherCoordinator {
+            get {
+                return ResourceManager.GetString("CollectionPoint_OtherCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dane koordynatora (imię, nazwisko, dane kontaktowe).
+        /// </summary>
+        public static string CollectionPoint_OtherCoordinatorDetails {
+            get {
+                return ResourceManager.GetString("CollectionPoint_OtherCoordinatorDetails", resourceCulture);
             }
         }
         
@@ -97,209 +178,20 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nowe hasło.
+        ///   Looks up a localized string similar to Koordynowanych.
         /// </summary>
-        public static string Common_NewPassword {
+        public static string Coordinator_CoordinatedPeopleCount {
             get {
-                return ResourceManager.GetString("Common_NewPassword", resourceCulture);
+                return ResourceManager.GetString("Coordinator_CoordinatedPeopleCount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hasło.
+        ///   Looks up a localized string similar to Koordynowany region.
         /// </summary>
-        public static string Common_Password {
+        public static string Coordinator_CoordinatedRegion {
             get {
-                return ResourceManager.GetString("Common_Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dodatkowe informacje.
-        /// </summary>
-        public static string EditProfileViewModel_AdditionalComment {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_AdditionalComment", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Miasto.
-        /// </summary>
-        public static string EditProfileViewModel_City {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_City", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nazwa.
-        /// </summary>
-        public static string EditProfileViewModel_CompanyName {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_CompanyName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Osoba kontaktowa.
-        /// </summary>
-        public static string EditProfileViewModel_ContactName {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_ContactName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Koordynator.
-        /// </summary>
-        public static string EditProfileViewModel_Coordinator {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_Coordinator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to - wybierz -.
-        /// </summary>
-        public static string EditProfileViewModel_CoordinatorId_Placeholder {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_CoordinatorId_Placeholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nr mieszkania.
-        /// </summary>
-        public static string EditProfileViewModel_FlatNumber {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_FlatNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Adapter.
-        /// </summary>
-        public static string EditProfileViewModel_HasAdapterAvailable {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_HasAdapterAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maska.
-        /// </summary>
-        public static string EditProfileViewModel_HasMaskAvailable {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_HasMaskAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Punkt zbioru masek.
-        /// </summary>
-        public static string EditProfileViewModel_HasMaskCollectionPoint {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_HasMaskCollectionPoint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nr domu.
-        /// </summary>
-        public static string EditProfileViewModel_HouseNumber {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_HouseNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Imię i nazwisko.
-        /// </summary>
-        public static string EditProfileViewModel_Name {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Inny koordynator....
-        /// </summary>
-        public static string EditProfileViewModel_OtherCoordinator {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_OtherCoordinator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dane koordynatora (imię, nazwisko, dane kontaktowe).
-        /// </summary>
-        public static string EditProfileViewModel_OtherCoordinatorDetails {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_OtherCoordinatorDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Telefon.
-        /// </summary>
-        public static string EditProfileViewModel_PhoneNumber {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Kod pocztowy.
-        /// </summary>
-        public static string EditProfileViewModel_PostalCode {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_PostalCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ulica.
-        /// </summary>
-        public static string EditProfileViewModel_StreetName {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_StreetName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Imię i nazwisko.
-        /// </summary>
-        public static string EditProfileViewModel_UserName {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_UserName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Typ użytkownika.
-        /// </summary>
-        public static string EditProfileViewModel_UserType {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_UserType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Firma.
-        /// </summary>
-        public static string EditProfileViewModel_UserType_Company {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_UserType_Company", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Osoba fizyczna.
-        /// </summary>
-        public static string EditProfileViewModel_UserType_IndividualPerson {
-            get {
-                return ResourceManager.GetString("EditProfileViewModel_UserType_IndividualPerson", resourceCulture);
+                return ResourceManager.GetString("Coordinator_CoordinatedRegion", resourceCulture);
             }
         }
         
@@ -318,6 +210,105 @@ namespace MDMProject.Resources {
         public static string RegisterViewModel_AcceptTerms {
             get {
                 return ResourceManager.GetString("RegisterViewModel_AcceptTerms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - wybierz -.
+        /// </summary>
+        public static string SelectList_Placeholder {
+            get {
+                return ResourceManager.GetString("SelectList_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodatkowe informacje.
+        /// </summary>
+        public static string User_AdditionalComment {
+            get {
+                return ResourceManager.GetString("User_AdditionalComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa.
+        /// </summary>
+        public static string User_CompanyName {
+            get {
+                return ResourceManager.GetString("User_CompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Osoba kontaktowa.
+        /// </summary>
+        public static string User_ContactName {
+            get {
+                return ResourceManager.GetString("User_ContactName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imię i nazwisko.
+        /// </summary>
+        public static string User_IndividualName {
+            get {
+                return ResourceManager.GetString("User_IndividualName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hasło.
+        /// </summary>
+        public static string User_Password {
+            get {
+                return ResourceManager.GetString("User_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon.
+        /// </summary>
+        public static string User_PhoneNumber {
+            get {
+                return ResourceManager.GetString("User_PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imię i nazwisko.
+        /// </summary>
+        public static string User_UserName {
+            get {
+                return ResourceManager.GetString("User_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ użytkownika.
+        /// </summary>
+        public static string User_UserType {
+            get {
+                return ResourceManager.GetString("User_UserType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firma.
+        /// </summary>
+        public static string User_UserType_Company {
+            get {
+                return ResourceManager.GetString("User_UserType_Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Osoba fizyczna.
+        /// </summary>
+        public static string User_UserType_IndividualPerson {
+            get {
+                return ResourceManager.GetString("User_UserType_IndividualPerson", resourceCulture);
             }
         }
     }

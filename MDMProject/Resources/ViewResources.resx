@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account_ChangePassword__Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="Account_ChangePassword__Title" xml:space="preserve">
+    <value>Zmień hasło</value>
+  </data>
   <data name="Account_ConfirmationEmailSent__ActivateAccountToUseService" xml:space="preserve">
     <value>Aktywuj konto, aby móc korzystać z serwisu.</value>
   </data>
@@ -192,6 +198,24 @@
   <data name="Account_ResetPassword__Title" xml:space="preserve">
     <value>Reset hasła</value>
   </data>
+  <data name="AdminLayout__CollectionPoints_Active" xml:space="preserve">
+    <value>Aktywni</value>
+  </data>
+  <data name="AdminLayout__CollectionPoints_Admins" xml:space="preserve">
+    <value>Administratorzy</value>
+  </data>
+  <data name="AdminLayout__CollectionPoints_All" xml:space="preserve">
+    <value>Punkty zbiórki</value>
+  </data>
+  <data name="AdminLayout__CollectionPoints_Coordinators" xml:space="preserve">
+    <value>Koordynatorzy</value>
+  </data>
+  <data name="AdminLayout__CollectionPoints_Unfinished" xml:space="preserve">
+    <value>Nieukończone profile</value>
+  </data>
+  <data name="AdminLayout__CollectionPoints_Unverified" xml:space="preserve">
+    <value>Niezweryfikowani</value>
+  </data>
   <data name="Error__BackToHomePage" xml:space="preserve">
     <value>Wróć do strony głównej</value>
   </data>
@@ -240,6 +264,9 @@
   <data name="LoginPartial__AdminPanel" xml:space="preserve">
     <value>Panel administracyjny</value>
   </data>
+  <data name="LoginPartial__ChangePassword" xml:space="preserve">
+    <value>Zmień hasło</value>
+  </data>
   <data name="LoginPartial__EditProfile" xml:space="preserve">
     <value>Edytuj profil</value>
   </data>
@@ -254,6 +281,9 @@
   </data>
   <data name="LoginPartial__Register" xml:space="preserve">
     <value>Zarejestruj</value>
+  </data>
+  <data name="LoginPartial__ShowProfile" xml:space="preserve">
+    <value>Pokaż profil</value>
   </data>
   <data name="Manage_EditProfile__AvailableProducts" xml:space="preserve">
     <value>Dostarczane produkty</value>
@@ -317,5 +347,11 @@
   </data>
   <data name="Map_Index__Title" xml:space="preserve">
     <value>Mapa</value>
+  </data>
+  <data name="UsersList__NoData" xml:space="preserve">
+    <value>- BRAK -</value>
+  </data>
+  <data name="UsersList__Success" xml:space="preserve">
+    <value>Sukces!</value>
   </data>
 </root>

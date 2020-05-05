@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using MDMProject.Helpers;
 using Constants = MDMProject.Models.Constants;
 
 namespace MDMProject.Controllers
@@ -16,6 +17,105 @@ namespace MDMProject.Controllers
     [Authorize(Roles = Constants.ADMIN_ROLE_NAME + "," + Constants.COORDINATOR_ROLE_NAME)]
     public class UserManagementController : AdminControllerBase
     {
+        [HttpGet]
+        public ActionResult CreateAdmin()
+        {
+            var userViewModel = new CreateUserViewModel
+            {
+                IsAdmin = true,
+                IsCoordinator = false
+            };
+
+            return View("Create", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveCreateAdmin(CreateUserViewModel model)
+        {
+            var actionResult = await CreateUser(model, Constants.ADMIN_ROLE_NAME);
+
+            return actionResult ?? View("Create", model);
+        }
+
+        private async Task<ActionResult> CreateUser(CreateUserViewModel model, string roleName)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Email, Email = model.Email };
+                var tempPassword = GenerateTempPassword(3, 3, 3);
+                var result = await UserManager.CreateAsync(user, tempPassword);
+
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, roleName);
+
+                    using (var db = new ApplicationDbContext())
+                    {
+                        var userToUpdate = db.Users.Find(user.Id);
+
+                        /* UPDATE BASIC INFO */
+                        userToUpdate.UserType = model.UserType;
+                        userToUpdate.PhoneNumber = GetString(model.PhoneNumber);
+                        userToUpdate.AdditionalComment = GetString(model.AdditionalComment);
+
+                        userToUpdate.IndividualName = model.UserType == UserTypeEnum.Individual ? GetString(model.IndividualName) : null;
+                        userToUpdate.CompanyName = model.UserType == UserTypeEnum.Company ? GetString(model.CompanyName) : null;
+                        userToUpdate.ContactPersonName = model.UserType == UserTypeEnum.Company ? GetString(model.ContactPersonName) : null;
+
+                        userToUpdate.CreatedDate = DateTime.Now;
+                        userToUpdate.ProfileFinishedDate = DateTime.Now;
+                        userToUpdate.UserAccountState = UserAccountState.UsingTempPassword;
+
+                        userToUpdate.CoordinatedRegion = model.CoordinatedRegion;
+
+                        userToUpdate.ApprovedBy = db.Users.Find(User.Identity.GetUserId<int>());
+                        userToUpdate.ApprovedDate = DateTime.Now;
+
+                        await db.SaveChangesAsync();
+                    }
+
+                    await SendEmail(model.Email, "Konto utworzone przez administratora",
+                        "Twoje konto w serwisie " + GetSiteUrl() + " zostało utworzone przez administratora!<br>" +
+                        "Po zalogowaniu się zostaniesz poproszony o zmianę hasła.<br>" +
+                        "Twoje tymczasowe hasło: <strong>" + tempPassword + "</strong><br><br>" +
+                        $"Przejdź do strony logowania: <a href=\"{Url.AbsoluteAction("Login", "Account")}\">ZALOGUJ SIĘ</a>"
+                        );
+
+                    TempData["Message"] = $"Konto użytkownika dla {model.Email} zostało utworzone.";
+                    if (model.IsCoordinator)
+                    {
+                        return RedirectToAction("CoordinatorsList", "Admin");
+                    }
+                    return RedirectToAction("AdministratorsList", "Admin");
+                }
+                AddErrors(result);
+            }
+
+            return null;
+        }
+
+        [HttpGet]
+        public ActionResult CreateCoordinator()
+        {
+            var userViewModel = new CreateUserViewModel
+            {
+                IsAdmin = false,
+                IsCoordinator = true
+            };
+
+            return View("Create", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveCreateCoordinator(CreateUserViewModel model)
+        {
+            var actionResult = await CreateUser(model, Constants.COORDINATOR_ROLE_NAME);
+
+            return actionResult ?? View("Create", model);
+        }
+
         [HttpGet]
         public ActionResult Details(int id)
         {
@@ -225,7 +325,7 @@ namespace MDMProject.Controllers
 
         private User GetUserById(int id, ApplicationDbContext db)
         {
-            return db.Users.Where(x => x.Id == id).FirstOrDefault();
+            return db.Users.FirstOrDefault(x => x.Id == id);
         }
 
         private async Task SendEmail(string email, string title, string message)
@@ -241,8 +341,52 @@ namespace MDMProject.Controllers
 
         private string GetSiteUrl()
         {
-            string baseUrl = Request.Url.Authority + Request.ApplicationPath.TrimEnd('/');
+            string baseUrl = Url.AbsoluteAction("Index", "Home");
             return baseUrl;
+        }
+
+        private string GenerateTempPassword(int lowercase, int uppercase, int numerics)
+        {
+            string lowers = "abcdefghijklmnopqrstuvwxyz";
+            string uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string number = "0123456789";
+
+            Random random = new Random();
+
+            string generated = "!";
+            for (int i = 1; i <= lowercase; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    lowers[random.Next(lowers.Length - 1)].ToString()
+                );
+
+            for (int i = 1; i <= uppercase; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    uppers[random.Next(uppers.Length - 1)].ToString()
+                );
+
+            for (int i = 1; i <= numerics; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    number[random.Next(number.Length - 1)].ToString()
+                );
+
+            return generated.Replace("!", string.Empty);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
+        private static string GetString(string value)
+        {
+            var result = value?.Trim();
+            return result;
         }
     }
 }

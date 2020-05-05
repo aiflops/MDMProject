@@ -30,7 +30,7 @@ namespace MDMProject.Controllers
 
                 ViewBag.ListTitle = "Użytkownicy";
 
-                return View("UsersList", viewModelsList);
+                return View("CollectionPointsList", viewModelsList);
             }    
         }
 
@@ -55,7 +55,7 @@ namespace MDMProject.Controllers
 
                 ViewBag.ListTitle = "Zweryfikowani użytkownicy";
 
-                return View("UsersList", viewModelsList);
+                return View("CollectionPointsList", viewModelsList);
             }
         }
 
@@ -80,7 +80,7 @@ namespace MDMProject.Controllers
 
                 ViewBag.ListTitle = "Nieukończone profile";
 
-                return View("UsersList", viewModelsList);
+                return View("CollectionPointsList", viewModelsList);
             }
         }
 
@@ -105,7 +105,7 @@ namespace MDMProject.Controllers
 
                 ViewBag.ListTitle = "Niezweryfikowani użytkownicy";
 
-                return View("UsersList", viewModelsList);
+                return View("CollectionPointsList", viewModelsList);
             }
         }
 

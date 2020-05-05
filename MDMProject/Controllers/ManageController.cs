@@ -156,8 +156,18 @@ namespace MDMProject.Controllers
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    if (user.UserAccountState == UserAccountState.UsingTempPassword)
+                    {
+                        using (var db = new ApplicationDbContext())
+                        {
+                            var userToChange = db.Users.Find(user.Id);
+                            userToChange.UserAccountState = UserAccountState.Normal;
+                            await db.SaveChangesAsync();
+                        }
+                    }
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", "Home");
             }
 
             AddErrors(result);

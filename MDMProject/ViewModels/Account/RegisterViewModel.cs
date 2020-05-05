@@ -14,7 +14,7 @@ namespace MDMProject.ViewModels
         [MaxLength(ValidationConstants.User.MAX_EMAIL_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MaxFieldLength))]
         public string Email { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Password))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_Password))]
         [DataType(DataType.Password)]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.FieldIsRequired))]
         [MinLength(ValidationConstants.User.MIN_PASSWORD_LENGTH, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.MinFieldLength))]

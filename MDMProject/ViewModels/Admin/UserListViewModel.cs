@@ -10,57 +10,60 @@ namespace MDMProject.ViewModels
         public int Id { get; set; }
 
         /* Basic info */
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_UserType))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_UserType))]
         public UserTypeEnum UserType { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_CompanyName))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_CompanyName))]
         public string CompanyName { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_ContactName))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_ContactName))]
         public string ContactPersonName { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_UserName))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_IndividualName))]
         public string IndividualName { get; set; }
 
         [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Common_Email))]
         public string Email { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_PhoneNumber))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_PhoneNumber))]
         public string PhoneNumber { get; set; }
 
         public int? CoordinatorId { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_Coordinator))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.CollectionPoint_Coordinator))]
         public string CoordinatorName { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_OtherCoordinatorDetails))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.CollectionPoint_OtherCoordinatorDetails))]
         public string OtherCoordinatorDetails { get; set; }
 
         /* Address */
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_City))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Address_City))]
         public string City { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_StreetName))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Address_StreetName))]
         public string StreetName { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_HouseNumber))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Address_HouseNumber))]
         public string HouseNumber { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_FlatNumber))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Address_FlatNumber))]
         public string FlatNumber { get; set; }
 
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_PostalCode))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.Address_PostalCode))]
         public string PostalCode { get; set; }
 
         /* Additional info */
-        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.EditProfileViewModel_AdditionalComment))]
+        [Display(ResourceType = typeof(PropertyNames), Name = nameof(PropertyNames.User_AdditionalComment))]
         public string AdditionalComment { get; set; }
 
         public DateTime? ProfileFinishedDate { get; set; }
                 
         public string ApprovedBy { get; set; }
+
         public DateTime? ApprovedDate { get; set; }
-        public bool IsCoordinator { get; internal set; }
-        public bool IsAdmin { get; internal set; }
+
+        public bool IsCoordinator { get; set; }
+
+        public bool IsAdmin { get; set; }
     }
 }

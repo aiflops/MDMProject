@@ -24,10 +24,10 @@
 
                     <div class="input-group  mt-1">
                         @Html.LabelFor(m => m.UserType)
-                        <p>@(Model.UserType == MDMProject.Models.UserTypeEnum.Company ? PropertyNames.EditProfileViewModel_UserType_Company : PropertyNames.EditProfileViewModel_UserType_IndividualPerson)</p>
+                        <p>@(Model.UserType == UserTypeEnum.Company ? PropertyNames.User_UserType_Company : PropertyNames.User_UserType_IndividualPerson)</p>
                     </div>
 
-                    @if (Model.UserType == MDMProject.Models.UserTypeEnum.Company)
+                    @if (Model.UserType == UserTypeEnum.Company)
                     {
                         <div class="row">
                             <div class="col-md-6">

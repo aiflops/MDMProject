@@ -10,13 +10,13 @@
         }
     });
 
-$("[name='CoordinatorId']").change(function () {
-    var otherCoordinatorId = $('[data-other-coordinator-id]').attr('data-other-coordinator-id');
-    if (this.value == otherCoordinatorId) {
-        $('.other-coordinator-details').fadeIn(500);
-    }
-    else {
-        $('.other-coordinator-details').fadeOut(500);
-    }
-});
+    $("[name='CoordinatorId']").change(function () {
+        var otherCoordinatorId = $('[data-other-coordinator-id]').attr('data-other-coordinator-id');
+        if (this.value == otherCoordinatorId) {
+            $('.other-coordinator-details').fadeIn(500);
+        }
+        else {
+            $('.other-coordinator-details').fadeOut(500);
+        }
+    });
 });

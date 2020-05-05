@@ -29,17 +29,17 @@
                            Url.Action("UnverifiedCollectionPointsList","Admin"),
                            Url.Action("UnfinishedCollectionPointsList","Admin")
                            )">
-                    <a href="@Url.Action("Index","Admin")" class="@DisplayActiveClass(Url.Action("Index","Admin"))">Użytkownicy</a>
+                    <a href="@Url.Action("Index","Admin")" class="@DisplayActiveClass(Url.Action("Index","Admin"))">@ViewResources.AdminLayout__CollectionPoints_All</a>
                     <ul>
-                        <li><a href="@Url.Action("ActiveCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("ActiveCollectionPointsList","Admin"))">Aktywni <span class="badge badge-light">@ViewBag.ActiveUsersCount</span></a></li>
-                        <li><a href="@Url.Action("UnverifiedCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("UnverifiedCollectionPointsList","Admin"))">Niezweryfikowani<span class="badge badge-warning">@ViewBag.UnverifiedUsersCount</span></a></li>
-                        <li><a href="@Url.Action("UnfinishedCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("UnfinishedCollectionPointsList","Admin"))">Nieukończone profile<span class="badge badge-warning">@ViewBag.UnfinishedUsersCount</span></a></li>
+                        <li><a href="@Url.Action("ActiveCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("ActiveCollectionPointsList","Admin"))">@ViewResources.AdminLayout__CollectionPoints_Active<span class="badge badge-light">@ViewBag.ActiveUsersCount</span></a></li>
+                        <li><a href="@Url.Action("UnverifiedCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("UnverifiedCollectionPointsList","Admin"))">@ViewResources.AdminLayout__CollectionPoints_Unverified<span class="badge badge-warning">@ViewBag.UnverifiedUsersCount</span></a></li>
+                        <li><a href="@Url.Action("UnfinishedCollectionPointsList","Admin")" class="@DisplayActiveClass(Url.Action("UnfinishedCollectionPointsList","Admin"))">@ViewResources.AdminLayout__CollectionPoints_Unfinished<span class="badge badge-warning">@ViewBag.UnfinishedUsersCount</span></a></li>
                     </ul>
                 </li>
-                <li class="@DisplayActiveClass(Url.Action("CoordinatorsList","Admin"))"><a href="@Url.Action("CoordinatorsList","Admin")" class="@DisplayActiveClass(Url.Action("CoordinatorsList","Admin"))">Koordynatorzy</a></li>
+                <li class="@DisplayActiveClass(Url.Action("CoordinatorsList","Admin"))"><a href="@Url.Action("CoordinatorsList","Admin")" class="@DisplayActiveClass(Url.Action("CoordinatorsList","Admin"))">@ViewResources.AdminLayout__CollectionPoints_Coordinators</a></li>
                 @if (User.IsInRole(MDMProject.Models.Constants.ADMIN_ROLE_NAME))
                 {
-                    <li class="@DisplayActiveClass(Url.Action("AdministratorsList","Admin"))"><a href="@Url.Action("AdministratorsList","Admin")" class="@DisplayActiveClass(Url.Action("AdministratorsList","Admin"))">Administratorzy</a></li>
+                    <li class="@DisplayActiveClass(Url.Action("AdministratorsList","Admin"))"><a href="@Url.Action("AdministratorsList","Admin")" class="@DisplayActiveClass(Url.Action("AdministratorsList","Admin"))">@ViewResources.AdminLayout__CollectionPoints_Admins</a></li>
                 }
             </ul>
         </nav>

@@ -8,14 +8,19 @@ body {
     margin: 0;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
-    font-size: 13px;
+    font-size: 16px;
     font-family: open sans,sans-serif;
+}
+
+table {
+    font-size: 13px;
 }
 
 .main-grid {
     display: grid;
     grid-template-columns: 230px 1fr;
     grid-template-rows: 50px 1fr;
+    /* ReSharper disable once CssNotResolved */
     gap: 0px 0px;
     grid-template-areas: ". ." ". .";
 }
@@ -223,4 +228,12 @@ body > main {
 .admins-table th:last-child,
 .admins-table td:last-child {
     max-width: 200px;
+}
+
+.add-user-btn {
+    margin-bottom: 0.8rem;
+}
+
+.radio label {
+    cursor: pointer;
 }
