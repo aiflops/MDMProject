@@ -6,7 +6,7 @@ namespace MDMProject.Controllers
     {
         // GET: Map
         [HttpGet]
-        public ActionResult MapIndex()
+        public ActionResult Index()
         {
             return View();
         }

@@ -444,7 +444,7 @@
     <Content Include="Views\Manage\EditProfile.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Map\MapIndex.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js">
       <DependentUpon>jquery.validate.js</DependentUpon>
     </None>
