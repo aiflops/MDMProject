@@ -46,7 +46,7 @@ namespace MDMProject.Models
         [StringLength(ValidationConstants.User.MAX_COORDINATOR_DETAILS_LENGTH)]
         public string OtherCoordinatorDetails { get; set; }
 
-        public virtual User ApprovedBy { get; set; } // Person who approved the account
+        public string ApprovedBy { get; set; } // Person who approved the account
 
         public DateTime? ApprovedDate { get; set; }
 

@@ -463,6 +463,7 @@
     <Content Include="Views\UserManagement\RemoveAsAdmin.cshtml" />
     <Content Include="Views\UserManagement\Create.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\UserManagement\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

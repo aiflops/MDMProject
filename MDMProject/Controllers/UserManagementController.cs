@@ -38,62 +38,6 @@ namespace MDMProject.Controllers
             return actionResult ?? View("Create", model);
         }
 
-        private async Task<ActionResult> CreateUser(CreateUserViewModel model, string roleName)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new User { UserName = model.Email, Email = model.Email };
-                var tempPassword = GenerateTempPassword(3, 3, 3);
-                var result = await UserManager.CreateAsync(user, tempPassword);
-
-                if (result.Succeeded)
-                {
-                    await UserManager.AddToRoleAsync(user.Id, roleName);
-
-                    using (var db = new ApplicationDbContext())
-                    {
-                        var userToUpdate = db.Users.Find(user.Id);
-
-                        /* UPDATE BASIC INFO */
-                        userToUpdate.UserType = model.UserType;
-                        userToUpdate.PhoneNumber = GetString(model.PhoneNumber);
-                        userToUpdate.AdditionalComment = GetString(model.AdditionalComment);
-
-                        userToUpdate.IndividualName = model.UserType == UserTypeEnum.Individual ? GetString(model.IndividualName) : null;
-                        userToUpdate.CompanyName = model.UserType == UserTypeEnum.Company ? GetString(model.CompanyName) : null;
-                        userToUpdate.ContactPersonName = model.UserType == UserTypeEnum.Company ? GetString(model.ContactPersonName) : null;
-
-                        userToUpdate.CreatedDate = DateTime.Now;
-                        userToUpdate.ProfileFinishedDate = DateTime.Now;
-                        userToUpdate.UserAccountState = UserAccountState.UsingTempPassword;
-
-                        userToUpdate.CoordinatedRegion = model.CoordinatedRegion;
-
-                        userToUpdate.ApprovedBy = db.Users.Find(User.Identity.GetUserId<int>());
-                        userToUpdate.ApprovedDate = DateTime.Now;
-
-                        await db.SaveChangesAsync();
-                    }
-
-                    await SendEmail(
-                        model.Email,
-                        ViewResources.UserManagement_CreateUser__UserCreatedEmail_Title,
-                        string.Format(ViewResources.UserManagement_CreateUser__UserCreatedEmail_Body, GetSiteUrl(), tempPassword, Url.AbsoluteAction("Login", "Account"))
-                        );
-
-                    TempData["Message"] = ViewResources.UserManagement_CreateUser__UserCreatedSuccessMessage;
-                    if (model.IsCoordinator)
-                    {
-                        return RedirectToAction("CoordinatorsList", "Admin");
-                    }
-                    return RedirectToAction("AdministratorsList", "Admin");
-                }
-                AddErrors(result);
-            }
-
-            return null;
-        }
-
         [HttpGet]
         public ActionResult CreateCoordinator()
         {
@@ -114,6 +58,41 @@ namespace MDMProject.Controllers
 
             return actionResult ?? View("Create", model);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> EditAdmin(int id)
+        {
+            var userViewModel = await GetEditAdminViewModel(id);
+
+            return View("Edit", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveEditAdmin(CreateUserViewModel model)
+        {
+            var actionResult = await EditUser(model);
+
+            return actionResult ?? View("Edit", model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditCoordinator(int id)
+        {
+            var userViewModel = await GetEditCoordinatorViewModel(id);
+
+            return View("Edit", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveEditCoordinator(CreateUserViewModel model)
+        {
+            var actionResult = await EditUser(model);
+
+            return actionResult ?? View("Edit", model);
+        }
+
 
         [HttpGet]
         public ActionResult Details(int id)
@@ -162,7 +141,7 @@ namespace MDMProject.Controllers
                 var user = GetUserById(id, db);
                 var approvingUser = GetUserById(CurrentUser.Id, db);
 
-                user.ApprovedBy = approvingUser;
+                user.ApprovedBy = $"{approvingUser.FullUserName}({approvingUser.Email})";
                 user.ApprovedDate = DateTime.Now;
 
                 db.SaveChanges();
@@ -305,13 +284,129 @@ namespace MDMProject.Controllers
             }
         }
 
+        private async Task<ActionResult> CreateUser(CreateUserViewModel model, string roleName)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = GetString(model.Email), Email = GetString(model.Email) };
+                var tempPassword = GenerateTempPassword(3, 3, 3);
+                var result = await UserManager.CreateAsync(user, tempPassword);
+
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, roleName);
+
+                    using (var db = new ApplicationDbContext())
+                    {
+                        var userToUpdate = db.Users.Find(user.Id);
+                        var approvingUser = db.Users.Find(User.Identity.GetUserId<int>());
+
+                        /* UPDATE BASIC INFO */
+                        userToUpdate.UserType = model.UserType;
+                        userToUpdate.PhoneNumber = GetString(model.PhoneNumber);
+                        userToUpdate.AdditionalComment = GetString(model.AdditionalComment);
+
+                        userToUpdate.IndividualName = model.UserType == UserTypeEnum.Individual ? GetString(model.IndividualName) : null;
+                        userToUpdate.CompanyName = model.UserType == UserTypeEnum.Company ? GetString(model.CompanyName) : null;
+                        userToUpdate.ContactPersonName = model.UserType == UserTypeEnum.Company ? GetString(model.ContactPersonName) : null;
+
+                        userToUpdate.CreatedDate = DateTime.Now;
+                        userToUpdate.ProfileFinishedDate = DateTime.Now;
+                        userToUpdate.UserAccountState = UserAccountState.UsingTempPassword;
+
+                        userToUpdate.CoordinatedRegion = model.CoordinatedRegion;
+
+                        userToUpdate.ApprovedBy = $"{approvingUser.FullUserName}({approvingUser.Email})";
+                        userToUpdate.ApprovedDate = DateTime.Now;
+
+                        await db.SaveChangesAsync();
+                    }
+
+                    await SendEmail(
+                        model.Email,
+                        ViewResources.UserManagement_CreateUser__UserCreatedEmail_Title,
+                        string.Format(ViewResources.UserManagement_CreateUser__UserCreatedEmail_Body, GetSiteUrl(), tempPassword, Url.AbsoluteAction("Login", "Account"))
+                        );
+
+                    TempData["Message"] = string.Format(ViewResources.UserManagement_CreateUser__UserCreatedSuccessMessage, user.Email);
+                    if (model.IsCoordinator)
+                    {
+                        return RedirectToAction("CoordinatorsList", "Admin");
+                    }
+                    return RedirectToAction("AdministratorsList", "Admin");
+                }
+                AddErrors(result);
+            }
+
+            return null;
+        }
+
+        private async Task<ActionResult> EditUser(CreateUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    var userToUpdate = db.Users.Find(model.Id);
+
+                    /* UPDATE BASIC INFO */
+                    userToUpdate.UserType = model.UserType;
+                    userToUpdate.Email = GetString(model.Email);
+                    userToUpdate.PhoneNumber = GetString(model.PhoneNumber);
+                    userToUpdate.AdditionalComment = GetString(model.AdditionalComment);
+
+                    userToUpdate.IndividualName = model.UserType == UserTypeEnum.Individual ? GetString(model.IndividualName) : null;
+                    userToUpdate.CompanyName = model.UserType == UserTypeEnum.Company ? GetString(model.CompanyName) : null;
+                    userToUpdate.ContactPersonName = model.UserType == UserTypeEnum.Company ? GetString(model.ContactPersonName) : null;
+
+                    if (model.IsCoordinator)
+                    {
+                        userToUpdate.CoordinatedRegion = model.CoordinatedRegion;
+                    }
+
+                    await db.SaveChangesAsync();
+                }
+
+                TempData["Message"] = string.Format(ViewResources.UserManagement_EditUser__UserEditedSuccessMessage, GetString(model.Email));
+                if (model.IsCoordinator)
+                {
+                    return RedirectToAction("CoordinatorsList", "Admin");
+                }
+                return RedirectToAction("AdministratorsList", "Admin");
+            }
+
+            return null;
+        }
+
+
+        private async Task<CreateUserViewModel> GetEditAdminViewModel(int id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+                var userViewModel = user.ToEditAdminViewModel();
+                return userViewModel;
+            }
+        }
+
+        private async Task<CreateUserViewModel> GetEditCoordinatorViewModel(int id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+                var userViewModel = user.ToEditCoordinatorViewModel();
+                return userViewModel;
+            }
+        }
+
         private UserDetailsViewModel GetUserDetailsViewModelById(int id)
         {
             using (var db = new ApplicationDbContext())
             {
                 var user = db.Users.Where(x => x.Id == id)
                                 .Include(x => x.Address)
-                                .Include(x => x.ApprovedBy)
                                 .Include(x => x.Coordinator).FirstOrDefault();
 
                 var allCollectionPointIds = db.GetAllCollectionPoints().Select(x => x.Id).ToHashSet();

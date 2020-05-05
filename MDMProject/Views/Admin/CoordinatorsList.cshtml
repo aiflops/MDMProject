@@ -90,10 +90,10 @@
                                 </a>
                                 @if (User.IsInRole(Constants.ADMIN_ROLE_NAME))
                                 {
-                                    @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
-                                           class="btn btn-sm btn-outline-primary">
-                                            @ViewResources.Common__Edit
-                                        </a>*@
+                                    <a href="@Url.Action("EditCoordinator", "UserManagement", new { id = item.Id })"
+                                       class="btn btn-sm btn-outline-primary">
+                                        @ViewResources.Common__Edit
+                                    </a>
                                     <a href="#"
                                        class="btn btn-sm btn-outline-danger"
                                        data-toggle="modal"

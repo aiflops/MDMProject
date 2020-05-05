@@ -57,7 +57,7 @@ namespace MDMProject.Data
                     .ToList();
                 var userToUpdate = usersToUpdate.First();
 
-                userToUpdate.ApprovedBy = user.ApprovedBy != null ? addedUsers.First(x => x.Email == user.ApprovedBy.Email) : null;
+                userToUpdate.ApprovedBy = user.ApprovedBy;
                 userToUpdate.ApprovedDate = user.ApprovedDate;
                 userToUpdate.Coordinator = user.Coordinator != null ? addedUsers.First(x => x.Email == user.Coordinator.Email) : null;
                 userToUpdate.OtherCoordinatorDetails = user.OtherCoordinatorDetails;
@@ -176,7 +176,7 @@ namespace MDMProject.Data
                 IndividualName = "Krzysztof Kowalkiewicz",
                 Email = "krzysztof@kowalkiewicz.pl",
                 PhoneNumber = "+48 77 12 50 321",
-                ApprovedBy = koordynatorOpole,
+                ApprovedBy = GetApprovingUserInfo(koordynatorOpole),
                 ApprovedDate = DateTime.Now,
                 Coordinator = koordynatorOpole,
                 OtherCoordinatorDetails = null,
@@ -199,7 +199,7 @@ namespace MDMProject.Data
                 IndividualName = "Sebastian Smykała",
                 Email = "sebastian@onet.pl",
                 PhoneNumber = "77 99 99 999",
-                ApprovedBy = koordynatorOpole,
+                ApprovedBy = GetApprovingUserInfo(koordynatorOpole),
                 ApprovedDate = DateTime.Now,
                 Coordinator = koordynatorOpole,
                 OtherCoordinatorDetails = null,
@@ -222,7 +222,7 @@ namespace MDMProject.Data
                 IndividualName = "Donata Dubielewicz",
                 Email = "donata@dubielewicz.pl",
                 PhoneNumber = "+48-77-99-99-999",
-                ApprovedBy = adminUser,
+                ApprovedBy = GetApprovingUserInfo(adminUser),
                 ApprovedDate = DateTime.Now,
                 Coordinator = koordynatorOpole,
                 OtherCoordinatorDetails = null,
@@ -290,7 +290,7 @@ namespace MDMProject.Data
                 IndividualName = "Example Mask",
                 Email = "example@email1.com",
                 PhoneNumber = "900 789 789",
-                ApprovedBy = adminUser,
+                ApprovedBy = GetApprovingUserInfo(adminUser),
                 ApprovedDate = DateTime.Now,
                 Coordinator = koordynatorWroclaw,
                 OtherCoordinatorDetails = null,
@@ -338,7 +338,7 @@ namespace MDMProject.Data
                 IndividualName = "Jakub Jeromy",
                 Email = "example@email3.com",
                 PhoneNumber = "900 789 789",
-                ApprovedBy = koordynatorWarszawa,
+                ApprovedBy = GetApprovingUserInfo(koordynatorWarszawa),
                 ApprovedDate = DateTime.Now,
                 Coordinator = koordynatorWarszawa,
                 OtherCoordinatorDetails = null,
@@ -402,6 +402,11 @@ namespace MDMProject.Data
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
             return data;
+        }
+
+        private static string GetApprovingUserInfo(User approvingUser)
+        {
+            return $"{approvingUser.FullUserName}({approvingUser.Email})";
         }
     }
 

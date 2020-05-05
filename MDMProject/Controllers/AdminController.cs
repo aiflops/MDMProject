@@ -17,7 +17,6 @@ namespace MDMProject.Controllers
             {
                 var allCollectionPointUsers = db.GetAllCollectionPoints()
                     .Include(x => x.Address)
-                    .Include(x => x.ApprovedBy)
                     .Include(x => x.Coordinator)
                     .OrderBy(x => x.UserType)
                     .ThenBy(x => x.CompanyName)
@@ -42,7 +41,6 @@ namespace MDMProject.Controllers
                 var allCollectionPointUsers = db.GetAllCollectionPoints()
                     .Where(x => x.ProfileFinishedDate != null && x.ApprovedBy != null)
                     .Include(x => x.Address)
-                    .Include(x => x.ApprovedBy)
                     .Include(x => x.Coordinator)
                     .OrderBy(x => x.UserType)
                     .ThenBy(x => x.CompanyName)
@@ -67,7 +65,6 @@ namespace MDMProject.Controllers
                 var allCollectionPointUsers = db.GetAllCollectionPoints()
                     .Where(x => x.ProfileFinishedDate == null)
                     .Include(x => x.Address)
-                    .Include(x => x.ApprovedBy)
                     .Include(x => x.Coordinator)
                     .OrderBy(x => x.UserType)
                     .ThenBy(x => x.CompanyName)
@@ -92,7 +89,6 @@ namespace MDMProject.Controllers
                 var allCollectionPointUsers = db.GetAllCollectionPoints()
                     .Where(x =>  x.ProfileFinishedDate != null && x.ApprovedBy == null)
                     .Include(x => x.Address)
-                    .Include(x => x.ApprovedBy)
                     .Include(x => x.Coordinator)
                     .OrderBy(x => x.UserType)
                     .ThenBy(x => x.CompanyName)
@@ -116,7 +112,6 @@ namespace MDMProject.Controllers
             {
                 var allCollectionPointUsers = db.GetAllCoordinators()
                     .Include(x => x.Address)
-                    .Include(x => x.ApprovedBy)
                     .Include(x => x.Coordinator)
                     .OrderBy(x => x.UserType)
                     .ThenBy(x => x.CompanyName)
@@ -145,7 +140,6 @@ namespace MDMProject.Controllers
             {
                 var allCollectionPointUsers = db.GetAllAdministrators()
                     .Include(x => x.Address)
-                    .Include(x => x.ApprovedBy)
                     .Include(x => x.Coordinator)
                     .OrderBy(x => x.UserType)
                     .ThenBy(x => x.CompanyName)

@@ -279,6 +279,12 @@
   <data name="Admin_UsersList__DeleteUser" xml:space="preserve">
     <value>Usuń użytkownika</value>
   </data>
+  <data name="Admin_UsersList__EditAdmin" xml:space="preserve">
+    <value>Edytuj administratora</value>
+  </data>
+  <data name="Admin_UsersList__EditCoordinator" xml:space="preserve">
+    <value>Edytuj koordynatora</value>
+  </data>
   <data name="Admin_UsersList__NoData" xml:space="preserve">
     <value>- BRAK -</value>
   </data>
@@ -503,6 +509,9 @@
   </data>
   <data name="UserManagement_Details__UserRoles" xml:space="preserve">
     <value>Role użytkownika</value>
+  </data>
+  <data name="UserManagement_EditUser__UserEditedSuccessMessage" xml:space="preserve">
+    <value>Konto użytkownika dla {0} zostało zmodyfikowane.</value>
   </data>
   <data name="UserManagement_RemoveAsAdmin__Title" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć tego użytkownika z Administratorów?</value>

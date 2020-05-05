@@ -37,7 +37,7 @@ namespace MDMProject.Mappers
             viewModel.PostalCode = user.Address?.PostalCode;
 
             viewModel.ProfileFinishedDate = user.ProfileFinishedDate;
-            viewModel.ApprovedBy = user.ApprovedBy?.FullUserName;
+            viewModel.ApprovedBy = user.ApprovedBy;
             viewModel.ApprovedDate = user.ApprovedDate;
 
             viewModel.IsCoordinator = allCoordinatorIds.Contains(user.Id);
@@ -72,12 +72,50 @@ namespace MDMProject.Mappers
             viewModel.CoordinatedRegion = user.CoordinatedRegion;
 
             viewModel.ProfileFinishedDate = user.ProfileFinishedDate;
-            viewModel.ApprovedBy = user.ApprovedBy?.FullUserName;
+            viewModel.ApprovedBy = user.ApprovedBy;
             viewModel.ApprovedDate = user.ApprovedDate;
 
             viewModel.IsCollectionPoint = allCollectionPointIds.Contains(user.Id);
             viewModel.IsCoordinator = allCoordinatorIds.Contains(user.Id);
             viewModel.IsAdmin = allAdminIds.Contains(user.Id);
+
+            return viewModel;
+        }
+
+        public static CreateUserViewModel ToEditAdminViewModel(this User user)
+        {
+            var viewModel = new CreateUserViewModel();
+            viewModel.Id = user.Id;
+            viewModel.UserType = user.UserType;
+            viewModel.Email = user.Email;
+            viewModel.PhoneNumber = user.PhoneNumber;
+            viewModel.AdditionalComment = user.AdditionalComment;
+
+            viewModel.IndividualName = user.IndividualName;
+            viewModel.CompanyName = user.CompanyName;
+            viewModel.ContactPersonName = user.ContactPersonName;
+
+            viewModel.IsAdmin = true;
+
+            return viewModel;
+        }
+
+        public static CreateUserViewModel ToEditCoordinatorViewModel(this User user)
+        {
+            var viewModel = new CreateUserViewModel();
+            viewModel.Id = user.Id;
+            viewModel.UserType = user.UserType;
+            viewModel.Email = user.Email;
+            viewModel.PhoneNumber = user.PhoneNumber;
+            viewModel.AdditionalComment = user.AdditionalComment;
+
+            viewModel.IndividualName = user.IndividualName;
+            viewModel.CompanyName = user.CompanyName;
+            viewModel.ContactPersonName = user.ContactPersonName;
+
+            viewModel.CoordinatedRegion = user.CoordinatedRegion;
+
+            viewModel.IsCoordinator = true;
 
             return viewModel;
         }

@@ -72,13 +72,12 @@
                             <td>
                                 <a href="@Url.Action("Details", "UserManagement", new { id = item.Id })"
                                    class="btn btn-sm btn-outline-success">
-                                    Szczegóły
+                                    @ViewResources.Common__Details
                                 </a>
-                                @*<a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })"
-                                       class="btn btn-sm btn-outline-primary">
-                                        @ViewResources.Common__Edit
-                                    </a>*@
-                                <br />
+                                <a href="@Url.Action("EditAdmin", "UserManagement", new { id = item.Id })"
+                                   class="btn btn-sm btn-outline-primary">
+                                    @ViewResources.Common__Edit
+                                </a>
                                 <a href="#"
                                    class="btn btn-sm btn-outline-danger"
                                    data-toggle="modal"

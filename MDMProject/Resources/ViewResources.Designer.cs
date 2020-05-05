@@ -493,6 +493,24 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edytuj administratora.
+        /// </summary>
+        public static string Admin_UsersList__EditAdmin {
+            get {
+                return ResourceManager.GetString("Admin_UsersList__EditAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edytuj koordynatora.
+        /// </summary>
+        public static string Admin_UsersList__EditCoordinator {
+            get {
+                return ResourceManager.GetString("Admin_UsersList__EditCoordinator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - BRAK -.
         /// </summary>
         public static string Admin_UsersList__NoData {
@@ -1218,6 +1236,15 @@ namespace MDMProject.Resources {
         public static string UserManagement_Details__UserRoles {
             get {
                 return ResourceManager.GetString("UserManagement_Details__UserRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konto użytkownika dla {0} zostało zmodyfikowane..
+        /// </summary>
+        public static string UserManagement_EditUser__UserEditedSuccessMessage {
+            get {
+                return ResourceManager.GetString("UserManagement_EditUser__UserEditedSuccessMessage", resourceCulture);
             }
         }
         
