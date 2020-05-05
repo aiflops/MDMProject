@@ -8,6 +8,7 @@
     /*height: 55px;*/
     min-height: 55px;
 }
+
 #partialView {
     padding-left: 10px;
 }
@@ -34,6 +35,7 @@
     vertical-align: middle;
     display: inline-block;
 }
+
 html, body {
     font-family: "Montserrat", sans-serif;
 }
@@ -70,19 +72,19 @@ html, body {
     display: block;
 }
 
-    .form-submit:hover, .form-submit:focus, .form-submit:active {
-        transition: background-color .3s ease;
-        background-color: #0067b8;
-        color: #fff;
-    }
+.form-submit:hover, .form-submit:focus, .form-submit:active {
+    transition: background-color .3s ease;
+    background-color: #0067b8;
+    color: #fff;
+}
 
 .input-group {
     width: 100%;
 }
 
-    .input-group label {
-        font-weight: 500;
-    }
+.input-group label {
+    font-weight: 500;
+}
 
 .m-0 {
     margin: 0;
@@ -237,12 +239,12 @@ main {
     transition: all .3s ease;
 }
 
-    .welcome__choose:hover, .welcome__choose:focus, .welcome__choose:active {
-        transition: all .3s ease;
-        text-decoration: none;
-        color: #fff;
-        filter: invert(1);
-    }
+.welcome__choose:hover, .welcome__choose:focus, .welcome__choose:active {
+    transition: all .3s ease;
+    text-decoration: none;
+    color: #fff;
+    filter: invert(1);
+}
 
 @media (max-width: 500px) {
     .welcome__choose {
@@ -327,4 +329,16 @@ main {
 
 .validation-summary-errors ul {
     padding-left: 15px;
+}
+
+.embedded-layout main {
+    min-height: 100vh;
+}
+
+.embedded-layout #mapID {
+    height: 100vh;
+}
+
+.embedded-layout .map .list {
+    height: calc(100vh - 95px);
 }

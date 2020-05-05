@@ -1,6 +1,10 @@
 ﻿@using MDMProject.Resources
 @{
     ViewBag.Title = ViewResources.Map_Index__Title;
+    if (ViewBag.IsEmbedded == true)
+    {
+        Layout = "~/Views/Shared/_EmbeddedLayout.cshtml";
+    }
 }
 
 <main class="map">

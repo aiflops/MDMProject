@@ -465,6 +465,7 @@
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\UserManagement\Edit.cshtml" />
     <Content Include="Views\UserManagement\EditCollectionPoint.cshtml" />
+    <Content Include="Views\Shared\_EmbeddedLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
