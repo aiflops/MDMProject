@@ -4,6 +4,7 @@ var suppliersList = [];
 var suppliersListElHtml = document.getElementById('showSuppliers');
 var mymap = L.map('mapID').setView([51.643078, 19.609658], 7);
 var GEOCODE_API = "https:\//nominatim.openstreetmap.org/search?q=#postcode,Poland&accept-language=pl&format=json";
+
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 25,
     id: 'mapbox/streets-v11',
@@ -35,7 +36,7 @@ var MapMDM = {
         mymap.setView(customParseFloat(lat,lon), zoom);
     },
     
-    moveMap: function (e) {
+    moveMap: function () {
         ListElement.clearAllLi();
         //MarkersGroupMDM.clearAllMarkers();
         var bounds = this.getBounds();
@@ -44,8 +45,8 @@ var MapMDM = {
     },
     checkIfSupplierOnMap: function (bounds) {
         for (var i = 0; i < suppliersList.length; i++) {
-            if (suppliersList[i].Address.Latitude !== null || suppliersList[i].Address.Longitude !== null) {
-                var isContain = bounds.contains(customParseFloat(suppliersList[i].Address.Latitude, suppliersList[i].Address.Longitude));
+            if (suppliersList[i].Latitude !== null || suppliersList[i].Longitude !== null) {
+                var isContain = bounds.contains(customParseFloat(suppliersList[i].Latitude, suppliersList[i].Longitude));
                 if (isContain)
                     ListElement.createOneLi(suppliersList[i]);
             }
@@ -72,35 +73,12 @@ var ListElement = {
     createLi: function (item) {
         var tile = this.htmlEl;
         tile = tile.replace('#Id', 'supplier-' + item.Id);
-        /* COMMENTED FOR REFACTOR */
-        //tile = tile.replace("#Name", item.Name.split(" ")[0]).replace("#City", item.Address.City);
-        //if (item.OfferedHelp !== null && item.OfferedEquipment !== null) {
-        //    tile = tile.replace('<img src=#Src alt=#Alt>', '<img src=\"/Content/images/mask.png\" alt=\"Drukuję w 3D\"><img src=\"/Content/images/3d.png\" alt=\"Oferuję Maskę"\>')
-        //    tile = tile.replace(/#Type/gi, "multiple");
-        //    if (MapMDM.onInitFlag)
-        //        MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsPrinter, item.Id);
-        //}
-        //else if(item.OfferedHelp !== null) {
-        //tile = tile.replace(/#Src/gi, "/Content/images/3d.png").replace(/#Alt/gi, "Drukuję w 3D").replace(/#Type/gi, "print");
-        //    if (MapMDM.onInitFlag)
-        //    MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsPrinter, item.Id);
-        //}
-        //else if (item.OfferedEquipment !== null) {
-        //    tile = tile.replace(/#Src/gi, "/Content/images/mask.png").replace(/#Alt/gi, "Oferuję Maskę").replace(/#Type/gi, "mask");
-        //    if (MapMDM.onInitFlag)
-        //        MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsMask, item.Id);
-        //}
 
         /* ADDED AFTER REFACTOR */
-        if (item.UserType == 1) { /* Individual */
-            tile = tile.replace("#Name", item.PersonName.split(" ")[0]).replace("#City", item.Address.City);
-        }
-        else { /* Company */
-            tile = tile.replace("#Name", item.CompanyName).replace("#City", item.Address.City);
-        }
+        tile = tile.replace("#Name", item.Name).replace("#City", item.City);
         tile = tile.replace(/#Src/gi, "/Content/images/mask.png").replace(/#Alt/gi, "Oferuję Maskę").replace(/#Type/gi, "mask");
             if (MapMDM.onInitFlag)
-                MarkerMDM.setMarker(item.Address.Latitude, item.Address.Longitude, MarkerMDM.iconsMask, item.Id);
+                MarkerMDM.setMarker(item.Latitude, item.Longitude, MarkerMDM.iconsMask, item.Id);
         /* END: ADDED AFTER REFACTOR */
 
 
@@ -110,8 +88,7 @@ var ListElement = {
         if (ListElement.activeElement === liElement.id) {
             liElement.classList.add("active__item");
         }
-        liElement.dataset.latlng = item.Address.Latitude + '-' + item.Address.Longitude;
-        liElement.dataset.postalcode = item.Address.PostalCode;
+        liElement.dataset.latlng = item.Latitude + '-' + item.Longitude;
         liElement.addEventListener("click", ListElement.clickLi);
         tile = tile.replace(/null/gi, "");
         liElement.innerHTML = tile;
@@ -204,8 +181,8 @@ var MobileListElement = {
     create: function (pointA) {
         ListElement.clearAllLi();
         for (var i = 0; i < suppliersList.length; i++) {
-            if (suppliersList[i].Address.Latitude !== null && suppliersList[i].Address.Longitude !== null) {
-                var pointB = [suppliersList[i].Address.Latitude, suppliersList[i].Address.Longitude];
+            if (suppliersList[i].Latitude !== null && suppliersList[i].Longitude !== null) {
+                var pointB = [suppliersList[i].Latitude, suppliersList[i].Longitude];
                 var distance = MarkerMDM.calculateDistance(pointA, pointB);
                 if (distance < 100) {
                     var elList = suppliersList[i];

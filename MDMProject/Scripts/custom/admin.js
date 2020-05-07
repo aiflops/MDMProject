@@ -1,5 +1,5 @@
 ﻿$('#modal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
+    var button = $(event.relatedTarget); // Button that triggered the modal
     var windowTitle = button.data('title');
     var buttonTitle = button.data('button-title');
 
@@ -57,8 +57,8 @@
     });
 });
 
-$('#modal').on('hide.bs.modal', function (e) {
-    var modal = $(this)
+$('#modal').on('hide.bs.modal', function () {
+    var modal = $(this);
     var submitButton = modal.find('.modal-footer .btn-primary');
     var cancelButton = modal.find('.modal-footer .btn-secondary');
 
@@ -68,7 +68,7 @@ $('#modal').on('hide.bs.modal', function (e) {
 
     cancelButton.text('Anuluj');
 
-    if (modal.attr('data-is-form-finished') == 'true') {
+    if (modal.attr('data-is-form-finished') === 'true') {
         setTimeout(function () {
             location.reload();
         }, 500);

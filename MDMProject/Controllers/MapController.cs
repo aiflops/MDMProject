@@ -11,12 +11,19 @@ namespace MDMProject.Controllers
             return View();
         }
 
-        // GET: Map
+        // GET: Map/Embedded
         [HttpGet]
         public ActionResult Embedded()
         {
             ViewBag.IsEmbedded = true;
             return View("Index");
+        }
+
+        // GET: Map/Knockout
+        [HttpGet]
+        public ActionResult Knockout()
+        {
+            return View();
         }
     }
 }

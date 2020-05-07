@@ -1,0 +1,13 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "declaration": false,
+    "noEmitOnError": false,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "exclude": [
+    "Scripts/typings/**/*.d.ts"
+  ]
+}

@@ -12,7 +12,7 @@ namespace MDMProject.WebAPI_Controllers
     public class SuppliersController : ApiController
     {
         // GET: api/Supplier
-        public async Task<IEnumerable<CollectionPointViewModel>> Get()
+        public async Task<IEnumerable<CollectionPointListViewModel>> Get()
         {
             using (var db = new ApplicationDbContext())
             {
@@ -20,7 +20,7 @@ namespace MDMProject.WebAPI_Controllers
                 var allAddresses = await db.Addresses.AsNoTracking().ToListAsync();
 
                 var usersToMap = allUsers.Where(x => x.Address != null && x.Address.Latitude != null && x.Address.Longitude != null && x.ApprovedBy != null).ToList();
-                var collectionPointViewModels = usersToMap.ToCollectionPointViewModels().ToList();
+                var collectionPointViewModels = usersToMap.ToCollectionPointListViewModels().ToList();
 
                 return collectionPointViewModels;
             }

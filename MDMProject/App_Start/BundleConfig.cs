@@ -12,7 +12,10 @@ namespace MDMProject
                     "~/Scripts/jquery-{version}.js",
                     "~/Scripts/bootstrap.js",
                     "~/Scripts/custom/errorHandler.js",
-                    "~/Scripts/custom/utils.js"
+                    "~/Scripts/custom/utils.js",
+                    "~/Scripts/knockout-{version}.js",
+                    "~/Scripts/knockout.mapping-{version}.js",
+                    "~/Scripts/custom/knockout.extensions.js"
                 ));
 
             bundles.Add(

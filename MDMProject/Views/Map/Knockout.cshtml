@@ -1,0 +1,63 @@
+﻿@using MDMProject.Resources
+@{
+    ViewBag.Title = ViewResources.Map_Index__Title;
+    if (ViewBag.IsEmbedded == true)
+    {
+        Layout = "~/Views/Shared/_EmbeddedLayout.cshtml";
+    }
+}
+
+<main class="ko-map">
+    <div class="container-fluid">
+
+        <div class="row">
+            <aside class="list-container col-xs-12 col-md-6 col-lg-5">
+                <header class="search-form">
+                    <label for="search-form__post-code">@ViewResources.Map_Index__AvailableList:</label>
+                    <div class="search-form__input-container">
+                        <input name="search-form__post-code" class="form-control" type="text" data-bind="textInput: postCode, event: { keypress: onKeyPress }" placeholder="@ViewResources.Map_Index__PostalCode">
+                        <button type="submit" class="btn form-submit" data-bind="click: searchByPostCode">@ViewResources.Map_Index__Search</button>
+                        <span class="search-form__validation" data-bind="css: { visible: isPostCodeIncorrect }">@ViewResources.Map_Index__FixPostalCode</span>
+                    </div>
+                </header>
+
+                <ul data-bind="foreach: visibleItems">
+                    <li class="entry" style="display:none" data-bind="visible: true, click: listItemClick">
+                        <div class="entry__summary">
+                            <i class="entry__icon"></i>
+                            <span class="entry__name" data-bind="text: name"></span>
+                            <span class="entry__city" data-bind="text: city"></span>
+                        </div>
+                        <div class="entry__details">
+
+                        </div>
+                    </li>
+                </ul>
+            </aside>
+
+            <section class="map-container col-md-6 col-lg-7">
+                <div id="mapID"></div>
+            </section>
+        </div>
+
+    </div>
+</main>
+
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+
+    @Styles.Render("~/Content/KoMap.css")
+}
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+
+    @Scripts.Render("~/Scripts/custom/map.js")
+}

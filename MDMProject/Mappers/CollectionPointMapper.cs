@@ -27,6 +27,24 @@ namespace MDMProject.Mappers
             return viewModel;
         }
 
+        public static IEnumerable<CollectionPointListViewModel> ToCollectionPointListViewModels(this IEnumerable<User> collection)
+        {
+            var result = collection.Select(x => x.ToCollectionPointListViewModel());
+            return result;
+        }
+
+        public static CollectionPointListViewModel ToCollectionPointListViewModel(this User user)
+        {
+            var viewModel = new CollectionPointListViewModel();
+            viewModel.Id = user.Id;
+            viewModel.Name = user.UserType == UserTypeEnum.Individual ? GetIndividualShortName(user.IndividualName) : GetCompanyShortName(user.CompanyName, user.ContactPersonName);
+            viewModel.City = user.Address.City;
+            viewModel.Latitude = user.Address.Latitude;
+            viewModel.Longitude = user.Address.Longitude;
+           
+            return viewModel;
+        }
+
         private static AddressViewModel ToAddressViewModel(this Address address)
         {
             if (address == null) return null;
@@ -70,6 +88,18 @@ namespace MDMProject.Mappers
             viewModel.Name = item.HelpTypeId.HasValue ? helpTypes[item.HelpTypeId.Value] : item.Name;
             viewModel.Description = item.Description;
             return viewModel;
+        }
+
+        private static string GetCompanyShortName(string companyName, string contactPersonName)
+        {
+            return companyName + (!string.IsNullOrWhiteSpace(contactPersonName) ? " - " + GetIndividualShortName(contactPersonName) : "");
+        }
+
+        // Get only first name or full name if all is provided
+        private static string GetIndividualShortName(string fullIndividualPersonName)
+        {
+            if (fullIndividualPersonName == null) return null;
+            return fullIndividualPersonName.Contains(" ") ? fullIndividualPersonName.Split(' ')[0] : fullIndividualPersonName;
         }
     }
 }

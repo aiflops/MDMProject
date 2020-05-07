@@ -1,6 +1,6 @@
 ﻿var utils = {
     isEmptyOrSpaces: function (str) {
-        return str === null || str.match(/^ *$/) !== null;
+        return str === null || str === undefined || str.match(/^ *$/) !== null;
     },
     arrayForEach: function (array, action) {
         for (var i = 0, j = array.length; i < j; i++)
