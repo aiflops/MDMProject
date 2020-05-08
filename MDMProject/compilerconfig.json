@@ -1,6 +1,6 @@
 ﻿[
   {
-    "outputFile": "Content/KoMap.css",
-    "inputFile": "Content/KoMap.less"
+    "outputFile": "Content/map.css",
+    "inputFile": "Content/map.less"
   }
 ]

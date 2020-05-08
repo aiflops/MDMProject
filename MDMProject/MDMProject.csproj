@@ -332,15 +332,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin.css" />
-    <Content Include="Content\KoMap.css">
-      <DependentUpon>KoMap.less</DependentUpon>
+    <Content Include="Content\map.css">
+      <DependentUpon>map.less</DependentUpon>
     </Content>
-    <Content Include="Content\KoMap.min.css">
-      <DependentUpon>KoMap.css</DependentUpon>
+    <Content Include="Content\map.min.css">
+      <DependentUpon>map.css</DependentUpon>
     </Content>
     <Content Include="Scripts\custom\admin.js" />
     <Content Include="Scripts\custom\createUser.js" />
     <Content Include="Scripts\custom\knockout.extensions.js" />
+    <Content Include="Scripts\custom\map.js">
+      <DependentUpon>map.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\custom\map.js.map">
+      <DependentUpon>map.ts</DependentUpon>
+    </Content>
     <Content Include="Scripts\custom\userProfile.js" />
     <Content Include="Scripts\knockout-3.5.1.debug.js">
       <DependentUpon>knockout-3.5.1.js</DependentUpon>
@@ -390,7 +396,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Map.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js">
       <DependentUpon>bootstrap.js</DependentUpon>
@@ -413,7 +418,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js">
       <DependentUpon>jquery-3.4.1.js</DependentUpon>
     </Content>
-    <Content Include="Content\KoMap.less" />
+    <Content Include="Content\map.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -435,7 +440,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js">
       <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\custom\MapMDM.js" />
     <Content Include="Scripts\MvcFoolproofValidation.min.js">
       <DependentUpon>MvcFoolproofValidation.js</DependentUpon>
     </Content>
@@ -464,7 +468,6 @@
     <Content Include="Views\Manage\EditProfile.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Map\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js">
       <DependentUpon>jquery.validate.js</DependentUpon>
     </None>
@@ -486,7 +489,7 @@
     <Content Include="Views\UserManagement\Edit.cshtml" />
     <Content Include="Views\UserManagement\EditCollectionPoint.cshtml" />
     <Content Include="Views\Shared\_EmbeddedLayout.cshtml" />
-    <Content Include="Views\Map\Knockout.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>

@@ -18,12 +18,5 @@ namespace MDMProject.Controllers
             ViewBag.IsEmbedded = true;
             return View("Index");
         }
-
-        // GET: Map/Knockout
-        [HttpGet]
-        public ActionResult Knockout()
-        {
-            return View();
-        }
     }
 }

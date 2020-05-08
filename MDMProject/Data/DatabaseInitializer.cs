@@ -277,8 +277,8 @@ namespace MDMProject.Data
                     PostalCode = "45-713",
                     HouseNumber = "7",
                     FlatNumber = "1A",
-                    Latitude = "51.108615",
-                    Longitude = "17.09772361596369"
+                    Latitude = "50.668623",
+                    Longitude = "17.911287"
                 },
                 ProfileFinishedDate = DateTime.Now
             }.WithRole(collectionPoint));
