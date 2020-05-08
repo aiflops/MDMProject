@@ -339,6 +339,6 @@ main {
     height: 100vh;
 }
 
-.embedded-layout .map .list {
-    height: calc(100vh - 95px);
+.embedded-layout .ko-map .list-container {
+    height: 100vh;
 }
