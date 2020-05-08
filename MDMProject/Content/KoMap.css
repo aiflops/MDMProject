@@ -176,11 +176,6 @@
   padding: 20px 25px;
   font-size: 14px;
 }
-@media (max-width: 450px) {
-  .ko-map .list-container .active-item .active-item__data {
-    padding: 15px 20px;
-  }
-}
 @media (max-width: 350px) {
   .ko-map .list-container .active-item .active-item__data {
     padding: 7px 12px;
@@ -191,7 +186,7 @@
   margin-bottom: 20px;
   display: flex;
 }
-@media (max-width: 450px) {
+@media (max-width: 992px) {
   .ko-map .list-container .active-item .active-item__data .row {
     display: block;
   }
@@ -213,6 +208,16 @@
   padding: 0;
 }
 @media (min-width: 600px) and (max-width: 767px) {
+  .ko-map .search-form {
+    font-size: 12px;
+  }
+  .ko-map .search-form input,
+  .ko-map .search-form button {
+    font-size: 12px !important;
+  }
+  .ko-map .active-item__data {
+    padding: 7px 12px;
+  }
   .ko-map .list-container {
     width: 350px;
     float: left;

@@ -186,10 +186,6 @@
                 padding: 20px 25px;
                 font-size: 14px;
 
-                @media (max-width: 450px) {
-                    padding: 15px 20px;
-                }
-
                 @media (max-width: 350px) {
                     padding: 7px 12px;
                 }
@@ -199,7 +195,7 @@
                     margin-bottom: 20px;
                     display: flex;
 
-                    @media (max-width: 450px) {
+                    @media (max-width: 992px) {
                         display: block;
 
                         &:last-child {
@@ -234,6 +230,19 @@
         padding: 4px;
     }*/
     @media (min-width: 600px) and (max-width: 767px) {
+
+        .search-form {
+            font-size: 12px;
+
+            input, button {
+                font-size: 12px !important;
+            }
+        }
+
+        .active-item__data {
+            padding: 7px 12px;
+        }
+
         .list-container {
             width: 350px;
             float: left;
