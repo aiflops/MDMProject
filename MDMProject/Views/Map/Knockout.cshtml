@@ -12,7 +12,7 @@
     <div class="container-fluid">
 
         <div class="row">
-            <aside class="list-container col-xs-12 col-md-6 col-lg-5">
+            <aside class="list-container col-xs-12 col-sm-6 col-md-6 col-lg-5">
                 <header class="search-form">
                     <label for="search-form__post-code">@ViewResources.Map_Index__AvailableList:</label>
                     <div class="search-form__input-container">
@@ -25,48 +25,66 @@
                 <section class="active-item" data-bind="css: { visible: activeItem() != null }, if: activeItem() != null">
                     <!-- ko with: activeItem -->
                     <header>
-                        <button type="button" data-bind="click: $root.exitActiveItemDetails">&lArr;</button>
+                        <button type="button" data-bind="click: $root.exitActiveItemDetails">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                        </button>
                     </header>
                     <div class="active-item__loader" data-bind="css: { visible: details() == null }">@ViewResources.Map_Index__Loading</div>
-                    <section data-bind="if: details() != null">
+                    <section class="active-item__data" data-bind="if: details() != null">
+                        <!-- ko with: details -->
 
-                        <dl class="dl-horizontal" data-bind="with: details">
-                            <dt>@PropertyNames.User_UserType</dt>
-                            <dd data-bind="text: userType == @((int)UserTypeEnum.Company) ? '@PropertyNames.User_UserType_Company' : '@PropertyNames.User_UserType_IndividualPerson'"></dd>
+                        <div class="row">
+                            <div>@PropertyNames.User_UserType</div>
+                            <div data-bind="text: userType == @((int)UserTypeEnum.Company) ? '@PropertyNames.User_UserType_Company' : '@PropertyNames.User_UserType_IndividualPerson'"></div>
+                        </div>
 
-                            <!-- ko if: userType == @((int)UserTypeEnum.Company) -->
-                            <dt>@PropertyNames.User_CompanyName</dt>
-                            <dd data-bind="text: companyName"></dd>
+                        <!-- ko if: userType == @((int)UserTypeEnum.Company) -->
+                        <div class="row">
+                            <div>@PropertyNames.User_CompanyName</div>
+                            <div data-bind="text: companyName"></div>
+                        </div>
 
-                            <dt data-bind="visible: personName != null">@PropertyNames.User_ContactName</dt>
-                            <dd data-bind="text: personName, visible: personName != null"></dd>
-                            <!-- /ko -->
+                        <div class="row">
+                            <div data-bind="visible: personName != null">@PropertyNames.User_ContactName</div>
+                            <div data-bind="text: personName, visible: personName != null"></div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: userType == @((int)UserTypeEnum.Individual) -->
+                        <div class="row">
+                            <div>@PropertyNames.User_IndividualName</div>
+                            <div data-bind="text: personName"></div>
+                        </div>
+                        <!-- /ko -->
 
-                            <!-- ko if: userType == @((int)UserTypeEnum.Individual) -->
-                            <dt>@PropertyNames.User_IndividualName</dt>
-                            <dd data-bind="text: personName"></dd>
-                            <!-- /ko -->
+                        <div class="row" data-bind="visible: email != null">
+                            <div>@PropertyNames.Common_Email</div>
+                            <div>
+                                <a data-bind="attr: { href: 'mailto:' + email }, text: email"></a>
+                            </div>
+                        </div>
 
-                            <dt>@PropertyNames.Common_Email</dt>
-                            <dd data-bind="text: email"></dd>
+                        <div class="row" data-bind="visible: phoneNumber != null">
+                            <div>@PropertyNames.User_PhoneNumber</div>
+                            <div>
+                                <a data-bind="attr: { href: 'tel:' + phoneNumber }, text: phoneNumber"></a>
+                            </div>
+                        </div>
 
-                            <dt>@PropertyNames.User_PhoneNumber</dt>
-                            <dd data-bind="text: phoneNumber"></dd>
-
-                            <!-- ko if: address != null -->
-                            <dt>@PropertyNames.User_Address</dt>
-                            <dd>
-                                <span data-bind="text: address.streetFormatted"></span>
-                                <span data-bind="text: address.cityFormatted"></span>
-                            </dd>
-                            <!-- /ko -->
-                        </dl>
-
+                        <!-- ko if: address != null -->
+                        <div class="row">
+                            <div>@PropertyNames.User_Address</div>
+                            <div class="active-item__address">
+                                <span class="active-item__address_street" data-bind="text: address.streetFormatted"></span>
+                                <span class="active-item__address_city" data-bind="text: address.cityFormatted"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
                     </section>
                     <!-- /ko -->
                 </section>
 
-                <ul data-bind="foreach: visibleItems">
+                <ul data-bind="foreach: visibleItems, css: { hidden: activeItem() != null }">
                     <li class="entry" style="display:none" data-bind="visible: true, click: listItemClick">
                         <div class="entry__summary">
                             <i class="entry__icon"></i>
@@ -78,7 +96,7 @@
                 </ul>
             </aside>
 
-            <section class="map-container col-md-6 col-lg-7">
+            <section class="map-container col-sm-6 col-md-6 col-lg-7">
                 <div id="mapID"></div>
             </section>
         </div>
