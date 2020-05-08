@@ -4,7 +4,7 @@ var GEOCODE_API = "https:\//nominatim.openstreetmap.org/search?q=#postcode,Polan
 var MAP_LAYER_URL = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
 var INIT_MAP_BOUNDARIES = [51.643078, 19.609658];
 var POINT_VIEW_ZOOM = 19;
-var POST_CODE_ZOOM = 13;
+var POST_CODE_ZOOM = 15;
 var POST_CODE_DISTANCE = 20; // Distance for post code search in kilometers
 var mapMdm;
 var viewModel;
@@ -29,15 +29,34 @@ var Map = /** @class */ (function () {
             polygonOptions: null,
         });
         this.map.addLayer(this.markerCluster);
+        this.postCodeMarkerCluster = L.markerClusterGroup({
+            chunkedLoading: true,
+            spiderfyOnMaxZoom: false,
+            disableClusteringAtZoom: 22,
+            showCoverageOnHover: false,
+            removeOutsideVisibleBounds: true,
+            polygonOptions: null,
+        });
+        this.map.addLayer(this.postCodeMarkerCluster);
     }
     Map.prototype.setViewToPoint = function (point, zoom) {
         this.map.setView(point, zoom);
     };
     Map.prototype.addMarker = function (marker) {
-        this.markerCluster.addLayer(marker.mapMarker);
+        if (!marker.isPostCodeMarker)
+            this.markerCluster.addLayer(marker.mapMarker);
+        else
+            this.postCodeMarkerCluster.addLayer(marker.mapMarker);
+    };
+    Map.prototype.removeMarker = function (marker) {
+        marker.mapMarker.remove();
     };
     Map.prototype.clearAllMarkers = function () {
         this.markerCluster.clearLayers();
+        this.postCodeMarkerCluster.clearLayers();
+    };
+    Map.prototype.clearPostCodeMarkers = function () {
+        this.postCodeMarkerCluster.clearLayers();
     };
     Map.prototype.moveMap = function () {
         var bounds = this.getBounds();
@@ -49,15 +68,21 @@ var Map = /** @class */ (function () {
     return Map;
 }());
 var Marker = /** @class */ (function () {
-    function Marker(id, point, icon) {
+    function Marker(id, point, icon, isPostCodeMarker) {
+        if (isPostCodeMarker === void 0) { isPostCodeMarker = false; }
         this.id = id;
         this.point = point;
+        this.isPostCodeMarker = isPostCodeMarker;
         this.mapMarker = L
             .marker(point, { icon: icon })
             .on('click', this.onClick);
     }
     Marker.prototype.onClick = function () {
-        mapMdm.setViewToPoint(this.getLatLng(), POINT_VIEW_ZOOM);
+        var leafletMarker = this;
+        mapMdm.setViewToPoint(leafletMarker.getLatLng(), POINT_VIEW_ZOOM);
+        if (leafletMarker._itemViewModel != null) {
+            viewModel.activeItem(leafletMarker._itemViewModel);
+        }
     };
     Marker.iconMask = L.icon({
         iconUrl: '/Content/images/mask.png',
@@ -66,6 +91,14 @@ var Marker = /** @class */ (function () {
     });
     Marker.iconGreen = L.icon({
         iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    Marker.iconRed = L.icon({
+        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
@@ -83,6 +116,11 @@ var MapViewModel = /** @class */ (function () {
         this.items = ko.observableArray();
         this.isDataLoaded = ko.observable(false);
         this.visibleItems = ko.observable([]);
+        this.activeItem = ko.observable();
+        this.activeItem.subscribe(function (newActiveItem) {
+            if (newActiveItem != null && newActiveItem.details() == null)
+                newActiveItem.loadDetails();
+        });
     }
     MapViewModel.prototype.loadData = function () {
         var _this = this;
@@ -103,6 +141,9 @@ var MapViewModel = /** @class */ (function () {
         if (utils.isEmptyOrSpaces(this.postCode())) {
             this.lastPostCodeSearch(null);
             this.lastPostCodePoint(null);
+            this.activeItem(null);
+            ko.utils.arrayForEach(this.items(), function (item) { return item.updateDistanceToPostCode(null); });
+            mapMdm.clearPostCodeMarkers();
             var mapBounds = mapMdm.getBounds();
             this.updateVisibleItems(mapBounds);
         }
@@ -113,6 +154,10 @@ var MapViewModel = /** @class */ (function () {
                 var point = L.latLng(firstResult.lat, firstResult.lon);
                 _this.lastPostCodeSearch(_this.postCode());
                 _this.lastPostCodePoint(point);
+                _this.activeItem(null);
+                ko.utils.arrayForEach(_this.items(), function (item) { return item.updateDistanceToPostCode(_this.lastPostCodePoint()); });
+                mapMdm.clearPostCodeMarkers();
+                mapMdm.addMarker(new Marker(null, _this.lastPostCodePoint(), Marker.iconRed, true));
                 var mapBounds = mapMdm.getBounds();
                 _this.updateVisibleItems(mapBounds);
                 mapMdm.setViewToPoint(point, POST_CODE_ZOOM);
@@ -144,15 +189,10 @@ var MapViewModel = /** @class */ (function () {
         if (searchByPostCode) {
             // select only those items, which have distance in correct bounds
             ko.utils.arrayForEach(this.items(), function (item) {
-                item.updateDistanceToPostCode(viewModel.lastPostCodePoint());
                 var isVisible = item.distanceToPostCode() < (POST_CODE_DISTANCE * 1000);
                 item.isVisible(isVisible);
                 if (isVisible)
                     newVisibleItems.push(item);
-            });
-            // sort items by distance ascending
-            newVisibleItems.sort(function (a, b) {
-                return a.distanceToPostCode() - b.distanceToPostCode();
             });
         }
         // show all if is mobile version or show visible on map if map is available
@@ -164,6 +204,25 @@ var MapViewModel = /** @class */ (function () {
                     newVisibleItems.push(item);
             });
         }
+        // Sort items by:
+        // 1. distance to post code (if provided)
+        // 2. city name
+        // 3. person name
+        // 4. id
+        newVisibleItems.sort(function (a, b) {
+            if (a.distanceToPostCode() != b.distanceToPostCode()) {
+                return a.distanceToPostCode() - b.distanceToPostCode();
+            }
+            else if (a.city != b.city) {
+                return a.city.localeCompare(b.city);
+            }
+            else if (a.name != b.name) {
+                return a.name.localeCompare(b.name);
+            }
+            else {
+                return a.id - b.id;
+            }
+        });
         this.visibleItems(newVisibleItems);
     };
     MapViewModel.prototype.addAllMarkers = function () {
@@ -179,6 +238,9 @@ var MapViewModel = /** @class */ (function () {
         }
         return true;
     };
+    MapViewModel.prototype.exitActiveItemDetails = function () {
+        viewModel.activeItem(null);
+    };
     return MapViewModel;
 }());
 //#region ViewModel types
@@ -191,9 +253,18 @@ var MapEntryItem = /** @class */ (function () {
         this.longitude = parseFloat(model.Longitude);
         this.point = L.latLng(this.latitude, this.longitude);
         this.marker = new Marker(this.id, this.point, Marker.iconGreen);
+        this.marker.mapMarker._itemViewModel = this;
+        this.details = ko.observable();
         this.isVisible = ko.observable(false);
         this.distanceToPostCode = ko.observable();
+        this.distanceToPostCodeFormatted = ko.computed(this.getDistanceToPostCodeFormatted.bind(this));
     }
+    MapEntryItem.prototype.getDistanceToPostCodeFormatted = function () {
+        if (this.distanceToPostCode() == null)
+            return null;
+        var distanceInKm = Math.round(this.distanceToPostCode() / 100) / 10;
+        return distanceInKm + 'km';
+    };
     MapEntryItem.prototype.updateDistanceToPostCode = function (postCodeCenterPoint) {
         if (postCodeCenterPoint != null) {
             var distance = this.point.distanceTo(postCodeCenterPoint);
@@ -205,30 +276,40 @@ var MapEntryItem = /** @class */ (function () {
     };
     MapEntryItem.prototype.listItemClick = function () {
         mapMdm.setViewToPoint(this.point, POINT_VIEW_ZOOM);
+        viewModel.activeItem(this);
+    };
+    MapEntryItem.prototype.loadDetails = function () {
+        var _this = this;
+        $.getJSON('/api/suppliers/' + this.id, function (data) {
+            var detailsViewModel = new MapEntryItemDetails(data);
+            _this.details(detailsViewModel);
+        });
     };
     return MapEntryItem;
 }());
 var MapEntryItemDetails = /** @class */ (function () {
     function MapEntryItemDetails(model) {
-        this.id = ko.observable(model.Id);
-        this.userType = ko.observable(model.UserType);
-        this.companyName = ko.observable(model.CompanyName);
-        this.personName = ko.observable(model.PersonName);
-        this.email = ko.observable(model.Email);
-        this.phoneNumber = ko.observable(model.PhoneNumber);
-        this.address = ko.observable(model.Address != null ? new MapEntryAddress(model.Address) : null);
+        this.id = model.Id;
+        this.userType = model.UserType;
+        this.companyName = model.CompanyName;
+        this.personName = model.PersonName;
+        this.email = model.Email;
+        this.phoneNumber = model.PhoneNumber;
+        this.address = model.Address != null ? new MapEntryAddress(model.Address) : null;
     }
     return MapEntryItemDetails;
 }());
 var MapEntryAddress = /** @class */ (function () {
     function MapEntryAddress(model) {
-        this.city = ko.observable(model.City);
-        this.streetName = ko.observable(model.StreetName);
-        this.houseNumber = ko.observable(model.HouseNumber);
-        this.flatNumber = ko.observable(model.FlatNumber);
-        this.postalCode = ko.observable(model.PostalCode);
-        this.latitude = ko.observable(parseFloat(model.Latitude));
-        this.longitude = ko.observable(parseFloat(model.Longitude));
+        this.city = model.City;
+        this.streetName = model.StreetName;
+        this.houseNumber = model.HouseNumber;
+        this.flatNumber = model.FlatNumber;
+        this.postalCode = model.PostalCode;
+        this.latitude = parseFloat(model.Latitude);
+        this.longitude = parseFloat(model.Longitude);
+        this.streetFormatted = (this.streetName != null ? this.streetName + " " : "") + this.houseNumber + (this.flatNumber != null ? "/" + this.flatNumber : "");
+        this.cityFormatted = this.postalCode + " " + this.city;
     }
     return MapEntryAddress;
 }());

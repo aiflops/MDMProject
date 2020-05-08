@@ -51,15 +51,15 @@
             overflow-y: scroll;
 
             li {
-                margin-bottom: 15px;
+                margin-bottom: 8px;
                 background: #fff;
                 border: 1px solid #e6e6e6;
                 border-left: 0;
                 position: relative;
-                padding: 10px;
+                padding: 12px 10px;
                 cursor: pointer;
                 transition: .2s;
-                /*user-select: none;*/
+
                 &:hover {
                     box-shadow: 0 5px 5px -5px rgba(0,0,0,.2);
                 }
@@ -94,6 +94,14 @@
                 .entry__city {
                     text-align: right;
                 }
+
+                .entry__distance {
+                    position: absolute;
+                    font-size: 10px;
+                    font-weight: bold;
+                    right: 10px;
+                    top: 6px;
+                }
             }
 
             &::-webkit-scrollbar {
@@ -115,7 +123,6 @@
     .map-container {
         padding: 0;
     }
-
     /*.leaflet-marker-icon {
         border-radius: 100%;
         border: 3px solid #168211;

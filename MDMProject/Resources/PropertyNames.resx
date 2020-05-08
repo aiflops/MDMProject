@@ -201,4 +201,7 @@
   <data name="Coordinator_CoordinatedRegion" xml:space="preserve">
     <value>Koordynowany region</value>
   </data>
+  <data name="User_Address" xml:space="preserve">
+    <value>Adres</value>
+  </data>
 </root>

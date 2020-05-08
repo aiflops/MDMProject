@@ -474,6 +474,9 @@
   <data name="Map_Index__FixPostalCode" xml:space="preserve">
     <value>Popraw kod pocztowy</value>
   </data>
+  <data name="Map_Index__Loading" xml:space="preserve">
+    <value>Pobieranie danych...</value>
+  </data>
   <data name="Map_Index__PostalCode" xml:space="preserve">
     <value>Kod pocztowy</value>
   </data>

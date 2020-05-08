@@ -1132,6 +1132,15 @@ namespace MDMProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pobieranie danych....
+        /// </summary>
+        public static string Map_Index__Loading {
+            get {
+                return ResourceManager.GetString("Map_Index__Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kod pocztowy.
         /// </summary>
         public static string Map_Index__PostalCode {

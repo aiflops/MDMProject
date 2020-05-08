@@ -1,4 +1,5 @@
-﻿@using MDMProject.Resources
+﻿@using MDMProject.Models
+@using MDMProject.Resources
 @{
     ViewBag.Title = ViewResources.Map_Index__Title;
     if (ViewBag.IsEmbedded == true)
@@ -21,15 +22,57 @@
                     </div>
                 </header>
 
+                <section class="active-item" data-bind="css: { visible: activeItem() != null }, if: activeItem() != null">
+                    <!-- ko with: activeItem -->
+                    <header>
+                        <button type="button" data-bind="click: $root.exitActiveItemDetails">&lArr;</button>
+                    </header>
+                    <div class="active-item__loader" data-bind="css: { visible: details() == null }">@ViewResources.Map_Index__Loading</div>
+                    <section data-bind="if: details() != null">
+
+                        <dl class="dl-horizontal" data-bind="with: details">
+                            <dt>@PropertyNames.User_UserType</dt>
+                            <dd data-bind="text: userType == @((int)UserTypeEnum.Company) ? '@PropertyNames.User_UserType_Company' : '@PropertyNames.User_UserType_IndividualPerson'"></dd>
+
+                            <!-- ko if: userType == @((int)UserTypeEnum.Company) -->
+                            <dt>@PropertyNames.User_CompanyName</dt>
+                            <dd data-bind="text: companyName"></dd>
+
+                            <dt data-bind="visible: personName != null">@PropertyNames.User_ContactName</dt>
+                            <dd data-bind="text: personName, visible: personName != null"></dd>
+                            <!-- /ko -->
+
+                            <!-- ko if: userType == @((int)UserTypeEnum.Individual) -->
+                            <dt>@PropertyNames.User_IndividualName</dt>
+                            <dd data-bind="text: personName"></dd>
+                            <!-- /ko -->
+
+                            <dt>@PropertyNames.Common_Email</dt>
+                            <dd data-bind="text: email"></dd>
+
+                            <dt>@PropertyNames.User_PhoneNumber</dt>
+                            <dd data-bind="text: phoneNumber"></dd>
+
+                            <!-- ko if: address != null -->
+                            <dt>@PropertyNames.User_Address</dt>
+                            <dd>
+                                <span data-bind="text: address.streetFormatted"></span>
+                                <span data-bind="text: address.cityFormatted"></span>
+                            </dd>
+                            <!-- /ko -->
+                        </dl>
+
+                    </section>
+                    <!-- /ko -->
+                </section>
+
                 <ul data-bind="foreach: visibleItems">
                     <li class="entry" style="display:none" data-bind="visible: true, click: listItemClick">
                         <div class="entry__summary">
                             <i class="entry__icon"></i>
                             <span class="entry__name" data-bind="text: name"></span>
                             <span class="entry__city" data-bind="text: city"></span>
-                        </div>
-                        <div class="entry__details">
-
+                            <span class="entry__distance" data-bind="text: distanceToPostCodeFormatted"></span>
                         </div>
                     </li>
                 </ul>

@@ -51,15 +51,14 @@
   overflow-y: scroll;
 }
 .ko-map .list-container ul li {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   background: #fff;
   border: 1px solid #e6e6e6;
   border-left: 0;
   position: relative;
-  padding: 10px;
+  padding: 12px 10px;
   cursor: pointer;
   transition: 0.2s;
-  /*user-select: none;*/
 }
 .ko-map .list-container ul li:hover {
   box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.2);
@@ -90,6 +89,13 @@
 }
 .ko-map .list-container ul .entry__summary .entry__city {
   text-align: right;
+}
+.ko-map .list-container ul .entry__summary .entry__distance {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  right: 10px;
+  top: 6px;
 }
 .ko-map .list-container ul::-webkit-scrollbar {
   width: 10px;
